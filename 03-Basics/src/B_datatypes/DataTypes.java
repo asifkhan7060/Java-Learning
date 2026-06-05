@@ -1,5 +1,6 @@
-package B_datatypes;
+// Study : Primitive & Non-Primitive Data Types, Size, Range, Default Values, Unicode Characters and Arrays in Java
 
+package B_datatypes;
 
 /**
      * ====================================================<br>
