@@ -1,131 +1,137 @@
-// Study : Primitive & Non-Primitive Data Types, Size, Range, Default Values, Unicode Characters and Arrays in Java
+// Study : Variable Naming Rules, Naming Conventions, Valid & Invalid Identifiers, Constants and Case Sensitivity in Java
 
 package A_variables;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DATA TYPES IN JAVA (Summary)<br>
- * ====================================================<br><br>
+ * This program demonstrates Variable Naming Rules and Naming Conventions in Java.<br><br>
  *
- * 🔹 What Are Data Types?<br><br>
+ * Variable names are identifiers used to represent memory locations that store data.
+ * Java follows specific rules and conventions for naming variables to improve
+ * readability, maintainability, and code quality.<br><br>
  *
- * A data type defines what kind of data a variable can store.<br><br>
+ * Explanation:<br><br>
  *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int age = 25; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ age is an integer<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;String name = "Faisal"; → name is text<br><br>
+ * 1) Case Sensitivity<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Java is a case-sensitive programming language.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Variables with different letter cases are treated as different identifiers.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Example:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int number = 10;<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int Number = 20;<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Both variables are different because of letter casing.<br><br>
  *
- * 💡 Think of a data type as the "shape" or "category" of data.<br><br>
+ * 2) First Character Rules<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- A variable name must begin with a letter, underscore (_),
+ * or dollar sign ($).<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Starting a variable name with a digit is not allowed.<br><br>
  *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Categories of Data Types in Java<br>
- * ====================================================<br><br>
+ * 3) Allowed Characters<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- After the first character, a variable name may contain
+ * letters, digits, underscores (_), and dollar signs ($).<br><br>
  *
- * 💡 1. Primitive Data Types (8 Total)<br><br>
+ * 4) Invalid Characters<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Spaces are not allowed in variable names.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Special characters such as %, #, @, -, etc. are not allowed.<br><br>
  *
- * These are the most basic data types and are stored directly in memory.<br><br>
- *<pre>
- *  Type      Size              Example
- *  ------------------------------------------
- *  byte      8-bit             byte b = 10;
- *  short     16-bit            short s = 200;
- *  int       32-bit            int age = 25;
- *  long      64-bit            long views = 1000000L;
- *  float     32-bit Decimal    float pi = 3.14f;
- *  double    64-bit Decimal    double price = 99.99;
- *  char      16-bit Unicode    char grade = 'A';
- *  boolean   true / false      boolean isActive = true;
- *  </pre>
+ * 5) Reserved Keywords<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Java keywords cannot be used as variable names.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Examples:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int class = 1; // Invalid<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int for = 5;   // Invalid<br><br>
+ *
+ * 6) Meaningful Variable Names<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Variable names should clearly describe their purpose.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Preferred:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;studentCount, totalMarks, gearRatio<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Avoid:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1, a2, temp123<br><br>
+ *
+ * 7) Naming Conventions<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Use lowerCamelCase for normal variables.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Examples:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;studentCount<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gearRatio<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalMarks<br><br>
+ *
+ * 8) Constant Naming Convention<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Constants are declared using the final keyword.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Use UPPER_CASE_WITH_UNDERSCORES for constants.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Example:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final int MAX_SPEED = 120;<br><br>
+ *
+ * 9) Valid Variable Name Examples<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- age<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- studentCount<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- _score<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- $total<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- gearRatio<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- MAX_SPEED<br><br>
+ *
+ * 10) ❌ INVALID Variable Names<br><br>
+ *
+ * int 1fast = 50; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Cannot start with a digit<br>
+ * nt student-count = 40; // Hyphen not allowed<br>
+ * int total marks = 100; &nbsp;// Spaces not allowed<br>
+ * int for = 5; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Java keyword<br>
+ * int @rate = 10; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Special character not allowed<br>
+ * int class = 1; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Reserved keyword<br><br>
  *
  *
+ * 11) Program Output<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- The program prints values stored in valid variables.<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- It demonstrates proper naming conventions and
+ * case-sensitivity in Java.<br><br>
  *
- * 💡 2. Non-Primitive Data Types<br><br>
- *
- * Examples:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- String<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Arrays<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Classes<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Interfaces<br><br>
- *
- * These data types are created by Java or by the programmer.<br><br>
- *
- * ====================================================<br>
- *
- * ✅ Primitive Data Types<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- byte<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- short<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- int<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- long<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- float<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- double<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- char<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- boolean<br><br>
- *
- * ✅ Non-Primitive Data Types<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- String<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Arrays<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Classes<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Interfaces<br><br>
- *
- * ====================================================
+ * Key Concepts Covered:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Variable Naming Rules<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Valid and Invalid Identifiers<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Naming Conventions<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Constants<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;- Case Sensitivity
  */
 
-/*
 
-Type      Size      Range                                             Default Value
--------------------------------------------------------------------------------------
-byte      1 byte    -128 to 127                                       0
 
-short     2 bytes   -32,768 to 32,767                                0
-
-int       4 bytes   -2,147,483,648 to 2,147,483,647                  0
-
-long      8 bytes   -9,223,372,036,854,775,808 to
-                    9,223,372,036,854,775,807                        0L
-
-float     4 bytes   ±3.4E−38 to ±3.4E+38                             0.0f
-
-double    8 bytes   ±1.7E−308 to ±1.7E+308                           0.0d
-
-char      2 bytes   0 to 65,535 (Unicode Characters)                 '\u0000'
-
-*/
 
 public class B_VariableNamingRules {
 
     public static void main(String[] args) {
 
-        // Primitive Data Types
-        char grade = 'A';
-        boolean isActive = false;
-        System.out.println(grade);
-        System.out.println(isActive);
+        // Valid variable names
+        int age = 25;
+        int studentCount = 100;
+        int _score = 95;          // Legal but not recommended
+        int $total = 500;         // Legal but not recommended
+        int gearRatio = 6;
 
-        byte b1 = 127;
-        System.out.println(b1);
+        // Constant naming convention
+        final int MAX_SPEED = 120;
 
-        float pi = 3.1483467575376975f; // f indication is compulsory
-        double price = 99.9938637463476370567;
-        System.out.println(pi); // less precise
-        System.out.println(price); // more precise
+        // Printing valid variables
+        System.out.println("Age: " + age);
+        System.out.println("Student Count: " + studentCount);
+        System.out.println("Gear Ratio: " + gearRatio);
+        System.out.println("Max Speed: " + MAX_SPEED);
 
-        // Unicode Character Example
-        char unicodeDemo = '\u20AC'; // Euro Symbol (€) (Always use single quote)
-        System.out.println(unicodeDemo);
-        // More unicodes : https://en.wikipedia.org/wiki/List_of_Unicode_characters
+        /*
+         * Invalid variable names
+         * Uncomment to see compiler errors
+         */
 
-        // Non-Primitive Data Type
-        String name = "Java";
-        System.out.println(name);
+        /*
+        int 1fast = 50;           // Cannot start with a digit
+        int student-count = 40;  // Hyphen not allowed
+        int total marks = 100;   // Spaces not allowed
+        int for = 5;             // 'for' is a keyword
+        int @rate = 10;          // '@' not allowed
+        int class = 1;           // Reserved keyword
+        */
 
-        // Arrays (Non-Primitive Data Type)
-        float[] marks = {1, 2, 3, 4};
+        // Example showing case-sensitivity
+        int number = 10;
+        int Number = 20;
 
-        // System.out.println(marks); Gives garbage value
-        System.out.println(marks[0]);
-        System.out.println(marks[2]);
-        // System.out.println(marks[8]);  Error : Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
-
+        System.out.println("number = " + number);
+        System.out.println("Number = " + Number);
 
     }
 }
