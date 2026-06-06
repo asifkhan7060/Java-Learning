@@ -1,4 +1,4 @@
-package B_ClassAndObject.Way1;
+package C_Constructors.one;
 
 // Objects are the instances of Class
 // Ex : Creating a Car instances
@@ -6,7 +6,7 @@ package B_ClassAndObject.Way1;
 // NOTE : Objects class contains entry point (main function)
 
 public class CarObjects {
-    public static void main(String[] args) {
+    public static void main() {
 
         // Creating and instantiating an object
         CarClass car1 = new CarClass();  // new CarClass() -> Process of Instantiation
@@ -29,6 +29,6 @@ public class CarObjects {
         car2.colour = "Green";
         car2.speed = 100;
 
-        car2.drive();
+        car1.drive();
     }
 }
