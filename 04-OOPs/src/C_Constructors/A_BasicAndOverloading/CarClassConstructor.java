@@ -1,6 +1,6 @@
-package C_Constructors.one;
+package C_Constructors.A_BasicAndOverloading;
 
-/**Constructor*/
+// Constructor
 // Without constructors, we need to initialize each instance variable
 // manually after creating an object. This becomes tedious when a class
 // contains many instance variables.
@@ -22,9 +22,20 @@ package C_Constructors.one;
 //     // Initialization code
 // }
 
-    /** NOTE : We can directly create constuctor-> right click -> generate -> select parameters -> create constructor DONE */
+/** NOTE :
+ 1) VeryImp : Parameter names do not matter in constructor overloading.
 
-    
+ Java only checks the parameter types (String,int etc), so Car(String brand) and Car(String colour) are considered the same constructor.
+ * Example:
+ Car(String brand)
+ Car(String colour)
+ Above both in one class not allowed (Error)
+
+ * Both are seen as:
+ Car(String)
+
+ 2) We can directly create constuctor-> right click -> generate -> select parameters -> create constructor DONE */
+
 public class CarClassConstructor {
 
     // Properties or state
@@ -67,6 +78,8 @@ public class CarClassConstructor {
         this.speed = c;
     }
     */
+
+    // Concept of Constructor OverLoading
 
     // We can create multiple constructors with different parameters!!!
     // Single parameter constructor
