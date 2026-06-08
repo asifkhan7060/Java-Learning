@@ -8,27 +8,43 @@ package C_Constructors.one;
 public class CarObjects {
     public static void main() {
 
+/**
+ * Without a constructor, instance variables must be initialized manually after object creation.
+
+ * CarClassConstructor car1 = new CarClassConstructor(); (default constructor is in use)
+
+ * If values are not assigned, Java uses default values:
+ * String -> null
+ * int    -> 0
+
+ * Therefore, for :
+ * car1.drive();
+
+ * Output:
+ * null is driving at 0
+ */
+
         // Creating and instantiating an object
-        CarClass car1 = new CarClass();  // new CarClass() -> Process of Instantiation
+        CarClassConstructor car1 = new CarClassConstructor("Red","BMW",100); //If constructor is created then it is necessary to give parameter else gives error
 
-        // Assigning values to instance variables
-        car1.brand = "BMW";   // car1 = reference variable, brand = instance variable
-        car1.colour = "Red";
-        car1.speed = 89;
+        /**  or
+        CarClassConstructor car1;  //Creating
+        car1 = new CarClassConstructor(); //instantiating I*/
 
-        // Calling an instance method
-        car1.drive();
+        car1.drive(); // Prints : BMW is driving at 100
 
+        // Single parameter constructor
+        CarClassConstructor car2 = new CarClassConstructor("BMW");
+        car2.drive();
 
-        // Creating and instantiating an object
-        CarClass car2;
-        car2 = new CarClass();
+        // Double parameter constructor
+        CarClassConstructor car3 = new CarClassConstructor(200,"BMW");
+        car3.drive();
 
-        // Assigning values to instance variables
-        car2.brand = "Audi";
-        car2.colour = "Green";
-        car2.speed = 100;
+        /**
+         * Suppose we called Single parameter Constructor -> Ex: CarClassConstructor car2 = new CarClassConstructor("BMW");
+         * and we didn't create a Single parameter Constructor in main class file then error shows as "(actual and formal argument lists differ in length)"
+         */
 
-        car1.drive();
     }
 }
