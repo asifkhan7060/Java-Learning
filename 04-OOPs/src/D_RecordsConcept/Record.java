@@ -86,13 +86,29 @@ package D_RecordsConcept;
   • You want less code.
  */
 
-record Bike(String Brand,String Color,int Price){}
+record Bike(String Brand, String Color, int Price) {}
 
 public class Record {
+
     public static void main() {
-        Bike bike = new Bike("Yamaha","Mat Black",2400000);
-        System.out.println("Bike Details:\n"+"Brand: "+ bike.Brand()+"\nColor: "+bike.Color()+"\nPrice: "+bike.Price());
+
+        // Creating a Record Object
+        Bike bike = new Bike(
+                "Yamaha",
+                "Mat Black",
+                2400000
+        );
+
+        // Accessing Record Components
+        System.out.println("Bike Details:");
+
+        System.out.println("Brand : " + bike.Brand());
+
+        System.out.println("Color : " + bike.Color());
+
+        System.out.println("Price : " + bike.Price());
+
+        // Records are immutable
+        // Values cannot be modified after object creation
     }
-
-
 }
