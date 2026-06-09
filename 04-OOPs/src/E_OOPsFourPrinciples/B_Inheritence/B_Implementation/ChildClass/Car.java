@@ -41,7 +41,7 @@ public class Car extends Vehicle {
  */
 
     /**
-     * Method Overriding:
+     * Method Overriding (Comes under Run Time Polymorphism):
      *
      * The display() method already exists in the Parent Class.
      *
@@ -49,6 +49,7 @@ public class Car extends Vehicle {
      * we override the Parent Class implementation and
      * provide our own version.
      */
+
     @Override
     public void display() {
 
