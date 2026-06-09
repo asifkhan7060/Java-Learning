@@ -131,13 +131,15 @@ package E_OOPsFourPrinciples.A_Encapsulation;
 // Access Modifiers are used to control the accessibility of variables, methods, constructors, and classes.
 // public    → Accessible from anywhere.
 // private   → Accessible only within the same class.
-// protected → Accessible within the same package and by child classes.
+// protected → Accessible within the same package and by child classes (Mostly Not in used)
+
 
 class CarClass {
 
     /**
-     Encapsulation = Data Hiding + Controlled Access
-     Main Idea :
+     * Encapsulation = Data Hiding + Controlled Access
+     *
+     * Main Idea :
      * Private + Getter only = Read Only
      * Private + Setter only = Write Only
      * Private + Getter + Setter = Read and Write
@@ -146,11 +148,17 @@ class CarClass {
     // Private variables (Data Hiding)
     private final String brand;
     private int speed;
+    private double range;
 
     // Constructor
-    public CarClass(String brand, int speed) {
+    public CarClass(String brand, int speed, double range) {
+
         this.brand = brand;
         this.speed = speed;
+
+        // Calling Setter from Constructor
+        // Validation is applied even during object creation
+        setRange(range);
     }
 
     // Getter - Read Access
@@ -161,6 +169,11 @@ class CarClass {
     // Getter - Read Access
     public int getSpeed() {
         return speed;
+    }
+
+    // Getter - Read Access
+    public double getRange() {
+        return range;
     }
 
     // Setter - Controlled Write Access
@@ -174,6 +187,17 @@ class CarClass {
         this.speed = speed;
     }
 
+    // Setter with Validation
+    public void setRange(double range) {
+
+        if (range < 0) {
+            System.out.println("Range cannot be negative");
+            range = 0;
+        }
+
+        this.range = range;
+    }
+
     // Behaviour
     public void drive() {
         System.out.println(brand + " is driving at " + speed + " km/h");
@@ -185,11 +209,14 @@ public class EncapsulationDemo {
     public static void main(String[] args) {
 
         // Creating Object
-        CarClass car1 = new CarClass("BMW", 200);
+        // Range is negative, but constructor calls setter,
+        // so validation is automatically applied.
+        CarClass car1 = new CarClass("BMW", 200, -50);
 
         // Reading private data using Getters
         System.out.println("Brand : " + car1.getBrand());
         System.out.println("Speed : " + car1.getSpeed());
+        System.out.println("Range : " + car1.getRange());
 
         // Updating private data using Setter
         car1.setSpeed(250);
@@ -199,12 +226,18 @@ public class EncapsulationDemo {
         // Validation through Setter
         car1.setSpeed(-100);
 
-        // Calling Behavior
+        // Updating Range
+        car1.setRange(500);
+
+        System.out.println("Updated Range : " + car1.getRange());
+
+        // Calling Behaviour
         car1.drive();
 
         // Direct access is not allowed
         // car1.speed = 1000;   // Error
         // car1.brand = "Audi"; // Error
+        // car1.range = 1000;   // Error
 
         // Since Setter for brand is not defined and brand is private,
         // the brand value cannot be modified from outside the class.
