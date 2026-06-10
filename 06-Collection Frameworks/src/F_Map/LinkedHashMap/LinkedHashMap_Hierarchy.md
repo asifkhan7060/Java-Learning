@@ -233,26 +233,68 @@ The methods available in a `LinkedHashMap` object come from different levels of 
 | `LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)` | `new LinkedHashMap<>(16, 0.75f, true)` | `true` = access order (LRU); `false` = insertion order | O(1) | O(n) |
 | `LinkedHashMap(Map<? extends K, ? extends V>)` | `new LinkedHashMap<>(existingMap)` | Copy all mappings; insertion order | O(n) | O(n) |
 
-### Ordering Modes
+## Insertion Order vs Access Order
 
 | Mode | Constructor Parameter | Behavior | Use Case |
 |------|----------------------|----------|----------|
 | **Insertion Order** | `accessOrder = false` (default) | Entries iterated in insertion order | General predictable iteration |
 | **Access Order** | `accessOrder = true` | Entries reordered on get/put; least-recently accessed first | LRU Cache implementation |
 
-```java
-// Insertion Order (default)
-LinkedHashMap<Integer, String> map1 = new LinkedHashMap<>();
-map1.put(3, "C"); map1.put(1, "A"); map1.put(2, "B");
-// Iteration: 3 → 1 → 2
+`LinkedHashMap` can maintain the order of elements in two ways:
 
-// Access Order (LRU)
-LinkedHashMap<Integer, String> map2 = new LinkedHashMap<>(16, 0.75f, true);
-map2.put(3, "C"); map2.put(1, "A"); map2.put(2, "B");
-map2.get(1); // Access key 1
-// Iteration: 3 → 2 → 1 (1 moved to end)
+### 1. Insertion Order (Default)
+
+Elements remain in the order they were inserted. Accessing an element using `get()` does **not** change its position.
+
+```java
+LinkedHashMap<Integer, String> map =
+        new LinkedHashMap<>();
+
+map.put(3, "C");
+map.put(1, "A");
+map.put(2, "B");
+
+System.out.println(map);
+
+map.get(1);
+
+System.out.println(map);
 ```
 
+**Output**
+
+```text
+{3=C, 1=A, 2=B}
+{3=C, 1=A, 2=B}
+```
+
+---
+
+### 2. Access Order (LRU)
+
+When `accessOrder` is set to `true`, every accessed element is moved to the end, making it the **most recently used**.
+
+```java
+LinkedHashMap<Integer, String> map =
+        new LinkedHashMap<>(16, 0.75f, true);
+
+map.put(3, "C");
+map.put(1, "A");
+map.put(2, "B");
+
+System.out.println(map);
+
+map.get(1);
+
+System.out.println(map);
+```
+
+**Output**
+
+```text
+{3=C, 1=A, 2=B}
+{3=C, 2=B, 1=A}
+```
 ---
 
 ## LinkedHashMap Specific Methods

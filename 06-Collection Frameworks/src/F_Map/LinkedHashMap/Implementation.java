@@ -2,12 +2,6 @@ package F_Map.LinkedHashMap;
 
 import java.util.*;
 
-/*
- * ==========================================================
- *           LinkedHashMap Implementation
- * ==========================================================
- */
-
 public class Implementation {
 
     public static void main(String[] args) {
@@ -49,15 +43,14 @@ public class Implementation {
          * ==========================================================
          */
 
-
         // ---------------------------------------------------------
         // Raw Type
         // ---------------------------------------------------------
 
         LinkedHashMap rawMap =
-                new LinkedHashMap();
+                new LinkedHashMap<>();
 
-        rawMap.put(101, "Java");
+        rawMap.put(101, "Java"); // different datatypes of keys and values allowed
 
         rawMap.put("Course", "Spring Boot");
 
@@ -67,18 +60,10 @@ public class Implementation {
 
         System.out.println(rawMap);
 
-        /*
-         * Raw Types
-         *
-         * Store everything
-         * as Object.
-         */
-
         System.out.println();
 
-
         // ---------------------------------------------------------
-        // Generics
+        // Generics - recommended
         // ---------------------------------------------------------
 
         LinkedHashMap<Integer, String> students =
@@ -93,13 +78,6 @@ public class Implementation {
         System.out.println("LinkedHashMap with Generics");
 
         System.out.println(students);
-
-        /*
-         * Provides
-         * Compile-Time
-         * Type Safety.
-         */
-
 
         // ---------------------------------------------------------
         // Duplicate Key
@@ -383,16 +361,13 @@ public class Implementation {
         System.out.println(accessMap);
 
         /*
-         * accessOrder
-         *
-         * true
+         * accessOrder = true
          *
          * Moves accessed
          * entry to the
          * end of the
          * linked list.
          */
-
 
         // ---------------------------------------------------------
         // LinkedHashMap(Map)
@@ -476,152 +451,9 @@ public class Implementation {
          * Shallow Copy.
          */
 
-
         /*
          * ==========================================================
-         *              Shallow Copy Demo
-         * ==========================================================
-         */
-
-        LinkedHashMap<Integer, Employee> employeeMap =
-                new LinkedHashMap<>();
-
-        employeeMap.put(
-                101,
-                new Employee("Rudra", 90000));
-
-        employeeMap.put(
-                102,
-                new Employee("Haya", 85000));
-
-        @SuppressWarnings("unchecked")
-
-        LinkedHashMap<Integer, Employee> employeeCopy =
-
-                (LinkedHashMap<Integer, Employee>)
-                        employeeMap.clone();
-
-        System.out.println(
-                "\nShallow Copy");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        employeeCopy
-                .get(101)
-                .name = "Virat";
-
-        System.out.println(
-                "\nAfter Modifying Object");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        /*
-         * Employee objects
-         * are shared.
-         *
-         * Only the map
-         * structure is
-         * copied.
-         */
-
-
-        /*
-         * ==========================================================
-         *          Insertion Order (Default)
-         * ==========================================================
-         */
-
-        LinkedHashMap<Integer, String> insertionOrder =
-                new LinkedHashMap<>();
-
-        insertionOrder.put(3, "C");
-        insertionOrder.put(1, "Java");
-        insertionOrder.put(2, "Python");
-        insertionOrder.put(5, "Spring");
-        insertionOrder.put(4, "Docker");
-
-        System.out.println(
-                "\nInsertion Order");
-
-        System.out.println(insertionOrder);
-
-        /*
-         * Output Order
-         *
-         * 3
-         *
-         * 1
-         *
-         * 2
-         *
-         * 5
-         *
-         * 4
-         *
-         * Same order
-         * as insertion.
-         */
-
-        /*
-         * ==========================================================
-         *        HashMap vs LinkedHashMap Iteration
-         * ==========================================================
-         */
-
-        HashMap<Integer, String> hashMap =
-                new HashMap<>();
-
-        hashMap.put(3, "C");
-        hashMap.put(1, "Java");
-        hashMap.put(2, "Python");
-        hashMap.put(5, "Spring");
-        hashMap.put(4, "Docker");
-
-        System.out.println("\nHashMap");
-
-        System.out.println(hashMap);
-
-        LinkedHashMap<Integer, String> linkedMap =
-                new LinkedHashMap<>();
-
-        linkedMap.put(3, "C");
-        linkedMap.put(1, "Java");
-        linkedMap.put(2, "Python");
-        linkedMap.put(5, "Spring");
-        linkedMap.put(4, "Docker");
-
-        System.out.println("\nLinkedHashMap");
-
-        System.out.println(linkedMap);
-
-        /*
-         * HashMap
-         *
-         * No guaranteed
-         * iteration order.
-         *
-         * LinkedHashMap
-         *
-         * Preserves
-         * insertion order.
-         */
-
-
-        /*
-         * ==========================================================
-         *         Access Order Demonstration
+         *          Updating Existing Key
          * ==========================================================
          */
 
@@ -638,46 +470,11 @@ public class Implementation {
         accessOrder.put(4, "Docker");
         accessOrder.put(5, "AWS");
 
-        System.out.println("\nInitial Order");
-
-        System.out.println(accessOrder);
-
-        accessOrder.get(2);
-
-        System.out.println("\nAfter get(2)");
-
-        System.out.println(accessOrder);
-
-        accessOrder.get(1);
-
-        System.out.println("\nAfter get(1)");
-
-        System.out.println(accessOrder);
-
-        accessOrder.get(4);
-
-        System.out.println("\nAfter get(4)");
-
-        System.out.println(accessOrder);
-
-        /*
-         * Every accessed
-         * entry moves
-         * to the end.
-         */
-
-
-        /*
-         * ==========================================================
-         *          Updating Existing Key
-         * ==========================================================
-         */
-
         accessOrder.put(3, "Spring Boot");
 
         System.out.println("\nAfter Updating Key 3");
 
-        System.out.println(accessOrder);
+        System.out.println(accessOrder); //1,2,4,5,3
 
         /*
          * Updating an
@@ -685,7 +482,6 @@ public class Implementation {
          * also counts
          * as access.
          */
-
 
         /*
          * ==========================================================
@@ -716,519 +512,25 @@ public class Implementation {
          * removed.
          */
 
-
-        /*
-         * ==========================================================
-         *          LRU Cache Demonstration
-         * ==========================================================
-         */
-
-        LRUCache<Integer, String> lru =
-                new LRUCache<>(3);
-
-        lru.put(1, "Chrome");
-
-        lru.put(2, "Edge");
-
-        lru.put(3, "Firefox");
-
-        System.out.println("\nLRU Cache");
-
-        System.out.println(lru);
-
-        lru.get(1);
-
-        lru.put(4, "Opera");
-
-        System.out.println("\nAfter Access + Insert");
-
-        System.out.println(lru);
-
-        /*
-         * Cache Size
-         *
-         * 3
-         *
-         * Accessing key 1
-         * makes it the
-         * most recently
-         * used entry.
-         *
-         * Key 2 becomes
-         * the eldest and
-         * is removed.
-         */
-
-
-        /*
-         * ==========================================================
-         *          Browser History Example
-         * ==========================================================
-         */
-
-        LinkedHashMap<Integer, String> history =
-                new LinkedHashMap<>(
-                        10,
-                        0.75f,
-                        true
-                );
-
-        history.put(1, "google.com");
-
-        history.put(2, "github.com");
-
-        history.put(3, "stackoverflow.com");
-
-        history.get(1);
-
-        history.get(2);
-
-        System.out.println("\nBrowser History");
-
-        System.out.println(history);
-
-        /*
-         * Recently visited
-         * websites move
-         * to the end.
-         */
-
-
-        /*
-         * ==========================================================
-         *        Recently Viewed Products
-         * ==========================================================
-         */
-
-        LinkedHashMap<Integer, String> products =
-                new LinkedHashMap<>(
-                        10,
-                        0.75f,
-                        true
-                );
-
-        products.put(101, "Laptop");
-
-        products.put(102, "Keyboard");
-
-        products.put(103, "Mouse");
-
-        products.put(104, "Monitor");
-
-        products.get(102);
-
-        products.get(101);
-
-        System.out.println("\nRecently Viewed");
-
-        System.out.println(products);
-
-        /*
-         * E-commerce sites
-         * often use this
-         * approach for
-         * recently viewed
-         * products.
-         */
-
-        /*
-         * ==========================================================
-         *           Reference Type Demonstration
-         * ==========================================================
-         */
-
-        /*
-         * Map Reference
-         *
-         * Recommended because
-         * it supports Loose
-         * Coupling.
-         */
-
-        Map<Integer, String> mapReference =
-                new LinkedHashMap<>();
-
-        mapReference.put(1, "Java");
-
-        mapReference.put(2, "Python");
-
-        System.out.println("\nMap Reference");
-
-        System.out.println(mapReference);
-
-
-        /*
-         * LinkedHashMap Reference
-         *
-         * Required for
-         * LinkedHashMap
-         * specific features.
-         */
-
-        LinkedHashMap<Integer, String> linkedReference =
-                new LinkedHashMap<>();
-
-        linkedReference.put(10, "Spring");
-
-        linkedReference.put(20, "Docker");
-
-        @SuppressWarnings("unchecked")
-
-        LinkedHashMap<Integer, String> clonedReference =
-
-                (LinkedHashMap<Integer, String>)
-                        linkedReference.clone();
-
-        System.out.println("\nLinkedHashMap Reference");
-
-        System.out.println(clonedReference);
-
-
-
         /*
          * ==========================================================
          *               Optimized Overrides
          * ==========================================================
          */
 
-
-        // ---------------------------------------------------------
-        // forEach()
-        // ---------------------------------------------------------
-
-        System.out.println("\nforEach()");
-
-        linkedReference.forEach(
-
-                (key, value) ->
-
-                        System.out.println(
-
-                                key
-                                        + " -> "
-                                        + value
-
-                        )
-
-        );
-
-
-        // ---------------------------------------------------------
-        // replaceAll()
-        // ---------------------------------------------------------
-
-        LinkedHashMap<Integer, String> replaceDemo =
-                new LinkedHashMap<>();
-
-        replaceDemo.put(1, "java");
-
-        replaceDemo.put(2, "python");
-
-        replaceDemo.put(3, "spring");
-
-        replaceDemo.replaceAll(
-
-                (key, value) ->
-
-                        value.toUpperCase()
-
-        );
-
-        System.out.println("\nreplaceAll()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // compute()
-        // ---------------------------------------------------------
-
-        replaceDemo.compute(
-
-                1,
-
-                (key, value) ->
-
-                        value + " 21"
-
-        );
-
-        System.out.println("\ncompute()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfAbsent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfAbsent(
-
-                4,
-
-                key -> "Docker"
-
-        );
-
-        System.out.println("\ncomputeIfAbsent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfPresent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfPresent(
-
-                2,
-
-                (key, value) ->
-
-                        value + " Framework"
-
-        );
-
-        System.out.println("\ncomputeIfPresent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // merge()
-        // ---------------------------------------------------------
-
-        LinkedHashMap<String, Integer> mergeDemo =
-                new LinkedHashMap<>();
-
-        mergeDemo.put("Java", 10);
-
-        mergeDemo.merge(
-
-                "Java",
-
-                5,
-
-                Integer::sum
-
-        );
-
-        mergeDemo.merge(
-
-                "Python",
-
-                20,
-
-                Integer::sum
-
-        );
-
-        System.out.println("\nmerge()");
-
-        System.out.println(mergeDemo);
-
-
-
         /*
-         * ==========================================================
-         *          LinkedHashMap Characteristics
-         * ==========================================================
+         * LinkedHashMap overrides and optimizes the following methods:
+         *
+         * ✔ forEach()
+         * ✔ replaceAll()
+         * ✔ compute()
+         * ✔ computeIfAbsent()
+         * ✔ computeIfPresent()
+         * ✔ merge()
+         *
+         * Their behavior is identical to HashMap.
+         * Refer to HashMap Implementation for detailed examples.
          */
-
-        LinkedHashMap<Integer, String> characteristics =
-                new LinkedHashMap<>();
-
-        characteristics.put(3, "C");
-
-        characteristics.put(1, "Java");
-
-        characteristics.put(2, "Python");
-
-        System.out.println("\nCharacteristics");
-
-        System.out.println(characteristics);
-
-        /*
-         * ✔ Maintains Order
-         *
-         * ✔ Insertion Order
-         *
-         * ✔ Optional Access Order
-         *
-         * ✔ Hash Table
-         *
-         * ✔ Doubly Linked List
-         *
-         * ✔ One Null Key
-         *
-         * ✔ Multiple Null Values
-         *
-         * ✔ Not Thread Safe
-         *
-         * ✔ Average O(1)
-         */
-
-
-        /*
-         * ==========================================================
-         *            Methods Not Covered Yet
-         * ==========================================================
-         */
-
-        /*
-         * Internal JDK Methods
-         *
-         * newNode()
-         *
-         * replacementNode()
-         *
-         * afterNodeAccess()
-         *
-         * afterNodeInsertion()
-         *
-         * afterNodeRemoval()
-         *
-         * transferLinks()
-         *
-         * linkNodeLast()
-         */
-
-
-        /*
-         * ==========================================================
-         *        Methods Inherited from Object
-         * ==========================================================
-         */
-
-        System.out.println("\nObject Methods");
-
-        System.out.println(
-
-                characteristics.toString()
-
-        );
-
-        System.out.println(
-
-                characteristics.getClass()
-
-        );
-
-        System.out.println(
-
-                characteristics.hashCode()
-
-        );
-
-        System.out.println(
-
-                characteristics.equals(linkedReference)
-
-        );
-
-        /*
-         * Object Methods
-         *
-         * toString()
-         *
-         * getClass()
-         *
-         * hashCode()
-         *
-         * equals()
-         *
-         * wait()
-         *
-         * notify()
-         *
-         * notifyAll()
-         *
-         * finalize()
-         * (Deprecated)
-         */
-
-
-        /*
-         * ==========================================================
-         *               Interview Notes
-         * ==========================================================
-         */
-
-        /*
-         * 1.
-         * Extends HashMap.
-         *
-         * 2.
-         * Uses Hash Table
-         * +
-         * Doubly Linked List.
-         *
-         * 3.
-         * Maintains
-         * Insertion Order.
-         *
-         * 4.
-         * Supports
-         * Access Order.
-         *
-         * 5.
-         * removeEldestEntry()
-         * is used for
-         * LRU Cache.
-         *
-         * 6.
-         * Allows One
-         * Null Key.
-         *
-         * 7.
-         * Allows Multiple
-         * Null Values.
-         *
-         * 8.
-         * clone()
-         * creates
-         * Shallow Copy.
-         *
-         * 9.
-         * Not Thread Safe.
-         *
-         * 10.
-         * Average
-         * put(), get(),
-         * remove()
-         * are O(1).
-         */
-
-
-        /*
-         * ==========================================================
-         *                   Summary
-         * ==========================================================
-         */
-
-        /*
-         * LinkedHashMap
-         * extends HashMap
-         * and preserves
-         * iteration order.
-         *
-         * It combines
-         * Hash Table
-         * with
-         * Doubly Linked List.
-         *
-         * It is ideal
-         * when predictable
-         * iteration order
-         * and fast lookup
-         * are both required.
-         *
-         * It is also the
-         * foundation for
-         * implementing
-         * LRU Cache.
-         */
-
 
         /*
          * ==========================================================
@@ -1296,114 +598,10 @@ class LRUCache<K, V>
     }
 
     @Override
-    protected boolean removeEldestEntry(
-            Map.Entry<K, V> eldest) {
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
 
         return size() > capacity;
 
     }
 
 }
-
-
-/*
- * ==========================================================
- * IMPORTANT
- * ==========================================================
- *
- * HashMap
- *
- * ↓
- *
- * Fast Lookup
- *
- * ↓
- *
- * No Order
- *
- * -----------------------------
- *
- * LinkedHashMap
- *
- * ↓
- *
- * Fast Lookup
- *
- * +
- *
- * Doubly Linked List
- *
- * ↓
- *
- * Maintains Order
- *
- * -----------------------------
- *
- * accessOrder = false
- *
- * ↓
- *
- * Insertion Order
- *
- * -----------------------------
- *
- * accessOrder = true
- *
- * ↓
- *
- * Access Order
- *
- * -----------------------------
- *
- * removeEldestEntry()
- *
- * ↓
- *
- * LRU Cache
- *
- * ==========================================================
- */
-
-
-
-/*
- * ==========================================================
- *              When Should You Use It?
- * ==========================================================
- */
-
-/*
- * Use HashMap
- *
- * ✔ Fast lookup
- * ✔ No ordering required
- *
- * -----------------------------
- *
- * Use LinkedHashMap
- *
- * ✔ Maintain insertion order
- * ✔ Build LRU cache
- * ✔ Recently viewed items
- * ✔ Browser history
- *
- * -----------------------------
- *
- * Use TreeMap
- *
- * ✔ Sorted data
- * ✔ Range queries
- *
- * -----------------------------
- *
- * Use ConcurrentHashMap
- *
- * ✔ Multi-threaded applications
- *
- * -----------------------------
- *
- * Use WeakHashMap
- *
- * ✔ Automatic garbage collection
- * ✔ Metadata caches
- */

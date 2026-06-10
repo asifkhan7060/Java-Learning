@@ -2,12 +2,6 @@ package F_Map.IdentityHashMap;
 
 import java.util.*;
 
-/*
- * ==========================================================
- *          IdentityHashMap Implementation
- * ==========================================================
- */
-
 public class Implementation {
 
     public static void main(String[] args) {
@@ -50,7 +44,6 @@ public class Implementation {
          * ==========================================================
          */
 
-
         // ---------------------------------------------------------
         // Raw Type
         // ---------------------------------------------------------
@@ -58,7 +51,7 @@ public class Implementation {
         IdentityHashMap rawMap =
                 new IdentityHashMap();
 
-        rawMap.put(101, "Java");
+        rawMap.put(101, "Java"); // allows different datatypes of keys and values
 
         rawMap.put("Course", "Spring Boot");
 
@@ -67,17 +60,6 @@ public class Implementation {
         System.out.println("Raw IdentityHashMap");
 
         System.out.println(rawMap);
-
-        /*
-         * Raw Types
-         *
-         * Store everything
-         * as Object.
-         *
-         * Avoid using
-         * Raw Types in
-         * production code.
-         */
 
         System.out.println();
 
@@ -98,13 +80,6 @@ public class Implementation {
         System.out.println("IdentityHashMap with Generics");
 
         System.out.println(students);
-
-        /*
-         * Generics provide
-         * Compile-Time
-         * Type Safety.
-         */
-
 
         // ---------------------------------------------------------
         // Duplicate Key
@@ -301,18 +276,23 @@ public class Implementation {
 
         System.out.println(map1);
 
-        /*
-         * Creates an empty
-         * IdentityHashMap.
-         *
-         * Uses Reference
-         * Equality.
-         */
-
-
         // ---------------------------------------------------------
         // IdentityHashMap(int expectedMaxSize)
         // ---------------------------------------------------------
+
+        /*
+         * Specifies the expected maximum
+         * number of key-value mappings.
+         *
+         * It is only a performance hint
+         * used to reduce resizing.
+         *
+         * It does NOT limit the number
+         * of entries that can be stored.
+         *
+         * The map grows automatically
+         * when required.
+         */
 
         IdentityHashMap<Integer, String> map2 =
                 new IdentityHashMap<>(100);
@@ -325,16 +305,6 @@ public class Implementation {
                 "\nIdentityHashMap(int expectedMaxSize)");
 
         System.out.println(map2);
-
-        /*
-         * Specifies the
-         * expected maximum
-         * number of mappings.
-         *
-         * It is NOT the
-         * actual capacity.
-         */
-
 
         // ---------------------------------------------------------
         // IdentityHashMap(Map)
@@ -418,63 +388,6 @@ public class Implementation {
          *
          * Creates a
          * Shallow Copy.
-         */
-
-
-        /*
-         * ==========================================================
-         *            Shallow Copy Demonstration
-         * ==========================================================
-         */
-
-        IdentityHashMap<Integer, Employee> employeeMap =
-                new IdentityHashMap<>();
-
-        employeeMap.put(
-                101,
-                new Employee("Rudra", 90000));
-
-        employeeMap.put(
-                102,
-                new Employee("Haya", 85000));
-
-        @SuppressWarnings("unchecked")
-
-        IdentityHashMap<Integer, Employee> employeeCopy =
-
-                (IdentityHashMap<Integer, Employee>)
-                        employeeMap.clone();
-
-        System.out.println("\nShallow Copy");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        employeeCopy
-                .get(101)
-                .name = "Virat";
-
-        System.out.println("\nAfter Modifying Object");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        /*
-         * Employee objects
-         * are shared.
-         *
-         * Only the map
-         * object is copied.
          */
 
 
@@ -578,38 +491,6 @@ public class Implementation {
          * reason both
          * IdentityHashMap
          * entries exist.
-         */
-
-        /*
-         * ==========================================================
-         *                  String Pool
-         * ==========================================================
-         */
-
-        String pool1 = "Java";
-
-        String pool2 = "Java";
-
-        System.out.println("\nString Pool");
-
-        System.out.println("pool1 == pool2 : "
-                + (pool1 == pool2));
-
-        System.out.println("pool1.equals(pool2) : "
-                + pool1.equals(pool2));
-
-        /*
-         * String Literals
-         * are stored inside
-         * the String Pool.
-         *
-         * Both references
-         * point to the
-         * same object.
-         *
-         * ==
-         *
-         * true
          */
 
 
@@ -869,494 +750,27 @@ public class Implementation {
          * identity.
          */
 
-
         /*
          * ==========================================================
-         *             Reference Demonstration
-         * ==========================================================
-         */
-
-        Employee employee =
-                new Employee("Virat", 100000);
-
-        Employee reference =
-                employee;
-
-        System.out.println("\nReference");
-
-        System.out.println(
-
-                employee == reference
-
-        );
-
-        /*
-         * Both variables
-         * point to the
-         * same object.
-         *
-         * ==
-         *
-         * true
-         */
-
-
-        /*
-         * ==========================================================
-         *           Memory Representation
+         *               Optimized Overrides
          * ==========================================================
          */
 
         /*
-         * HashMap
+         * IdentityHashMap overrides and optimizes the following methods:
          *
-         * Employee A
+         * ✔ forEach()
+         * ✔ replaceAll()
+         * ✔ compute()
+         * ✔ computeIfAbsent()
+         * ✔ computeIfPresent()
+         * ✔ merge()
          *
-         * equals()
+         * These methods behave similarly to HashMap.
+         * However, key comparison uses reference equality (==)
+         * instead of equals().
          *
-         * Employee B
-         *
-         * =
-         *
-         * One Entry
-         *
-         *
-         * -------------------
-         *
-         * IdentityHashMap
-         *
-         * Employee A
-         *
-         * !=
-         *
-         * Employee B
-         *
-         * =
-         *
-         * Two Entries
-         */
-
-        /*
-         * ==========================================================
-         *           Reference Type Demonstration
-         * ==========================================================
-         */
-
-        /*
-         * Map Reference
-         *
-         * Recommended because
-         * it supports Loose
-         * Coupling.
-         */
-
-        Map<String, Integer> mapReference =
-                new IdentityHashMap<>();
-
-        mapReference.put("Java", 21);
-
-        System.out.println("\nMap Reference");
-
-        System.out.println(mapReference);
-
-        /*
-         * IdentityHashMap Reference
-         *
-         * Required when
-         * IdentityHashMap
-         * specific methods
-         * are needed.
-         */
-
-        IdentityHashMap<String, Integer> identityReference =
-                new IdentityHashMap<>();
-
-        identityReference.put("Spring", 10);
-
-        @SuppressWarnings("unchecked")
-
-        IdentityHashMap<String, Integer> clonedReference =
-
-                (IdentityHashMap<String, Integer>)
-                        identityReference.clone();
-
-        System.out.println("\nIdentityHashMap Reference");
-
-        System.out.println(clonedReference);
-
-
-
-        /*
-         * ==========================================================
-         *             Real World Demonstration
-         * ==========================================================
-         */
-
-        Employee employee1 =
-                new Employee("Rudra", 90000);
-
-        Employee employee2 =
-                new Employee("Rudra", 90000);
-
-        IdentityHashMap<Employee, Boolean> visited =
-                new IdentityHashMap<>();
-
-        visited.put(employee1, true);
-
-        visited.put(employee2, true);
-
-        System.out.println("\nVisited Objects");
-
-        System.out.println(visited);
-
-        System.out.println("Visited Count : "
-                + visited.size());
-
-        /*
-         * Used by
-         *
-         * Object Graph
-         *
-         * Serialization
-         *
-         * Circular Reference
-         *
-         * Detection
-         *
-         * JVM Frameworks
-         */
-
-
-        /*
-         * ==========================================================
-         *                 Optimized Overrides
-         * ==========================================================
-         */
-
-
-        // ---------------------------------------------------------
-        // forEach()
-        // ---------------------------------------------------------
-
-        System.out.println("\nforEach()");
-
-        identityReference.forEach(
-
-                (key, value) ->
-
-                        System.out.println(
-
-                                key
-                                        + " -> "
-                                        + value
-
-                        )
-
-        );
-
-
-        // ---------------------------------------------------------
-        // replaceAll()
-        // ---------------------------------------------------------
-
-        IdentityHashMap<Integer, String> replaceDemo =
-                new IdentityHashMap<>();
-
-        replaceDemo.put(1, "java");
-        replaceDemo.put(2, "python");
-        replaceDemo.put(3, "spring");
-
-        replaceDemo.replaceAll(
-
-                (key, value) ->
-
-                        value.toUpperCase()
-
-        );
-
-        System.out.println("\nreplaceAll()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // compute()
-        // ---------------------------------------------------------
-
-        replaceDemo.compute(
-
-                1,
-
-                (key, value) ->
-
-                        value + " 21"
-
-        );
-
-        System.out.println("\ncompute()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfAbsent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfAbsent(
-
-                4,
-
-                key -> "Docker"
-
-        );
-
-        System.out.println("\ncomputeIfAbsent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfPresent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfPresent(
-
-                2,
-
-                (key, value) ->
-
-                        value + " Framework"
-
-        );
-
-        System.out.println("\ncomputeIfPresent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // merge()
-        // ---------------------------------------------------------
-
-        IdentityHashMap<String, Integer> mergeDemo =
-                new IdentityHashMap<>();
-
-        mergeDemo.put("Java", 10);
-
-        mergeDemo.merge(
-
-                "Java",
-
-                5,
-
-                Integer::sum
-
-        );
-
-        mergeDemo.merge(
-
-                "Python",
-
-                20,
-
-                Integer::sum
-
-        );
-
-        System.out.println("\nmerge()");
-
-        System.out.println(mergeDemo);
-
-
-
-        /*
-         * ==========================================================
-         *          IdentityHashMap Characteristics
-         * ==========================================================
-         */
-
-        IdentityHashMap<String, Integer> characteristics =
-                new IdentityHashMap<>();
-
-        characteristics.put("Java", 21);
-
-        characteristics.put("Python", 10);
-
-        System.out.println("\nCharacteristics");
-
-        System.out.println(characteristics);
-
-        /*
-         * ✔ Reference Equality
-         *
-         * ✔ Uses ==
-         *
-         * ✔ Uses
-         * System.identityHashCode()
-         *
-         * ✔ Open Addressing
-         *
-         * ✔ Linear Probing
-         *
-         * ✔ One Null Key
-         *
-         * ✔ Multiple Null Values
-         *
-         * ✔ Not Thread Safe
-         *
-         * ✔ Average O(1)
-         */
-
-
-        /*
-         * ==========================================================
-         *            Methods Not Covered Yet
-         * ==========================================================
-         */
-
-        /*
-         * Internal JDK Methods
-         *
-         * hash()
-         *
-         * resize()
-         *
-         * capacity()
-         *
-         * nextKeyIndex()
-         *
-         * closeDeletion()
-         *
-         * init()
-         *
-         * putForCreate()
-         */
-
-
-        /*
-         * ==========================================================
-         *         Methods Inherited from Object
-         * ==========================================================
-         */
-
-        System.out.println("\nObject Methods");
-
-        System.out.println(
-
-                characteristics.toString()
-
-        );
-
-        System.out.println(
-
-                characteristics.getClass()
-
-        );
-
-        System.out.println(
-
-                characteristics.hashCode()
-
-        );
-
-        System.out.println(
-
-                characteristics.equals(identityReference)
-
-        );
-
-        /*
-         * Object Methods
-         *
-         * toString()
-         *
-         * getClass()
-         *
-         * hashCode()
-         *
-         * equals()
-         *
-         * wait()
-         *
-         * notify()
-         *
-         * notifyAll()
-         *
-         * finalize()
-         * (Deprecated)
-         */
-
-
-        /*
-         * ==========================================================
-         *                Interview Notes
-         * ==========================================================
-         */
-
-        /*
-         * 1.
-         * Uses ==
-         *
-         * 2.
-         * Does NOT use
-         * equals()
-         *
-         * 3.
-         * Uses
-         * System.identityHashCode()
-         *
-         * 4.
-         * Allows duplicate
-         * logical keys
-         *
-         * 5.
-         * Uses Open
-         * Addressing
-         *
-         * 6.
-         * Uses Linear
-         * Probing
-         *
-         * 7.
-         * Stores entries
-         * inside Object[]
-         *
-         * 8.
-         * Not Thread Safe
-         *
-         * 9.
-         * clone() creates
-         * Shallow Copy
-         *
-         * 10.
-         * Mainly used by
-         * JVM Internals
-         * and Frameworks
-         */
-
-
-        /*
-         * ==========================================================
-         *                    Summary
-         * ==========================================================
-         */
-
-        /*
-         * IdentityHashMap
-         * is a specialized
-         * implementation
-         * of Map.
-         *
-         * It compares
-         * keys using
-         * Reference Equality
-         * instead of
-         * Logical Equality.
-         *
-         * It is mainly
-         * intended for
-         * framework level
-         * development.
+         * Refer to HashMap Implementation for detailed examples.
          */
 
 
@@ -1455,46 +869,3 @@ class EmployeeKey {
     }
 
 }
-
-
-/*
- * ==========================================================
- * IMPORTANT
- * ==========================================================
- *
- * HashMap
- *
- * key.hashCode()
- *
- * ↓
- *
- * equals()
- *
- * ↓
- *
- * One Logical Entry
- *
- * --------------------------
- *
- * IdentityHashMap
- *
- * System.identityHashCode()
- *
- * ↓
- *
- * ==
- *
- * ↓
- *
- * One Physical Object
- *
- * --------------------------
- *
- * Use IdentityHashMap
- * only when
- * Object Identity
- * is more important
- * than Logical Equality.
- *
- * ==========================================================
- */

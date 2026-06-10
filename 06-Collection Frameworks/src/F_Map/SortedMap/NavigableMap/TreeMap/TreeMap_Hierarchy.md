@@ -72,34 +72,14 @@ TreeMap
 ## Interface Relationship
 
 ```text
-Map
+Map (I)
  ↑
-SortedMap
+SortedMap (I)
  ↑
-NavigableMap
+NavigableMap (I)
  ↑
-TreeMap
+TreeMap (Class)
 ```
-
----
-
-## Relationship with Other Map Implementations
-
-```text
-HashMap                    TreeMap
-   ↓                          ↓
-Hash Table              Red-Black Tree
-   ↓                          ↓
-hashCode()              Comparable
-   ↓                       or
-equals()                 Comparator
-
-LinkedHashMap              TreeMap
-   ↓                          ↓
-Insertion Order         Sorted Order
-```
-
-HashMap focuses on fast hashing. TreeMap focuses on maintaining sorted order.
 
 ---
 
@@ -341,37 +321,6 @@ higherKey(25)   → 40    (strictly greater)
 | **Performance** | `put()`, `get()`, `remove()` → O(log n) | Balanced tree guarantees this |
 | **Memory** | Each node stores Key, Value, Color, Parent, Left, Right | More overhead per entry than HashMap |
 | **Use Cases** | Leaderboards, scheduling, calendars, stock prices, banking, auto-complete, time-series, range queries | When sorted data or range operations are needed |
-
-### Red-Black Tree Structure
-
-```text
-              40(B)
-             /              20(R)     60(R)
-        /   \      /       10(B)30(B)50(B)70(B)
-```
-
-Each node stores: Key, Value, Color, Parent, Left Child, Right Child.
-
-### Tree Rotation Examples
-
-**Left Rotation:**
-```text
-Before          After
-  20              30
-   \             /     30    →     20    40
-         40
-```
-
-**Right Rotation:**
-```text
-Before          After
-     40           30
-    /            /     30     →    20    40
-  /
- 20
-```
-
-Rotations maintain O(log n) height.
 
 ### Why TreeMap Exists
 

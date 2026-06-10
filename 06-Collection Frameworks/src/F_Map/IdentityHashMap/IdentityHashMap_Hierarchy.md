@@ -281,8 +281,8 @@ System.out.println(s1 == s2);        // false
 String s1 = new String("Java");
 String s2 = new String("Java");
 
-// HashMap → 1 entry (s1 and s2 are logically equal)
-// IdentityHashMap → 2 entries (s1 and s2 are different references)
+// HashMap → (s1 and s2 are logically equal)
+// IdentityHashMap → (s1 and s2 are different references)
 ```
 
 ---

@@ -31,6 +31,8 @@ Since `Hashtable` implements the `Map` interface, it automatically inherits meth
 
 Additionally, `Hashtable` provides its own constructors, optimized implementations, and legacy utility methods.
 
+Recommended : Use ConcurrentHashMap instead of HashTable
+
 ---
 
 ## Class Declaration
