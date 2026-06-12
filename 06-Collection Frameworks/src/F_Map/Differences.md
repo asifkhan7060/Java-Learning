@@ -101,18 +101,6 @@ marks.put("Bob", 90);
 marks.put("Charlie", 78);
 // Iteration: Alice=85, Bob=90, Charlie=78 (insertion order preserved)
 ```
-
-**LRU Cache:**
-```java
-// accessOrder=true: orders by last access, not insertion
-Map<String, String> lru = new LinkedHashMap<>(16, 0.75f, true) {
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
-        return size() > 100;  // Evict oldest when size > 100
-    }
-};
-```
-
 ---
 
 ### TreeMap — Red-Black Tree

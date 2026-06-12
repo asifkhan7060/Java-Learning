@@ -366,6 +366,18 @@ These avoid linear searches by leveraging the hash-based structure.
 | `clear()` | O(n) |
 | `iterator()` | O(n) |
 
+## Why are these HashMap methods `O(n)`?
+
+For a **HashMap**, these methods are **O(n)** because they must examine many or all entries rather than using the hash table's key lookup mechanism.
+
+| Method | Time Complexity | Why? |
+|--------|-----------------|------|
+| `containsValue(value)` | **O(n)** | Values are **not hashed**. HashMap hashes only **keys**, so it must scan every entry until it finds the value. |
+| `clear()` | **O(n)** | Every bucket/entry must be removed (or dereferenced) so the map becomes empty. This requires processing all stored entries. |
+| `iterator()` *(full traversal)* | **O(n)** | Creating the iterator is **O(1)**, but iterating through all elements takes **O(n)** because each entry is visited once. |
+
+> **Note:** The `iterator()` method itself is **O(1)** to create. It becomes **O(n)** only when you traverse the entire HashMap using that iterator.
+
 ### Worst Case (Before Java 8)
 
 | Operation | Complexity |

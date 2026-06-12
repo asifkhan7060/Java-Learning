@@ -118,6 +118,10 @@ Need reference equality (==)?
 | `isEmpty()` | Check if empty | `map.isEmpty()` |
 | `clear()` | Remove all mappings | `map.clear()` |
 
+```text
+Put → Get → Remove → Replace → Contains → View → Compute → Size → forEach → Merge
+```
+
 ### SortedMap Methods (TreeMap)
 
 | Method | Description |
@@ -147,17 +151,22 @@ Need reference equality (==)?
 
 ### ConcurrentMap Methods (ConcurrentHashMap)
 
-| Method | Description |
-|--------|-------------|
-| `putIfAbsent(K, V)` | Atomic insert-if-absent |
-| `remove(Object key, Object value)` | Atomic remove-if-match |
-| `replace(K key, V value)` | Atomic replace |
-| `replace(K, oldV, newV)` | Atomic replace-if-match |
-| `compute()` / `computeIfAbsent()` / `computeIfPresent()` / `merge()` | Atomic computation methods |
-| `forEach()` / `replaceAll()` | Bulk atomic operations |
-| `getOrDefault()` | Retrieve with fallback |
+Already covered in **Map**.
 
----
+The following methods perform **atomic (thread-safe)** operations:
+
+```text
+✓ putIfAbsent()
+✓ remove(key, value)
+✓ replace()
+✓ compute()
+✓ computeIfAbsent()
+✓ computeIfPresent()
+✓ merge()
+✓ forEach()
+✓ replaceAll()
+✓ getOrDefault()
+```
 
 ## 4. Traversal Methods
 

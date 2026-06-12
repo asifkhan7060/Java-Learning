@@ -79,7 +79,7 @@ public class Implementation {
         // Map Methods Demonstration
         // =====================================================
 
-        Map<Integer, String> map = new HashMap<>();
+        Map<Integer, String> map = new HashMap<>(); // Implemented by HashMap(Common to use)
 
         map.put(1, "Java");
         map.put(2, "Python");
@@ -154,6 +154,9 @@ public class Implementation {
         System.out.println("Value of Key 6 : "
                 + map.get(6));
 
+        System.out.println("Value of Key 6 : "
+                + map.get(100)); //null
+
         // =====================================================
         // getOrDefault()
         // Returns mapped value or supplied default value.
@@ -161,17 +164,9 @@ public class Implementation {
 
         System.out.println("\ngetOrDefault()");
 
-        System.out.println(
-                "Key 5 : "
-                        + map.getOrDefault(
-                        5,
-                        "Not Found"));
+        System.out.println("Key 5 : " + map.getOrDefault(5, "Not Found"));
 
-        System.out.println(
-                "Key 100 : "
-                        + map.getOrDefault(
-                        100,
-                        "Not Found"));
+        System.out.println("Key 100 : " + map.getOrDefault(100, "Not Found"));
 
         // =====================================================
         // remove(key)
@@ -182,7 +177,7 @@ public class Implementation {
 
         System.out.println("Before remove() : " + map);
 
-        map.remove(8);
+        map.remove(8); // for wrong index nothing happens
 
         System.out.println("After remove() : " + map);
 
@@ -196,7 +191,7 @@ public class Implementation {
         System.out.println("Before remove(key,value) : "
                 + map);
 
-        map.remove(7, "Rust");
+        map.remove(7, "Rust"); // for wrong input nothing happens
 
         System.out.println("After remove(key,value) : "
                 + map);
@@ -210,7 +205,7 @@ public class Implementation {
 
         System.out.println("Before replace() : " + map);
 
-        map.replace(1, "Core Java");
+        map.replace(1, "Core Java"); // for wrong index nothing happens
 
         System.out.println("After replace() : " + map);
 
@@ -223,10 +218,7 @@ public class Implementation {
 
         System.out.println("Before replace() : " + map);
 
-        map.replace(
-                2,
-                "Spring",
-                "Spring Boot");
+        map.replace(2, "Spring", "Spring Boot"); // for wrong index and value it skips
 
         System.out.println("After replace() : " + map);
 
@@ -239,9 +231,7 @@ public class Implementation {
 
         System.out.println("Before replaceAll() : " + map);
 
-        map.replaceAll(
-                (key, value) ->
-                        value.toUpperCase());
+        map.replaceAll((key, value) -> value.toUpperCase());
 
         System.out.println("After replaceAll() : " + map);
 
@@ -314,9 +304,7 @@ public class Implementation {
 
         System.out.println("\nforEach()");
 
-        map.forEach((key, value) ->
-                System.out.println(
-                        key + " -> " + value));
+        map.forEach((key, value) -> System.out.println(key + " -> " + value));
 
         // =====================================================
         // compute()
@@ -327,10 +315,7 @@ public class Implementation {
 
         System.out.println("Before compute() : " + map);
 
-        map.compute(
-                1,
-                (key, value) ->
-                        value + " Programming");
+        map.compute(1, (key, value) -> value + " Programming");
 
         System.out.println("After compute() : " + map);
 
@@ -344,16 +329,11 @@ public class Implementation {
         System.out.println("Before computeIfAbsent() : "
                 + map);
 
-        map.computeIfAbsent(
-                10,
-                key -> "DART");
+        map.computeIfAbsent(10,key -> "DART");
 
-        map.computeIfAbsent(
-                2,
-                key -> "FLUTTER");
+        map.computeIfAbsent(2, key -> "FLUTTER");
 
-        System.out.println("After computeIfAbsent() : "
-                + map);
+        System.out.println("After computeIfAbsent() : " + map);
 
         // =====================================================
         // computeIfPresent()
@@ -365,18 +345,11 @@ public class Implementation {
         System.out.println("Before computeIfPresent() : "
                 + map);
 
-        map.computeIfPresent(
-                10,
-                (key, value) ->
-                        value + " LANGUAGE");
+        map.computeIfPresent(10, (key, value) -> value + " LANGUAGE");
 
-        map.computeIfPresent(
-                100,
-                (key, value) ->
-                        "UNKNOWN");
+        map.computeIfPresent(100, (key, value) -> "UNKNOWN");
 
-        System.out.println("After computeIfPresent() : "
-                + map);
+        System.out.println("After computeIfPresent() : " + map);
 
         // =====================================================
         // merge()
@@ -387,16 +360,12 @@ public class Implementation {
 
         System.out.println("Before merge() : " + map);
 
-        map.merge(
-                10,
-                " FRAMEWORK",
-                (oldValue, newValue) ->
-                        oldValue + newValue);
+        map.merge(10, " FRAMEWORK", (oldValue, newValue) -> oldValue + newValue);
 
         map.merge(
-                20,
-                "REACT",
-                (oldValue, newValue) ->
+                20, //new index
+                "REACT", //new value
+                (oldValue, newValue) -> //oldValue=0
                         oldValue + newValue);
 
         System.out.println("After merge() : " + map);
@@ -524,10 +493,7 @@ public class Implementation {
 
         System.out.println("\nUsing forEach()");
 
-        traverseMap.forEach(
-                (key, value) ->
-                        System.out.println(
-                                key + " -> " + value));
+        traverseMap.forEach((key, value) -> System.out.println(key + " -> " + value));
 
         // =====================================================
         // Using Stream API
@@ -535,9 +501,7 @@ public class Implementation {
 
         System.out.println("\nUsing Stream API");
 
-        traverseMap.entrySet()
-                .stream()
-                .forEach(System.out::println);
+        traverseMap.entrySet().stream().forEach(System.out::println);
 
         // =====================================================
         // clear()
@@ -571,11 +535,7 @@ public class Implementation {
         System.out.println("\nMap.of()");
 
         Map<Integer, String> immutableMap =
-                Map.of(
-                        1, "Java",
-                        2, "Python",
-                        3, "C++"
-                );
+                Map.of(1, "Java", 2, "Python", 3, "C++");
 
         System.out.println("Immutable Map : "
                 + immutableMap);
@@ -590,11 +550,7 @@ public class Implementation {
         System.out.println("\nMap.ofEntries()");
 
         Map<Integer, String> entryMap =
-                Map.ofEntries(
-                        Map.entry(1, "Java"),
-                        Map.entry(2, "Python"),
-                        Map.entry(3, "Go")
-                );
+                Map.ofEntries(Map.entry(1, "Java"), Map.entry(2, "Python"), Map.entry(3, "Go"));
 
         System.out.println(
                 "Map.ofEntries() : "

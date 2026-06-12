@@ -54,13 +54,14 @@ public class Implementation {
          * ==========================================================
          */
 
-
         // ---------------------------------------------------------
         // Raw Type (Without Type Safety)
         // ---------------------------------------------------------
 
-        HashMap rawMap =
-                new HashMap();
+        // Avoid Raw Types in production code.
+
+        HashMap<Object, Object> rawMap =
+                new HashMap<>(); // or HashMap rawMap = new HashMap<>();
 
         rawMap.put(101, "Java");
         rawMap.put("Course", "Spring Boot");
@@ -70,22 +71,7 @@ public class Implementation {
 
         System.out.println(rawMap);
 
-        /*
-         * Raw Types
-         * ----------
-         *
-         * Everything is stored
-         * as Object.
-         *
-         * Type Safety is
-         * NOT available.
-         *
-         * Avoid Raw Types
-         * in production code.
-         */
-
         System.out.println();
-
 
         // ---------------------------------------------------------
         // Generics
@@ -103,13 +89,8 @@ public class Implementation {
         System.out.println(students);
 
         /*
-         * Generic Types
-         *
-         * Provide
-         * Compile-Time
-         * Type Safety.
+         * Generic Types : It Provides Compile-Time Type Safety.
          */
-
 
         // ---------------------------------------------------------
         // Duplicate Key Demonstration
@@ -120,19 +101,15 @@ public class Implementation {
 
         duplicateKey.put(1, "Java");
         duplicateKey.put(2, "Python");
-        duplicateKey.put(1, "Spring");
+        duplicateKey.put(1, "Spring"); // Overwrites the previous value
 
         System.out.println("\nDuplicate Key");
 
         System.out.println(duplicateKey);
 
         /*
-         * Output
-         *
-         * {1=Spring, 2=Python}
-         *
-         * Existing value
-         * gets replaced.
+         * Output : {1=Spring, 2=Python}
+         * Existing value gets replaced.
          */
 
 
@@ -154,32 +131,29 @@ public class Implementation {
         System.out.println(duplicateValue);
 
         /*
-         * Duplicate Values
-         * are allowed.
+         * Duplicate Values are allowed.
          */
 
-
         // ---------------------------------------------------------
-        // Null Key Demonstration
+        // Null Key Replacement
         // ---------------------------------------------------------
 
-        HashMap<Integer, String> nullKey =
+        HashMap<Integer, String> nullReplace =
                 new HashMap<>();
 
-        nullKey.put(null, "Java");
+        nullReplace.put(null, "Java");
 
-        nullKey.put(2, "Python");
+        nullReplace.put(null, "Spring"); // value gets overwrite
 
-        System.out.println("\nNull Key");
+        System.out.println("\nNull Key Replacement");
 
-        System.out.println(nullKey);
+        System.out.println(nullReplace);
 
         /*
-         * Only one
-         * Null Key
-         * is allowed.
+         * Output : {null=Spring}
+         * One null allowed
+         * Existing Null Key gets replaced.
          */
-
 
         // ---------------------------------------------------------
         // Null Value Demonstration
@@ -199,85 +173,8 @@ public class Implementation {
         System.out.println(nullValue);
 
         /*
-         * Multiple
-         * Null Values
-         * are allowed.
+         * One or Multiple Null Values are allowed.
          */
-
-
-        // ---------------------------------------------------------
-        // Null Key Replacement
-        // ---------------------------------------------------------
-
-        HashMap<Integer, String> nullReplace =
-                new HashMap<>();
-
-        nullReplace.put(null, "Java");
-
-        nullReplace.put(null, "Spring");
-
-        System.out.println("\nNull Key Replacement");
-
-        System.out.println(nullReplace);
-
-        /*
-         * Output
-         *
-         * {null=Spring}
-         *
-         * Existing Null Key
-         * gets replaced.
-         */
-
-
-        // ---------------------------------------------------------
-        // For Each Loop
-        // ---------------------------------------------------------
-
-        System.out.println("\nUsing For Each");
-
-        for (Map.Entry<Integer, String> entry
-                : students.entrySet()) {
-
-            System.out.println(
-
-                    entry.getKey()
-
-                            + " -> "
-
-                            + entry.getValue()
-
-            );
-
-        }
-
-
-        // ---------------------------------------------------------
-        // Iterator
-        // ---------------------------------------------------------
-
-        System.out.println("\nUsing Iterator");
-
-        Iterator<Map.Entry<Integer, String>> iterator =
-                students.entrySet().iterator();
-
-        while (iterator.hasNext()) {
-
-            Map.Entry<Integer, String> entry =
-                    iterator.next();
-
-            System.out.println(
-
-                    entry.getKey()
-
-                            + " -> "
-
-                            + entry.getValue()
-
-            );
-
-        }
-
 
         // ---------------------------------------------------------
         // Working with Custom Class
@@ -286,50 +183,28 @@ public class Implementation {
         HashMap<Integer, Employee> employees =
                 new HashMap<>();
 
-        employees.put(
-                101,
-                new Employee("Rudra", 90000));
+        employees.put(101, new Employee("Rudra", 90000));
 
-        employees.put(
-                102,
-                new Employee("Haya", 85000));
+        employees.put(102, new Employee("Haya", 85000));
 
-        employees.put(
-                103,
-                new Employee("Arman", 92000));
+        employees.put(103, new Employee("Arman", 92000));
 
         System.out.println("\nCustom Class");
 
-        for (Map.Entry<Integer, Employee> entry
-                : employees.entrySet()) {
+        for (Map.Entry<Integer, Employee> entry : employees.entrySet()) {
 
-            System.out.println(entry);
+            System.out.println("Key :"+entry.getKey());
+            System.out.println("Value :"+entry.getValue());
+            System.out.println("Name of Value :"+entry.getValue().name);
+            System.out.println("Overall Entry :"+entry);
 
         }
-
-        /*
-         * Keys
-         *
-         * Must remain unique.
-         *
-         * Values
-         *
-         * May contain duplicate
-         * objects.
-         *
-         * equals() and
-         * hashCode()
-         * determine logical
-         * equality of Keys.
-         */
-
 
         /*
          * ==========================================================
          *                    Constructors
          * ==========================================================
          */
-
 
         // ---------------------------------------------------------
         // HashMap()
@@ -347,20 +222,11 @@ public class Implementation {
         System.out.println(map1);
 
         /*
-         * Creates an empty
-         * HashMap.
-         *
+         * Creates an empty HashMap.
          * Default Constructor.
-         *
-         * Default Capacity
-         *
-         * 16
-         *
-         * Default Load Factor
-         *
-         * 0.75
+         * Default Capacity : 16
+         * Default Load Factor : 75
          */
-
 
         // ---------------------------------------------------------
         // HashMap(int initialCapacity)
@@ -378,17 +244,10 @@ public class Implementation {
         System.out.println(map2);
 
         /*
-         * Specifies the
-         * initial capacity.
-         *
-         * Useful when
-         * approximate
-         * number of entries
-         * is already known.
-         *
+         * Specifies the initial capacity.
+         * Useful when approximate number of entries is already known.
          * Reduces resizing.
          */
-
 
         // ---------------------------------------------------------
         // HashMap(int initialCapacity,
@@ -408,16 +267,9 @@ public class Implementation {
         System.out.println(map3);
 
         /*
-         * Allows custom
-         * Load Factor.
-         *
-         * Default value
-         *
-         * 0.75
-         *
-         * is recommended.
+         * Allows custom Load Factor.
+         * Default value 0.75 is recommended.
          */
-
 
         // ---------------------------------------------------------
         // HashMap(Map)
@@ -444,11 +296,8 @@ public class Implementation {
         System.out.println(map4);
 
         /*
-         * Copies all mappings
-         * from another Map.
-         *
-         * Original Map
-         * remains unchanged.
+         * Copies all mappings from another Map.
+         * Original Map remains unchanged.
          */
 
 
@@ -469,10 +318,7 @@ public class Implementation {
 
         @SuppressWarnings("unchecked")
 
-        HashMap<Integer, String> clonedMap =
-
-                (HashMap<Integer, String>)
-                        languageMap.clone();
+        HashMap<Integer, String> clonedMap = (HashMap<Integer, String>) languageMap.clone();
 
         System.out.println("Original");
 
@@ -495,81 +341,13 @@ public class Implementation {
         System.out.println(clonedMap);
 
         /*
-         * clone()
-         *
-         * Creates a
-         * Shallow Copy.
-         *
-         * HashMap object
-         * is copied.
-         *
-         * Stored objects
-         * are NOT copied.
+         * clone() : Creates a Shallow Copy.
          */
 
-
         /*
-         * ==========================================================
-         *             Shallow Copy Demonstration
-         * ==========================================================
-         */
-
-        HashMap<Integer, Employee> employeeMap =
-                new HashMap<>();
-
-        employeeMap.put(
-                101,
-                new Employee("Rudra", 90000));
-
-        employeeMap.put(
-                102,
-                new Employee("Haya", 85000));
-
-        @SuppressWarnings("unchecked")
-
-        HashMap<Integer, Employee> employeeCopy =
-
-                (HashMap<Integer, Employee>)
-                        employeeMap.clone();
-
-        System.out.println("\nShallow Copy");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        employeeCopy
-                .get(101)
-                .name = "Virat";
-
-        System.out.println("\nAfter Modifying Object");
-
-        System.out.println("Original");
-
-        System.out.println(employeeMap);
-
-        System.out.println("\nCopied");
-
-        System.out.println(employeeCopy);
-
-        /*
-         * Employee object
-         * is NOT copied.
-         *
-         * Both HashMaps
-         * point to the same
-         * Employee object.
-         */
-
-
-        /*
-         * ==========================================================
-         *              equals() and hashCode()
-         * ==========================================================
+         * ==================================================================================
+         *  equals() and hashCode() - refer Buckets-Class.md for internal explanation
+         * ==================================================================================
          */
 
         HashMap<EmployeeKey, String> employeeDemo =
@@ -605,267 +383,26 @@ public class Implementation {
 
 
         /*
-         * ==========================================================
-         *            Constructors Completed
-         * ==========================================================
-         */
-
-
-        /*
-         * ==========================================================
-         *                 Capacity vs Size
-         * ==========================================================
-         */
-
-        HashMap<Integer, String> capacityDemo =
-                new HashMap<>(20);
-
-        capacityDemo.put(1, "Java");
-        capacityDemo.put(2, "Python");
-        capacityDemo.put(3, "Spring");
-
-        System.out.println("\nCapacity vs Size");
-
-        System.out.println(capacityDemo);
-
-        System.out.println("Size : "
-                + capacityDemo.size());
-
-        /*
-         * Capacity
-         *
-         * Number of Buckets.
-         *
-         * Cannot be accessed
-         * directly.
-         *
-         * Size
-         *
-         * Number of stored
-         * Key-Value pairs.
-         */
-
-
-        /*
-         * ==========================================================
-         *                    Load Factor
-         * ==========================================================
-         */
-
-        HashMap<Integer, String> loadFactorDemo =
-                new HashMap<>(16, 0.75f);
-
-        loadFactorDemo.put(10, "Java");
-        loadFactorDemo.put(20, "Python");
-        loadFactorDemo.put(30, "Spring");
-
-        System.out.println("\nLoad Factor");
-
-        System.out.println(loadFactorDemo);
-
-        /*
-         * Formula
-         *
-         * Size / Capacity
-         *
-         * Default Value
-         *
-         * 0.75
-         *
-         * Provides a good
-         * balance between
-         * performance and
-         * memory usage.
-         */
-
-
-        /*
-         * ==========================================================
-         *                      Threshold
-         * ==========================================================
-         */
-
-        System.out.println("\nThreshold");
-
-        /*
-         * Formula
-         *
-         * Capacity
-         *
-         * ×
-         *
-         * Load Factor
-         *
-         * Example
-         *
-         * 16 × 0.75
-         *
-         * =
-         *
-         * 12
-         *
-         * After inserting
-         * the 13th element,
-         *
-         * HashMap resizes.
-         */
-
-
-        /*
-         * ==========================================================
-         *                     Hashing
-         * ==========================================================
-         */
-
-        String language = "Java";
-
-        System.out.println("\nHashing");
-
-        System.out.println("Key : "
-                + language);
-
-        System.out.println("hashCode : "
-                + language.hashCode());
-
-        /*
-         * HashMap converts
-         * the hashCode
-         * into a bucket index.
-         *
-         * Key
-         *
-         * ↓
-         *
-         * hashCode()
-         *
-         * ↓
-         *
-         * Bucket
-         */
-
-
-        /*
-         * ==========================================================
-         *                  hashCode()
-         * ==========================================================
-         */
-
-        System.out.println("\nhashCode()");
-
-        System.out.println(
-
-                "Java -> "
-                        + "Java".hashCode()
-
-        );
-
-        System.out.println(
-
-                "Python -> "
-                        + "Python".hashCode()
-
-        );
-
-        /*
-         * Every object
-         * has a hashCode().
-         *
-         * HashMap uses
-         * hashCode()
-         * before equals().
-         */
-
-
-        /*
-         * ==========================================================
-         *                     equals()
-         * ==========================================================
-         */
-
-        EmployeeKey emp1 =
-                new EmployeeKey(1, "Rudra");
-
-        EmployeeKey emp2 =
-                new EmployeeKey(1, "Rudra");
-
-        System.out.println("\nequals()");
-
-        System.out.println(
-
-                emp1.equals(emp2)
-
-        );
-
-        /*
-         * equals()
-         *
-         * determines
-         * logical equality.
-         *
-         * HashMap first
-         * compares
-         * hashCode().
-         *
-         * Then calls
-         * equals().
-         */
-
-
-        /*
-         * ==========================================================
-         *                     Bucket
-         * ==========================================================
-         */
-
-        System.out.println("\nBucket");
-
-        /*
-         * Example
-         *
-         * Bucket 0
-         *
-         * Bucket 1
-         *
-         * Bucket 2
-         *
-         * Bucket 3
-         *
-         * Every entry
-         * is stored
-         * inside one
-         * bucket.
-         */
-
-
-        /*
-         * ==========================================================
-         *                  Hash Collision
-         * ==========================================================
+         * =========================================================================
+         *     Hash Collision - refer Buckets-Class.md for internal explanation
+         * =========================================================================
          */
 
         HashMap<CollisionKey, String> collisionDemo =
                 new HashMap<>();
 
-        collisionDemo.put(
-                new CollisionKey(1),
-                "Java");
+        collisionDemo.put(new CollisionKey(1), "Java"); // Key: new CollisionKey(1)  Value: "Java"
 
-        collisionDemo.put(
-                new CollisionKey(2),
-                "Python");
+        collisionDemo.put(new CollisionKey(2), "Python");
 
-        collisionDemo.put(
-                new CollisionKey(3),
-                "Spring");
+        collisionDemo.put(new CollisionKey(3), "Spring");
 
         System.out.println("\nHash Collision");
 
         System.out.println(collisionDemo);
 
         /*
-         * All CollisionKey
-         * objects return
-         * the same hashCode().
+         * All CollisionKey objects return the same hashCode().
          *
          * Therefore,
          * all entries
@@ -882,341 +419,30 @@ public class Implementation {
          */
 
         /*
-         * Before Java 8
-         *
-         * Bucket
-         *
-         * ↓
-         *
-         * Java
-         *
-         * ↓
-         *
-         * Python
-         *
-         * ↓
-         *
-         * Spring
-         *
-         * Linked List
-         * was used.
-         */
-
-
-        /*
          * ==========================================================
-         *                  Treeification
+         * Optimized Overrides
          * ==========================================================
+         *
+         * Already covered in Map Implementation.java
+         *
+         * ✓ forEach()
+         * ✓ replaceAll()
+         * ✓ compute()
+         * ✓ computeIfAbsent()
+         * ✓ computeIfPresent()
+         * ✓ merge()
          */
-
-        System.out.println("\nTreeification");
-
-        /*
-         * Bucket Size
-         *
-         * >= 8
-         *
-         * AND
-         *
-         * Capacity
-         *
-         * >= 64
-         *
-         * Linked List
-         *
-         * ↓
-         *
-         * Red Black Tree
-         */
-
-
-        /*
-         * ==========================================================
-         *                 Untreeification
-         * ==========================================================
-         */
-
-        System.out.println("\nUntreeification");
-
-        /*
-         * Tree Size
-         *
-         * <= 6
-         *
-         * Red Black Tree
-         *
-         * ↓
-         *
-         * Linked List
-         */
-
-
-        /*
-         * ==========================================================
-         *                    Resizing
-         * ==========================================================
-         */
-
-        HashMap<Integer, Integer> resizeDemo =
-                new HashMap<>(4, 0.75f);
-
-        resizeDemo.put(1, 10);
-        resizeDemo.put(2, 20);
-        resizeDemo.put(3, 30);
-
-        System.out.println("\nBefore Resizing");
-
-        System.out.println(resizeDemo);
-
-        resizeDemo.put(4, 40);
-
-        System.out.println("\nAfter Resizing");
-
-        System.out.println(resizeDemo);
-
-        /*
-         * Capacity
-         *
-         * 4
-         *
-         * ↓
-         *
-         * 8
-         *
-         * Threshold exceeded.
-         */
-
-
-        /*
-         * ==========================================================
-         *                    Rehashing
-         * ==========================================================
-         */
-
-        System.out.println("\nRehashing");
-
-        /*
-         * Old Bucket
-         *
-         * ↓
-         *
-         * Resize
-         *
-         * ↓
-         *
-         * New Bucket
-         *
-         * Every entry
-         * receives a
-         * new bucket index.
-         */
-
-
-        /*
-         * ==========================================================
-         *           Reference Type Demonstration
-         * ==========================================================
-         */
-
-        /*
-         * Map Reference
-         *
-         * Can access only
-         * Map methods.
-         */
-
-        Map<Integer, String> mapReference =
-                new HashMap<>();
-
-        mapReference.put(1, "Java");
-        mapReference.put(2, "Python");
-
-        System.out.println("\nMap Reference");
-
-        System.out.println(mapReference);
-
-        /*
-         * HashMap Reference
-         *
-         * Can access every
-         * HashMap specific
-         * method.
-         */
-
-        HashMap<Integer, String> hashMapReference =
-                new HashMap<>();
-
-        hashMapReference.put(100, "Spring");
-
-        @SuppressWarnings("unchecked")
-
-        HashMap<Integer, String> clonedReference =
-
-                (HashMap<Integer, String>)
-                        hashMapReference.clone();
-
-        System.out.println("\nHashMap Reference");
-
-        System.out.println(clonedReference);
-
-        /*
-         * Interface Reference
-         *
-         * Recommended because
-         * implementation can
-         * be changed easily.
-         *
-         * Class Reference
-         *
-         * Required when
-         * HashMap specific
-         * methods are needed.
-         */
-
-
-        /*
-         * ==========================================================
-         *                 Optimized Overrides
-         * ==========================================================
-         */
-
-
-        // ---------------------------------------------------------
-        // forEach()
-        // ---------------------------------------------------------
-
-        System.out.println("\nforEach()");
-
-        hashMapReference.forEach(
-
-                (key, value) ->
-
-                        System.out.println(
-
-                                key
-                                        + " -> "
-                                        + value)
-
-        );
-
-
-        // ---------------------------------------------------------
-        // replaceAll()
-        // ---------------------------------------------------------
-
-        HashMap<Integer, String> replaceDemo =
-                new HashMap<>();
-
-        replaceDemo.put(1, "java");
-        replaceDemo.put(2, "python");
-        replaceDemo.put(3, "spring");
-
-        replaceDemo.replaceAll(
-
-                (key, value) ->
-
-                        value.toUpperCase()
-
-        );
-
-        System.out.println("\nreplaceAll()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // compute()
-        // ---------------------------------------------------------
-
-        replaceDemo.compute(
-
-                1,
-
-                (key, value) ->
-
-                        value + " 21"
-
-        );
-
-        System.out.println("\ncompute()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfAbsent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfAbsent(
-
-                4,
-
-                key -> "Docker"
-
-        );
-
-        System.out.println("\ncomputeIfAbsent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // computeIfPresent()
-        // ---------------------------------------------------------
-
-        replaceDemo.computeIfPresent(
-
-                2,
-
-                (key, value) ->
-
-                        value + " Framework"
-
-        );
-
-        System.out.println("\ncomputeIfPresent()");
-
-        System.out.println(replaceDemo);
-
-
-        // ---------------------------------------------------------
-        // merge()
-        // ---------------------------------------------------------
-
-        HashMap<String, Integer> mergeDemo =
-                new HashMap<>();
-
-        mergeDemo.put("Java", 10);
-
-        mergeDemo.merge(
-
-                "Java",
-
-                5,
-
-                Integer::sum
-
-        );
-
-        mergeDemo.merge(
-
-                "Python",
-
-                20,
-
-                Integer::sum
-
-        );
-
-        System.out.println("\nmerge()");
-
-        System.out.println(mergeDemo);
-
 
         /*
          * ==========================================================
          *             Fail-Fast Iterator
          * ==========================================================
+         */
+
+        /*
+        Why is it called Fail-Fast?
+        Because Java fails immediately when it detects that the collection has been modified while iterating.
+        Instead of giving incorrect results, it throws an exception as soon as possible
          */
 
         HashMap<Integer, String> failFast =
@@ -1249,43 +475,6 @@ public class Implementation {
          * Fail-Fast.
          */
 
-
-        /*
-         * ==========================================================
-         *             HashMap Characteristics
-         * ==========================================================
-         */
-
-        HashMap<Integer, String> characteristics =
-                new HashMap<>();
-
-        characteristics.put(3, "C");
-        characteristics.put(1, "Java");
-        characteristics.put(2, "Python");
-
-        System.out.println("\nHashMap Characteristics");
-
-        System.out.println(characteristics);
-
-        /*
-         * ✔ Unordered
-         *
-         * ✔ Hash Table
-         *
-         * ✔ One Null Key
-         *
-         * ✔ Multiple Null Values
-         *
-         * ✔ Duplicate Keys NOT Allowed
-         *
-         * ✔ Duplicate Values Allowed
-         *
-         * ✔ Average O(1)
-         *
-         * ✔ Not Thread Safe
-         */
-
-
         /*
          * ==========================================================
          *             Methods Not Covered Yet
@@ -1316,122 +505,9 @@ public class Implementation {
          * afterNodeInsertion()
          */
 
-
         /*
          * ==========================================================
-         *          Methods Inherited from Object
-         * ==========================================================
-         */
-
-        System.out.println("\nObject Methods");
-
-        System.out.println(characteristics.toString());
-
-        System.out.println(characteristics.getClass());
-
-        System.out.println(characteristics.hashCode());
-
-        System.out.println(
-
-                characteristics.equals(hashMapReference)
-
-        );
-
-        /*
-         * Object Methods
-         *
-         * toString()
-         *
-         * getClass()
-         *
-         * hashCode()
-         *
-         * equals()
-         *
-         * wait()
-         *
-         * notify()
-         *
-         * notifyAll()
-         *
-         * finalize() (Deprecated)
-         */
-
-
-        /*
-         * ==========================================================
-         *                Interview Notes
-         * ==========================================================
-         */
-
-        /*
-         * 1.
-         * Average Complexity
-         *
-         * O(1)
-         *
-         * 2.
-         * Worst Case
-         *
-         * O(log n)
-         *
-         * Java 8+
-         *
-         * 3.
-         * One Null Key
-         *
-         * 4.
-         * Multiple Null Values
-         *
-         * 5.
-         * Hash Table
-         *
-         * 6.
-         * Buckets
-         *
-         * 7.
-         * Collision Handling
-         *
-         * 8.
-         * Treeification
-         *
-         * 9.
-         * Load Factor
-         *
-         * 10.
-         * Fail-Fast Iterator
-         */
-
-
-        /*
-         * ==========================================================
-         *                     Summary
-         * ==========================================================
-         */
-
-        /*
-         * HashMap is the
-         * most commonly used
-         * implementation of
-         * the Map interface.
-         *
-         * It provides
-         * fast lookup,
-         * insertion and
-         * deletion using
-         * hashing.
-         *
-         * HashMap forms the
-         * foundation for
-         * understanding all
-         * hash-based
-         * collections.
-         */
-
-
-        /*
-         * ==========================================================
-         *                        End
+         *      Methods Inherited from Object - covered previous
          * ==========================================================
          */
 
@@ -1502,9 +578,7 @@ class EmployeeKey {
         EmployeeKey other =
                 (EmployeeKey) obj;
 
-        return id == other.id
-                &&
-                Objects.equals(name, other.name);
+        return id == other.id && Objects.equals(name, other.name);
 
     }
 
@@ -1564,35 +638,3 @@ class CollisionKey {
     }
 
 }
-
-
-/*
- * ==========================================================
- * IMPORTANT
- * ==========================================================
- *
- * HashMap uses both
- * hashCode() and equals()
- * together.
- *
- * hashCode()
- *
- * ↓
- *
- * Bucket Selection
- *
- * ↓
- *
- * equals()
- *
- * ↓
- *
- * Exact Key Matching
- *
- * Overriding only one
- * of these methods
- * may lead to incorrect
- * behavior.
- *
- * ==========================================================
- */
