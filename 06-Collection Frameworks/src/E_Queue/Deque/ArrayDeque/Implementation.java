@@ -98,5 +98,7 @@ public class Implementation {
          */
 
         // same as Implementation.java of Deque just clone is added which we studied earlier
+
+        // That's it !!
     }
 }
