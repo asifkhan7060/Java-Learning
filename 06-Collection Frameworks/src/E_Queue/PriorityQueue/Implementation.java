@@ -2,11 +2,6 @@ package E_Queue.PriorityQueue;
 
 import java.util.*;
 
-// In Which areas PriorityQueue class is used ?
-// Hold Ctrl and move cursor to PriorityQueue keyword -> Go to that file.
-// Hold Ctrl again on PriorityQueue -> Click -> Change search to
-// "All Places" to explore where PriorityQueue is used.
-
 public class Implementation {
 
     public static void main(String[] args) {
@@ -60,29 +55,7 @@ public class Implementation {
         // element()
         // peek()
 
-
-        /*
-         * PriorityQueue introduces NO NEW PUBLIC METHODS.
-         *
-         * It is the concrete implementation of
-         * the Queue interface.
-         *
-         * The main difference lies in its
-         * internal implementation.
-         *
-         * Internally it uses:
-         *
-         * Binary Min Heap
-         *
-         * Features:
-         *
-         * ✔ Natural Ordering
-         * ✔ Custom Comparator
-         * ✔ Duplicate Elements Allowed
-         * ✔ Null Values NOT Allowed
-         * ✔ Does NOT Maintain Insertion Order
-         */
-
+        /** Learn min Heap and max Heap Concept first by Heap.md **/
 
         /*
          * ==========================================================
@@ -94,24 +67,25 @@ public class Implementation {
         // Raw Type (Without Type Safety)
         // ---------------------------------------------------------
 
-        PriorityQueue rawQueue =
-                new PriorityQueue();
+        PriorityQueue<Object> rawQueue =
+                new PriorityQueue<>();
 
+        rawQueue.add(80);
         rawQueue.add(30);
-        rawQueue.add("Java");
-        rawQueue.add(true);
+        rawQueue.add(40);
+        // Not Possible (Throws error) - think how tree maintain different datatypes values
+        // rawQueue.add("Java");
+        // rawQueue.add(true);
 
         System.out.println("Raw PriorityQueue");
 
-        System.out.println(rawQueue);
+        System.out.println(rawQueue); // Heap structured printed not sorted !
 
-        /*
-         * Raw Type
-         *
-         * Stores everything as Object.
-         *
-         * Type Safety is NOT available.
-         */
+        System.out.println("Sorted Order: ");
+
+        while (!rawQueue.isEmpty()) {
+            System.out.println(rawQueue.poll());
+        }
 
         System.out.println();
 
@@ -135,34 +109,11 @@ public class Implementation {
 
         /*
          * Note
-         *
          * Duplicate values are allowed.
-         *
-         * Elements are arranged
-         * according to priority.
+         * Elements are arranged according to priority as Heap.
          */
 
         System.out.println();
-
-
-        // ---------------------------------------------------------
-        // Queue Reference
-        // ---------------------------------------------------------
-
-        Queue<Integer> queue =
-                new PriorityQueue<>();
-
-        queue.offer(100);
-        queue.offer(20);
-        queue.offer(50);
-        queue.offer(10);
-
-        System.out.println("Queue Reference");
-
-        System.out.println(queue);
-
-        System.out.println();
-
 
         /*
          * ==========================================================
@@ -171,7 +122,7 @@ public class Implementation {
          */
 
         // ---------------------------------------------------------
-        // PriorityQueue()
+        // PriorityQueue() // Normal
         // ---------------------------------------------------------
 
         PriorityQueue<Integer> pq1 =
@@ -189,7 +140,7 @@ public class Implementation {
 
 
         // ---------------------------------------------------------
-        // PriorityQueue(int initialCapacity)
+        // PriorityQueue(int initialCapacity) - Unbounded
         // ---------------------------------------------------------
 
         PriorityQueue<Integer> pq2 =
@@ -204,6 +155,11 @@ public class Implementation {
         System.out.println(pq2);
 
         System.out.println();
+
+        /*
+         * When the array becomes full, PriorityQueue automatically creates a larger array, copies existing elements, and continues inserting.
+         * Therefore, PriorityQueue is unbounded.
+         */
 
 
         // ---------------------------------------------------------
@@ -254,184 +210,24 @@ public class Implementation {
 
         System.out.println();
 
-
         /*
          * ==========================================================
-         *          Natural Ordering Demonstration
+         * Queue Methods (Already Covered)
          * ==========================================================
+         *
+         * Refer Queue Implementation.java
+         *
+         * ✓ add()
+         * ✓ offer()
+         * ✓ peek()
+         * ✓ element()
+         * ✓ poll()
+         * ✓ remove()
+         *
+         * Note:
+         * In PriorityQueue, these methods work on
+         * the heap (priority order) instead of FIFO.
          */
-
-        PriorityQueue<Integer> natural =
-                new PriorityQueue<>();
-
-        natural.add(50);
-        natural.add(10);
-        natural.add(40);
-        natural.add(20);
-        natural.add(30);
-
-        System.out.println("Natural Ordering");
-
-        while (!natural.isEmpty()) {
-
-            System.out.print(
-                    natural.poll() + " ");
-
-        }
-
-        System.out.println("\n");
-
-
-        /*
-         * ==========================================================
-         *        Duplicate & Null Demonstration
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> duplicate =
-                new PriorityQueue<>();
-
-        duplicate.add(20);
-        duplicate.add(10);
-        duplicate.add(20);
-        duplicate.add(30);
-        duplicate.add(10);
-
-        System.out.println("Duplicate Demonstration");
-
-        System.out.println(duplicate);
-
-        System.out.println();
-
-//      duplicate.add(null);
-//
-//      Throws:
-//
-//      java.lang.NullPointerException
-
-        System.out.println("Null values are NOT allowed.");
-
-        System.out.println();
-
-        /*
-         * ==========================================================
-         *              add() vs offer()
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> queue1 =
-                new PriorityQueue<>();
-
-        queue1.add(50);
-        queue1.add(20);
-        queue1.add(40);
-
-        queue1.offer(10);
-        queue1.offer(30);
-
-        System.out.println("add() & offer()");
-
-        System.out.println(queue1);
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *               peek() & element()
-         * ==========================================================
-         */
-
-        System.out.println("peek()");
-
-        System.out.println(queue1.peek());
-
-        System.out.println();
-
-        System.out.println("element()");
-
-        System.out.println(queue1.element());
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *               poll() & remove()
-         * ==========================================================
-         */
-
-        System.out.println("poll()");
-
-        System.out.println(queue1.poll());
-
-        System.out.println(queue1);
-
-        System.out.println();
-
-        System.out.println("remove()");
-
-        System.out.println(queue1.remove());
-
-        System.out.println(queue1);
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *            Min Heap Demonstration
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> minHeap =
-                new PriorityQueue<>();
-
-        minHeap.add(40);
-        minHeap.add(10);
-        minHeap.add(60);
-        minHeap.add(20);
-        minHeap.add(30);
-
-        System.out.println("Min Heap");
-
-        while (!minHeap.isEmpty()) {
-
-            System.out.print(
-                    minHeap.poll() + " ");
-
-        }
-
-        System.out.println("\n");
-
-
-        /*
-         * ==========================================================
-         *            Max Heap Demonstration
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> maxHeap =
-                new PriorityQueue<>(
-                        Comparator.reverseOrder());
-
-        maxHeap.add(40);
-        maxHeap.add(10);
-        maxHeap.add(60);
-        maxHeap.add(20);
-        maxHeap.add(30);
-
-        System.out.println("Max Heap");
-
-        while (!maxHeap.isEmpty()) {
-
-            System.out.print(
-                    maxHeap.poll() + " ");
-
-        }
-
-        System.out.println("\n");
-
 
         /*
          * ==========================================================
@@ -550,40 +346,6 @@ public class Implementation {
 
         System.out.println("\n");
 
-
-        /*
-         * ==========================================================
-         *          Internal Ordering Demonstration
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> internal =
-                new PriorityQueue<>();
-
-        internal.offer(100);
-        internal.offer(40);
-        internal.offer(80);
-        internal.offer(20);
-        internal.offer(60);
-
-        System.out.println("Internal Heap");
-
-        System.out.println(internal);
-
-        System.out.println();
-
-        System.out.println(
-                "Priority Removal");
-
-        while (!internal.isEmpty()) {
-
-            System.out.print(
-                    internal.poll() + " ");
-
-        }
-
-        System.out.println("\n");
-
         /*
          * ==========================================================
          *             Custom Object Priority
@@ -631,222 +393,5 @@ public class Implementation {
 
         System.out.println();
 
-
-        /*
-         * ==========================================================
-         *          Task Scheduling Example
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> tasks =
-                new PriorityQueue<>();
-
-        tasks.offer(3);
-        tasks.offer(1);
-        tasks.offer(5);
-        tasks.offer(2);
-        tasks.offer(4);
-
-        System.out.println("Task Scheduling");
-
-        while (!tasks.isEmpty()) {
-
-            System.out.println(
-                    "Executing Priority : "
-                            + tasks.poll());
-
-        }
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *         Hospital Emergency Example
-         * ==========================================================
-         */
-
-        PriorityQueue<String> patients =
-                new PriorityQueue<>();
-
-        patients.offer("Critical");
-        patients.offer("Normal");
-        patients.offer("Emergency");
-        patients.offer("Serious");
-
-        System.out.println("Hospital Queue");
-
-        while (!patients.isEmpty()) {
-
-            System.out.println(
-                    patients.poll());
-
-        }
-
-        System.out.println();
-
-        /*
-         * Note
-         *
-         * Actual hospitals usually use
-         * a custom Comparator instead of
-         * String ordering.
-         */
-
-
-        /*
-         * ==========================================================
-         *           CPU Process Scheduling
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> cpu =
-                new PriorityQueue<>();
-
-        cpu.offer(15);
-        cpu.offer(5);
-        cpu.offer(30);
-        cpu.offer(10);
-
-        System.out.println("CPU Scheduling");
-
-        while (!cpu.isEmpty()) {
-
-            System.out.println(
-                    "Executing : "
-                            + cpu.poll());
-
-        }
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *           Priority Queue Properties
-         * ==========================================================
-         */
-
-        PriorityQueue<Integer> properties =
-                new PriorityQueue<>();
-
-        properties.offer(50);
-        properties.offer(10);
-        properties.offer(40);
-        properties.offer(20);
-
-        System.out.println("Properties");
-
-        System.out.println(
-                "Size : "
-                        + properties.size());
-
-        System.out.println(
-                "Contains 20 : "
-                        + properties.contains(20));
-
-        System.out.println(
-                "Is Empty : "
-                        + properties.isEmpty());
-
-        properties.clear();
-
-        System.out.println(
-                "After clear() : "
-                        + properties);
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *             Performance Notes
-         * ==========================================================
-         */
-
-        System.out.println("Performance");
-
-        System.out.println(
-                "Insertion : O(log n)");
-
-        System.out.println(
-                "Deletion : O(log n)");
-
-        System.out.println(
-                "Peek : O(1)");
-
-        System.out.println(
-                "Internal Structure : Binary Min Heap");
-
-        System.out.println(
-                "Random Access : Not Supported");
-
-        System.out.println(
-                "Insertion Order : Not Maintained");
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *              Best Practices
-         * ==========================================================
-         */
-
-        System.out.println("Best Practices");
-
-        System.out.println(
-                "✔ Use PriorityQueue when priority matters.");
-
-        System.out.println(
-                "✔ Use Comparator for custom priority.");
-
-        System.out.println(
-                "✔ Do not expect sorted iteration.");
-
-        System.out.println(
-                "✔ Use poll() to retrieve elements in priority order.");
-
-        System.out.println(
-                "✔ Never insert null values.");
-
-        System.out.println();
-
-
-        /*
-         * ==========================================================
-         *                   Summary
-         * ==========================================================
-         */
-
-        System.out.println("===== Summary =====");
-
-        System.out.println(
-                "Implementation : "
-                        + pq1.getClass().getSimpleName());
-
-        System.out.println(
-                "Internal Structure : Binary Min Heap");
-
-        System.out.println(
-                "Natural Ordering : Yes");
-
-        System.out.println(
-                "Custom Comparator : Supported");
-
-        System.out.println(
-                "Duplicate Elements : Allowed");
-
-        System.out.println(
-                "Null Elements : Not Allowed");
-
-        System.out.println(
-                "Insertion Order : Not Maintained");
-
-        System.out.println(
-                "Thread Safe : No");
-
-        System.out.println(
-                "PriorityQueue demonstration completed successfully.");
     }
 }   

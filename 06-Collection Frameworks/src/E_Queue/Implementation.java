@@ -92,9 +92,24 @@ public class Implementation {
                 → Returns false
                   if insertion fails.
 
-            For LinkedList Queue,
-            both behave the same because
-            LinkedList has no capacity restriction.
+            For LinkedList Queue, both behave the same because LinkedList has no capacity restriction.
+            Difference is visible only in capacity-restricted queues (e.g., ArrayBlockingQueue etc (given list below)).
+
+            Difference Visible
+
+            ✓ ArrayBlockingQueue
+            ✓ LinkedBlockingQueue (bounded)
+            ✓ LinkedBlockingDeque (bounded)
+            ✓ SynchronousQueue
+
+            ex: Queue<Integer> queue = new ArrayBlockingQueue<>(3);
+                queue.add(1);
+                queue.add(2);
+                queue.add(3);
+
+                queue.add(4);      // ❌ IllegalStateException
+
+                queue.offer(4);    // ❌ false
          */
 
         // remove()
@@ -153,6 +168,7 @@ public class Implementation {
                 → Returns null
                   if Queue is empty.
          */
+
 
         // element()
         // Returns the head element.
@@ -254,8 +270,7 @@ public class Implementation {
                 → Maintains insertion order.
 
             PriorityQueue
-                → Maintains priority order
-                  (Natural Ordering by default).
+                → Maintains priority order (Natural Ordering by default).
          */
 
         // =====================================================
@@ -317,32 +332,6 @@ public class Implementation {
         traverseQueue.stream().forEach(System.out::println);
 
         // =====================================================
-        // Additional Queue Methods
-        // =====================================================
-
-        /*
-            Queue interface itself
-            does not introduce any
-            additional static methods.
-
-            Queue implementations
-            provide their own constructors
-            and implementation-specific methods.
-
-            Example
-
-            LinkedList
-            PriorityQueue
-            ArrayDeque
-            ArrayBlockingQueue
-            LinkedBlockingQueue
-            PriorityBlockingQueue
-            DelayQueue
-            SynchronousQueue
-            LinkedTransferQueue
-         */
-
-        // =====================================================
         // Important Notes
         // =====================================================
 
@@ -367,55 +356,6 @@ public class Implementation {
             6. Deque extends Queue and
                supports insertion and
                deletion from both ends.
-         */
-
-        // =====================================================
-        // Queue Summary
-        // =====================================================
-
-        /*
-            Insertion Methods
-
-            add()
-            offer()
-
-            Removal Methods
-
-            remove()
-            poll()
-
-            Retrieval Methods
-
-            element()
-            peek()
-         */
-
-        // =====================================================
-        // Best Practice
-        // =====================================================
-
-        /*
-            ✔ Use offer()
-              instead of add()
-              for capacity-restricted queues.
-
-            ✔ Use poll()
-              instead of remove()
-              when empty queues are possible.
-
-            ✔ Use peek()
-              instead of element()
-              when Queue may be empty.
-
-            ✔ Use ArrayDeque
-              for most Queue implementations.
-
-            ✔ Use PriorityQueue
-              when priority-based processing
-              is required.
-
-            ✔ Use BlockingQueue
-              for concurrent applications.
          */
 
     }

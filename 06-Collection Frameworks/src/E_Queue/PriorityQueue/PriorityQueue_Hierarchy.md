@@ -33,7 +33,11 @@ public class PriorityQueue<E>
         extends AbstractQueue<E>
         implements Serializable
 ```
-
+```java
+public abstract class AbstractQueue<E>
+extends AbstractCollection<E>
+implements Queue<E>
+```
 ---
 
 ## Inheritance Hierarchy
@@ -232,6 +236,116 @@ Array: [10, 20, 30, 40, 50]
 
 > **Note:** The `iterator()` traverses the internal array, so iteration order is **not sorted** — only `peek()` and `poll()` guarantee priority order.
 
+## PriorityQueue Internal Working
+
+### Initial Min Heap
+
+```text
+        10
+      /    \
+    20      30
+   /  \
+ 40    50
+ 
+ // 10,20,30,40,50
+```
+
+---
+
+### offer(15) / add(15)
+
+```text
+Insert at End
+
+        10
+      /    \
+    20      30
+   /  \    /
+ 40   50  15
+
+      siftUp ↑
+
+        10
+      /    \
+    20      15
+   /  \    /
+ 40   50  30
+
+done until 15 reaches to proper place
+Time → O(log n)
+```
+
+---
+
+### poll()
+
+```text
+Remove Root (10)
+
+Move Last to Root
+
+        30
+      /    \
+    20      15
+   /  \
+ 40    50
+
+     siftDown ↓
+
+        15
+      /    \
+    20      30
+   /  \
+ 40    50
+
+Time → O(log n)
+```
+
+---
+
+### peek()
+
+```text
+        15
+      /    \
+    20      30
+
+Returns → 15
+
+Time → O(1)
+```
+
+---
+
+### remove(40)
+
+```text
+Search → 15 → 20 → 30 → 40 ✔
+
+Remove → Heap Adjust
+
+Time → O(n)
+```
+
+---
+
+### grow()
+
+```text
+Array Full
+
+[10,20,30,40]
+
+        │
+        ▼
+
+[10,20,30,40,_,_,_,_]
+
+Copy Elements
+
+Time → O(n)
+```
+
 ---
 
 ## Optimized Overrides
@@ -259,6 +373,8 @@ spliterator()              // Heap-aware split for parallel streams
 | Unbounded | ✅ Yes | ✅ Yes |
 | Null Elements | ❌ Not allowed | ❌ Not allowed |
 | Use Case | Single-threaded priority tasks | Concurrent priority scheduling |
+
+// NOTE IT : Only ArrayBlockingQueue , LinkedBlockingQueue , LinkedBlockingDequeue and SynchronousQueue are Bounded
 
 ---
 

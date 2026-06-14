@@ -204,18 +204,6 @@ null ← 10 ⇄ 20 ⇄ 30 ⇄ 40 → null
 - Allows null elements
 - Higher memory overhead than ArrayDeque
 
-### BlockingQueue Implementations
-
-| Implementation | Internal Structure | Key Feature |
-|----------------|-------------------|-------------|
-| **ArrayBlockingQueue** | Circular Array + ReentrantLock | Fixed capacity, bounded |
-| **LinkedBlockingQueue** | Linked Nodes + Two Locks | Optional bounded, higher throughput |
-| **PriorityBlockingQueue** | Binary Heap + Lock | Thread-safe priority queue |
-| **DelayQueue** | Priority Queue + Delayed interface | Elements available only after delay expires |
-| **SynchronousQueue** | No internal storage | Direct handoff producer→consumer |
-| **LinkedTransferQueue** | Lock-free linked nodes | `transfer()` blocks until consumed |
-| **LinkedBlockingDeque** | Doubly linked list + locks | Blocking operations at both ends |
-
 ---
 
 ## 6. Real-World Use Cases
