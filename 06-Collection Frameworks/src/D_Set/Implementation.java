@@ -2,11 +2,58 @@ package D_Set;
 
 public class Implementation {
 
-// =====================================================
-// Set Methods
-// =====================================================
 
-/*
+    // =====================================================
+    // Collection Methods Available in Set
+    // =====================================================
+
+        /*
+            Since List extends Collection,
+            all Collection methods are available.
+
+            Already implemented in
+            "Collection and Iterator" topic.
+
+            add()
+            addAll()
+
+            remove()
+            removeAll()
+            removeIf()
+
+            retainAll()
+
+            contains()
+            containsAll()
+
+            size()
+            isEmpty()
+
+            clear()
+
+            toArray()
+            toArray(T[])
+            toArray(IntFunction<T[]>)
+
+            iterator()
+            spliterator()
+
+            stream()
+            parallelStream()
+
+            equals()
+            hashCode()
+         */
+
+
+
+
+
+    // =====================================================
+    // Set Methods
+    // =====================================================
+
+    /*
     Unlike List, the Set interface does NOT introduce
     any new methods.
 

@@ -177,10 +177,10 @@ The methods available in a `HashSet` object come from different levels of the Ja
 
 ### Capacity vs Size
 
-| Concept | Meaning | Example |
-|---------|---------|---------|
-| **Capacity** | Number of buckets in internal Hash Table | `new HashSet<>(32)` → Capacity = 32 |
-| **Size** | Actual number of stored elements | After `add(10)`, `add(20)` → Size = 2 |
+| Concept | Meaning                                                    | Example |
+|---------|------------------------------------------------------------|---------|
+| **Capacity** | Number of buckets or bucket indices in internal Hash Table | `new HashSet<>(32)` → Capacity = 32 |
+| **Size** | Actual number of stored elements                           | After `add(10)`, `add(20)` → Size = 2 |
 
 ```java
 HashSet<Integer> set = new HashSet<>(32);  // Capacity = 32
@@ -201,6 +201,91 @@ Load Factor = 0.75
 Threshold = 12
 ```
 When the 13th element is inserted, HashSet performs **rehashing** (capacity doubles to 32).
+
+### Example digram for explanation
+```text
+                 HashSet / HashMap
+
+Default Capacity = 16
+        │
+        ▼
+Creates an Internal Array
+of 16 Buckets
+        │
+        ▼
+Bucket Indices
+
+0   1   2   3   4   ...   15
+│   │   │   │   │          │
+▼   ▼   ▼   ▼   ▼          ▼
+[]  []  []  []  []         []
+
+------------------------------------------------------
+
+Add "Java"
+        │
+        ▼
+hashCode("Java")
+        │
+        ▼
+2301506
+        │
+        ▼
+2301506 % 16 = 2
+        │
+        ▼
+Store in Bucket Index 2
+
+0   1   2         3   ...   15
+│   │   │
+▼   ▼   ▼
+[]  [] [Java]
+
+------------------------------------------------------
+
+Add "ABC"
+        │
+        ▼
+hashCode("ABC")
+        │
+        ▼
+64578
+        │
+        ▼
+64578 % 16 = 2
+        │
+        ▼
+Collision (Same Bucket)
+
+Bucket 2
+
+Java
+ │
+ ▼
+ABC
+
+------------------------------------------------------
+
+contains("ABC")
+        │
+        ▼
+hashCode("ABC")
+        │
+        ▼
+64578 % 16 = 2
+        │
+        ▼
+Go to Bucket 2
+        │
+        ▼
+Java.equals("ABC")   ❌
+        │
+        ▼
+ABC.equals("ABC")    ✅
+        │
+        ▼
+Found ✔
+```
 
 ---
 

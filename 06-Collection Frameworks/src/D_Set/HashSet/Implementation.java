@@ -101,9 +101,7 @@ public class Implementation {
 
         /*
          * Note:
-         *
          * Duplicate values are ignored automatically.
-         *
          * Output order is NOT guaranteed.
          */
 
@@ -125,13 +123,7 @@ public class Implementation {
         System.out.println(duplicateDemo);
 
         /*
-         * Output
-         *
-         * 10
-         * 20
-         * 30
-         * 40
-         *
+         * Output : [10,20,30,40]
          * Duplicate values are ignored.
          */
 
@@ -196,24 +188,10 @@ public class Implementation {
         }
 
         /*
-         * Note:
-         *
-         * Since equals() and hashCode()
-         * are NOT overridden,
-         *
-         * HashSet considers every object different.
-         *
-         * Therefore duplicate logical objects
-         * are still stored.
-         */
-
-
-        /*
          * ==========================================================
          *                    Constructors
          * ==========================================================
          */
-
 
         // ---------------------------------------------------------
         // HashSet()
@@ -230,9 +208,7 @@ public class Implementation {
 
         /*
          * Creates an empty HashSet.
-         *
          * Default Constructor.
-         *
          * Default Capacity  : 16
          * Default LoadFactor: 0.75
          */
@@ -253,9 +229,7 @@ public class Implementation {
 
         /*
          * Capacity is allocated internally.
-         *
-         * Useful when approximate size
-         * is already known.
+         * Useful when approximate size is already known.
          */
 
 
@@ -276,8 +250,7 @@ public class Implementation {
         /*
          * Allows custom Load Factor.
          *
-         * Generally default value (0.75)
-         * is recommended.
+         * Generally default value (0.75) is recommended.
          */
 
 
@@ -285,16 +258,14 @@ public class Implementation {
         // HashSet(Collection)
         // ---------------------------------------------------------
 
-        ArrayList<Integer> list =
-                new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
         list.add(10);
         list.add(20);
         list.add(30);
         list.add(20);
 
-        HashSet<Integer> set4 =
-                new HashSet<>(list);
+        HashSet<Integer> set4 = new HashSet<>(list);
 
         System.out.println("\nHashSet(Collection)");
 
@@ -303,12 +274,9 @@ public class Implementation {
 
         /*
          * Frequently used for:
-         *
-         * Removing Duplicate Elements
-         * from another Collection.
+         * Removing Duplicate Elements from another Collection.
          */
 
-        // ----------- Part 2 Starts from clone() -----------
 
         /*
          * ==========================================================
@@ -325,8 +293,7 @@ public class Implementation {
         System.out.println("\nclone()");
 
         @SuppressWarnings("unchecked")
-        HashSet<String> cloned =
-                (HashSet<String>) original.clone();
+        HashSet<String> cloned = (HashSet<String>) original.clone();
 
         System.out.println("Original HashSet : " + original);
         System.out.println("Cloned HashSet   : " + cloned);
@@ -342,9 +309,7 @@ public class Implementation {
 
         /*
          * Note:
-         *
          * clone() creates a SHALLOW COPY.
-         *
          * Only HashSet object is copied.
          * Stored objects are shared.
          */
@@ -387,234 +352,100 @@ public class Implementation {
 
         /*
          * Note:
-         *
          * HashSet is copied.
-         *
          * Car objects are NOT copied.
-         *
-         * Both HashSets refer to the
-         * same Car objects.
+         * Both HashSets refer to the same Car objects.
          */
 
 
         /*
          * ==========================================================
-         *                 Capacity vs Size
-         * ==========================================================
-         */
-
-        HashSet<Integer> capacityDemo =
-                new HashSet<>(20);
-
-        capacityDemo.add(10);
-        capacityDemo.add(20);
-        capacityDemo.add(30);
-
-        System.out.println("\nCapacity vs Size");
-
-        System.out.println(capacityDemo);
-
-        System.out.println("Size : "
-                + capacityDemo.size());
-
-        /*
-         * Capacity
-         *
-         * Number of Buckets
-         *
-         * (Cannot be accessed directly)
-         *
-         *
-         * Size
-         *
-         * Number of Stored Elements
-         */
-
-
-        /*
-         * ==========================================================
-         *                     Load Factor
-         * ==========================================================
-         */
-
-        HashSet<Integer> loadFactorDemo =
-                new HashSet<>(16,0.75f);
-
-        loadFactorDemo.add(10);
-        loadFactorDemo.add(20);
-        loadFactorDemo.add(30);
-
-        System.out.println("\nLoad Factor");
-
-        System.out.println(loadFactorDemo);
-
-        /*
-         * Default Load Factor
-         *
-         * 0.75
-         *
-         * Formula
-         *
-         * Size / Capacity
-         *
-         * Default Value gives
-         * good performance.
-         */
-
-
-        /*
-         * ==========================================================
-         *                      Threshold
-         * ==========================================================
-         */
-
-        System.out.println("\nThreshold");
-
-        /*
-         * Formula
-         *
-         * Threshold
-         *
-         * =
-         *
-         * Capacity × LoadFactor
-         *
-         *
-         * Example
-         *
-         * Capacity = 16
-         *
-         * LoadFactor = 0.75
-         *
-         * Threshold = 12
-         *
-         * When 13th element is inserted,
-         * HashSet performs Rehashing.
-         */
-
-
-        /*
-         * ==========================================================
-         *                     Rehashing
+         *                      Rehashing
          * ==========================================================
          */
 
         HashSet<Integer> rehashDemo =
-                new HashSet<>(4,0.75f);
+                new HashSet<>(4, 0.75f);
 
         /*
-         * Capacity = 4
-         *
-         * Threshold = 3
+         * Initial:
+         * Capacity   = 4 (Default = 16)
+         * Load Factor = 0.75
+         * Threshold   = 4 × 0.75 = 3
          */
 
+        // Current size = 3
         rehashDemo.add(10);
         rehashDemo.add(20);
         rehashDemo.add(30);
 
         System.out.println("\nBefore Rehashing");
-
         System.out.println(rehashDemo);
 
         /*
-         * Next insertion exceeds threshold.
+         * Next insertion exceeds the threshold.
          */
 
         rehashDemo.add(40);
 
-        System.out.println("\nAfter Rehashing");
+        /*
+         * After Rehashing:
+         * Capacity doubles (4 → 8)
+         * Size = 4
+         * New Threshold = 8 × 0.75 = 6
+         */
 
+        System.out.println("\nAfter Rehashing");
         System.out.println(rehashDemo);
 
         /*
-         * Internally
-         *
-         * Capacity increases.
-         *
-         * Existing elements are
-         * redistributed into
-         * new buckets.
-         *
-         * This process is called
-         * Rehashing.
-         */
-
-
-        /*
-         * ==========================================================
-         *            Reference Type Demonstration
-         * ==========================================================
+         * Rehashing:
+         * • Capacity increases.
+         * • Existing elements are redistributed into the new bucket array.
          */
 
         /*
+         * ==========================================================
+         *          Reference Type Demonstration
+         * ==========================================================
+         *
          * Set Reference
+         * ✓ Access Set + Collection methods only.
+         * ✗ Cannot access HashSet-specific methods (e.g. clone()).
          *
-         * Can access only methods
-         * declared in Set and Collection.
-         */
-
-        Set<Integer> setReference =
-                new HashSet<>();
-
-        setReference.add(10);
-        setReference.add(20);
-
-        System.out.println("\nSet Reference");
-
-        System.out.println(setReference);
-
-        setReference.contains(10);
-
-        // setReference.clone(); ❌
-        // clone() belongs to HashSet
-
-
-        /*
          * HashSet Reference
+         * ✓ Access all HashSet methods, including clone().
          *
-         * Can access every method
-         * of HashSet.
+         * Recommendation
+         * ✓ Use Set reference for loose coupling.
+         * ✓ Use HashSet reference only when HashSet-specific methods are needed.
          */
 
-        HashSet<Integer> hashSetReference =
-                new HashSet<>();
-
-        hashSetReference.add(100);
-        hashSetReference.add(200);
-
-        hashSetReference.clone();      // ✔
-
-        System.out.println("\nHashSet Reference");
-
-        System.out.println(hashSetReference);
 
         /*
+         * ==========================================================
+         *               Already Covered in ArrayList
+         * ==========================================================
+         *
+         * The following methods behave the same for HashSet.
+         * Refer to ArrayList Implementation.java.
+         *
+         * ✓ forEach()
+         * ✓ Method Reference (System.out::println)
+         * ✓ spliterator()
+         *
          * Note:
-         *
-         * Interface Reference
-         *
-         * Recommended because
-         * implementation can
-         * change easily.
-         *
-         * Class Reference
-         *
-         * Required when using
-         * HashSet specific methods.
+         * Although these methods are available in HashSet,
+         * the iteration order is NOT guaranteed because
+         * HashSet is unordered.
          */
 
-
-        // ------------- Part 3 Starts from Optimized Overrides -------------
 
         /*
          * ==========================================================
-         *                 Optimized Overrides
+         *                    iterator()
          * ==========================================================
          */
-
-        // ---------------------------------------------------------
-        // forEach()
-        // ---------------------------------------------------------
 
         HashSet<String> fruits = new HashSet<>();
 
@@ -622,89 +453,37 @@ public class Implementation {
         fruits.add("Banana");
         fruits.add("Mango");
 
-        System.out.println("\nforEach()");
-
-        fruits.forEach(fruit ->
-                System.out.println(fruit));
-
-        /*
-         * forEach()
-         *
-         * Introduced in Java 8.
-         *
-         * Uses Consumer Functional Interface.
-         */
-
-
-        // ---------------------------------------------------------
-        // Method Reference
-        // ---------------------------------------------------------
-
-        System.out.println("\nMethod Reference");
-
-        fruits.forEach(System.out::println);
-
-        /*
-         * Cleaner version of Lambda Expression.
-         */
-
-
-        // ---------------------------------------------------------
-        // spliterator()
-        // ---------------------------------------------------------
-
-        System.out.println("\nSpliterator");
-
-        Spliterator<String> spliterator =
-                fruits.spliterator();
-
-        spliterator.forEachRemaining(System.out::println);
-
-        /*
-         * Spliterator
-         *
-         * Introduced in Java 8.
-         *
-         * Supports Parallel Processing.
-         *
-         * Used by Java Streams internally.
-         */
-
-
-        // ---------------------------------------------------------
-        // iterator()
-        // ---------------------------------------------------------
-
         System.out.println("\nIterator");
 
-        Iterator<String> itr =
-                fruits.iterator();
+        Iterator<String> itr = fruits.iterator();
 
         while (itr.hasNext()) {
             System.out.println(itr.next());
         }
 
         /*
-         * HashSet does NOT support
-         * ListIterator.
+         * HashSet supports Iterator only.
          *
-         * Only Iterator is available.
+         * ListIterator is NOT available
+         * because HashSet does not implement List.
          */
 
 
         /*
          * ==========================================================
-         *              HashSet Characteristics
+         *               HashSet Characteristics
          * ==========================================================
          */
 
-        HashSet<Integer> characteristics =
-                new HashSet<>();
+        HashSet<Integer> characteristics = new HashSet<>();
 
         characteristics.add(30);
         characteristics.add(10);
         characteristics.add(40);
         characteristics.add(20);
+        characteristics.add(20);   // Duplicate
+        characteristics.add(null); // One null allowed
+        characteristics.add(null); // Ignored
 
         System.out.println("\nHashSet Characteristics");
 
@@ -713,17 +492,11 @@ public class Implementation {
         /*
          * Characteristics
          *
-         * ✔ Duplicate NOT Allowed
-         *
-         * ✔ One Null Allowed
-         *
-         * ✔ Unordered
-         *
-         * ✔ No Index
-         *
-         * ✔ Fast Searching
-         *
-         * ✔ Average O(1)
+         * ✓ Duplicate NOT Allowed
+         * ✓ One Null Allowed
+         * ✓ Unordered
+         * ✓ No Index
+         * ✓ Fast Searching (Average O(1))
          */
 
 
@@ -732,16 +505,7 @@ public class Implementation {
          *              Methods Not Covered Yet
          * ==========================================================
          */
-
         /*
-         * Java 8
-         *
-         * removeIf(Predicate)
-         *
-         * Java 11
-         *
-         * toArray(IntFunction<T[]>)
-         *
          * Java 21
          *
          * HashSet.newHashSet(int expectedSize)
@@ -754,72 +518,7 @@ public class Implementation {
          * ==========================================================
          */
 
-        System.out.println("\nObject Methods");
-
-        System.out.println(users.toString());
-
-        System.out.println(users.getClass());
-
-        System.out.println(users.hashCode());
-
-        System.out.println(users.equals(cloned));
-
-        /*
-         * Object Methods
-         *
-         * toString()
-         *
-         * getClass()
-         *
-         * hashCode()
-         *
-         * equals()
-         *
-         * wait()
-         *
-         * notify()
-         *
-         * notifyAll()
-         *
-         * finalize() (Deprecated)
-         */
-
-
-        /*
-         * ==========================================================
-         *                    Interview Notes
-         * ==========================================================
-         */
-
-        /*
-         * 1. HashSet internally uses
-         *    HashMap.
-         *
-         * 2. HashSet stores only Keys.
-         *
-         * 3. Values are stored as
-         *    PRESENT (Dummy Object).
-         *
-         * 4. Duplicate detection
-         *    uses hashCode()
-         *    followed by equals().
-         *
-         * 5. Average Complexity
-         *
-         *    add()      O(1)
-         *
-         *    remove()   O(1)
-         *
-         *    contains() O(1)
-         *
-         * 6. Worst Case
-         *
-         *    O(log n)
-         *
-         *    (Java 8+
-         *     Red-Black Tree Buckets)
-         */
-
+        // future !!
 
         /*
          * ==========================================================

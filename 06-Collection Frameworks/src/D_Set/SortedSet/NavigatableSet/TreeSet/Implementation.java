@@ -2,11 +2,6 @@ package D_Set.SortedSet.NavigatableSet.TreeSet;
 
 import java.util.*;
 
-// In Which areas TreeSet class is used ?
-// Hold Ctrl and move cursor to TreeSet keyword -> Go to that file.
-// Hold Ctrl again on TreeSet -> Click -> Change search to
-// "All Places" to explore where TreeSet is used.
-
 public class Implementation {
 
     public static void main(String[] args) {
@@ -104,28 +99,23 @@ public class Implementation {
         // Raw Type (Without Type Safety)
         // ---------------------------------------------------------
 
-        TreeSet rawUsers = new TreeSet();
+        TreeSet<Object> rawUsers = new TreeSet<>();
 
         rawUsers.add("Apple");
         rawUsers.add("Banana");
-        rawUsers.add("Mango");
+        // rawUsers.add(90); ClassCastException
+
+        /*
+         * Unlike HashSet and LinkedHashSet,
+         * TreeSet cannot store mixed data types.
+         *
+         * All elements must be mutually comparable,
+         * otherwise ClassCastException is thrown.
+         */
 
         System.out.println("Raw TreeSet");
 
         System.out.println(rawUsers);
-
-        /*
-         * Raw Types
-         *
-         * Stores everything as Object.
-         *
-         * Avoid in modern Java.
-         *
-         * NOTE:
-         * Mixed data types are NOT allowed
-         * because TreeSet compares elements.
-         */
-
 
         System.out.println();
 
@@ -142,97 +132,19 @@ public class Implementation {
         numbers.add(20);
         numbers.add(40);
         numbers.add(20);
+        // numbers.add(null); NullPointerException
+
+        /*
+         * TreeSet compares elements.
+         * null cannot be compared.
+         */
 
         System.out.println("TreeSet with Generics");
 
         System.out.println(numbers);
 
         /*
-         * Output
-         *
-         * 10
-         * 20
-         * 30
-         * 40
-         *
-         * Automatically Sorted.
-         */
-
-
-        // ---------------------------------------------------------
-        // Automatic Sorting
-        // ---------------------------------------------------------
-
-        TreeSet<Integer> sortingDemo =
-                new TreeSet<>();
-
-        sortingDemo.add(50);
-        sortingDemo.add(10);
-        sortingDemo.add(80);
-        sortingDemo.add(20);
-        sortingDemo.add(40);
-
-        System.out.println("\nAutomatic Sorting");
-
-        System.out.println(sortingDemo);
-
-        /*
-         * Elements are always
-         * stored in sorted order.
-         */
-
-
-        // ---------------------------------------------------------
-        // Duplicate Demonstration
-        // ---------------------------------------------------------
-
-        TreeSet<Integer> duplicateDemo =
-                new TreeSet<>();
-
-        duplicateDemo.add(10);
-        duplicateDemo.add(20);
-        duplicateDemo.add(30);
-        duplicateDemo.add(20);
-        duplicateDemo.add(40);
-        duplicateDemo.add(10);
-
-        System.out.println("\nDuplicate Demonstration");
-
-        System.out.println(duplicateDemo);
-
-        /*
-         * Duplicate values
-         * are ignored.
-         */
-
-
-        // ---------------------------------------------------------
-        // Null Demonstration
-        // ---------------------------------------------------------
-
-        TreeSet<String> nullDemo =
-                new TreeSet<>();
-
-        nullDemo.add("Java");
-        nullDemo.add("Python");
-
-        try{
-
-            nullDemo.add(null);
-
-        }catch (NullPointerException e){
-
-            System.out.println("\nNull Demonstration");
-
-            System.out.println(
-                    "TreeSet does NOT allow null.");
-
-        }
-
-        /*
-         * TreeSet compares elements.
-         *
-         * null cannot be compared.
+         * Output : Automatic Sorting and duplicates removed : [10, 20, 40, 50, 80]
          */
 
 
@@ -271,22 +183,12 @@ public class Implementation {
 
         /*
          * TreeSet requires either:
-         *
-         * Comparable
-         *
-         * OR
-         *
-         * Comparator
-         *
-         * Otherwise
-         *
+         * Comparable OR Comparator
+                Otherwise
          * ClassCastException occurs.
          */
 
-        TreeSet<Car> cars =
-                new TreeSet<>(
-                        Comparator.comparingInt(
-                                car -> car.speed));
+        TreeSet<Car> cars = new TreeSet<>(Comparator.comparingInt(car -> car.speed));
 
         cars.add(new Car("BMW",900));
         cars.add(new Car("Toyota",500));
@@ -306,7 +208,6 @@ public class Implementation {
          *                  Constructors
          * ==========================================================
          */
-
 
         // ---------------------------------------------------------
         // TreeSet()
@@ -403,8 +304,6 @@ public class Implementation {
          */
 
 
-        // ------------ Part 2 Starts from first() ------------
-
         /*
          * ==========================================================
          *                 SortedSet Methods
@@ -433,8 +332,7 @@ public class Implementation {
                 + tree.first());
 
         /*
-         * Returns the
-         * smallest element.
+         * Returns the smallest element.
          */
 
 
@@ -448,8 +346,7 @@ public class Implementation {
                 + tree.last());
 
         /*
-         * Returns the
-         * largest element.
+         * Returns the largest element.
          */
 
 
@@ -465,10 +362,8 @@ public class Implementation {
         System.out.println(head);
 
         /*
-         * Returns all elements
-         * less than the given value.
-         *
-         * Returns a VIEW.
+         * Returns all elements less than the given value.
+           Returns a VIEW.
          */
 
 
@@ -484,9 +379,7 @@ public class Implementation {
         System.out.println(tail);
 
         /*
-         * Returns elements
-         * greater than or equal
-         * to the given value.
+         * Returns elements greater than or equal to the given value.
          */
 
 
@@ -517,12 +410,9 @@ public class Implementation {
         System.out.println(tree.comparator());
 
         /*
-         * Returns
+         * Returns : null
          *
-         * null
-         *
-         * when TreeSet uses
-         * Natural Ordering.
+         * when TreeSet uses Natural Ordering.
          */
 
 
@@ -531,7 +421,6 @@ public class Implementation {
          *             NavigableSet Methods
          * ==========================================================
          */
-
 
         // ---------------------------------------------------------
         // lower()
@@ -542,9 +431,7 @@ public class Implementation {
         System.out.println(tree.lower(30));
 
         /*
-         * Greatest element
-         * strictly less
-         * than given element.
+         * Greatest element strictly less than given element.
          */
 
 
@@ -557,9 +444,7 @@ public class Implementation {
         System.out.println(tree.floor(30));
 
         /*
-         * Greatest element
-         * less than or equal
-         * to given element.
+         * Greatest element less than or equal to given element.
          */
 
 
@@ -572,9 +457,7 @@ public class Implementation {
         System.out.println(tree.ceiling(35));
 
         /*
-         * Smallest element
-         * greater than or equal
-         * to given element.
+         * Smallest element greater than or equal to given element.
          */
 
 
@@ -587,9 +470,7 @@ public class Implementation {
         System.out.println(tree.higher(30));
 
         /*
-         * Smallest element
-         * strictly greater
-         * than given element.
+         * Smallest element strictly greater than given element.
          */
 
 
@@ -693,7 +574,6 @@ public class Implementation {
 
         /*
          * true
-         *
          * Includes 30.
          */
 
@@ -711,7 +591,6 @@ public class Implementation {
 
         /*
          * false
-         *
          * Excludes 30.
          */
 
@@ -739,8 +618,6 @@ public class Implementation {
          * (Exclusive)
          */
 
-
-        // ----------- Part 3 Starts from Natural Ordering -----------
 
         /*
          * ==========================================================
@@ -793,29 +670,6 @@ public class Implementation {
          * Uses Comparator.
          *
          * Custom sorting order.
-         */
-
-
-        /*
-         * ==========================================================
-         *           Comparable vs Comparator
-         * ==========================================================
-         */
-
-        System.out.println("\n========== Comparable vs Comparator ==========");
-
-        System.out.println("Comparable : Natural Ordering");
-
-        System.out.println("Comparator : Custom Ordering");
-
-        /*
-         * Comparable
-         *
-         * compareTo()
-         *
-         * Comparator
-         *
-         * compare()
          */
 
 
@@ -958,84 +812,7 @@ public class Implementation {
          * ==========================================================
          */
 
-        System.out.println("\n========== forEach() ==========");
-
-        treeSet.forEach(System.out::println);
-
-        /*
-         * Executes action
-         * for every element.
-         */
-
-
-        System.out.println("\n========== spliterator() ==========");
-
-        Spliterator<Integer> spliterator =
-                treeSet.spliterator();
-
-        spliterator.forEachRemaining(System.out::println);
-
-        /*
-         * Supports Parallel
-         * Traversal.
-         */
-
-
-        System.out.println("\n========== iterator() ==========");
-
-        Iterator<Integer> itr =
-                treeSet.iterator();
-
-        while(itr.hasNext()){
-
-            System.out.println(itr.next());
-
-        }
-
-        /*
-         * Traverses
-         * Ascending Order.
-         */
-
-
-        System.out.println("\n========== descendingIterator() ==========");
-
-        Iterator<Integer> reverseItr =
-                treeSet.descendingIterator();
-
-        while(reverseItr.hasNext()){
-
-            System.out.println(reverseItr.next());
-
-        }
-
-        /*
-         * Traverses
-         * Descending Order.
-         */
-
-
-        /*
-         * ==========================================================
-         *            Methods Not Covered Yet
-         * ==========================================================
-         */
-
-        /*
-         * Java 8
-         *
-         * removeIf(Predicate)
-         *
-         * Java 11
-         *
-         * toArray(IntFunction<T[]>)
-         *
-         * Java 21+
-         *
-         * reversed()
-         *
-         * SequencedSet support
-         */
+        // same
 
 
         /*
@@ -1044,36 +821,7 @@ public class Implementation {
          * ==========================================================
          */
 
-        System.out.println("\n========== Object Methods ==========");
-
-        System.out.println(treeSet.toString());
-
-        System.out.println(treeSet.getClass());
-
-        System.out.println(treeSet.hashCode());
-
-        System.out.println(treeSet.equals(tree));
-
-        /*
-         * Object Methods
-         *
-         * toString()
-         *
-         * getClass()
-         *
-         * hashCode()
-         *
-         * equals()
-         *
-         * wait()
-         *
-         * notify()
-         *
-         * notifyAll()
-         *
-         * finalize() (Deprecated)
-         */
-
+        // same
 
         /*
          * ==========================================================

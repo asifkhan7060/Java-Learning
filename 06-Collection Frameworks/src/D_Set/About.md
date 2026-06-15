@@ -13,7 +13,7 @@ public interface Set<E> extends Collection<E>
 Iterable → Collection → Set
                            ├── HashSet
                            ├── LinkedHashSet
-                           └── TreeSet (implements SortedSet → NavigableSet)
+                           └── TreeSet
 ```
 
 ---
