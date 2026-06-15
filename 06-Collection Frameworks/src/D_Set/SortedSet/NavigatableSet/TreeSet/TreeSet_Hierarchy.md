@@ -251,6 +251,28 @@ TreeSet<Integer> rev = new TreeSet<>(Collections.reverseOrder());  // 40, 30, 20
 
 > **Note:** `headSet()`, `tailSet()`, and `subSet()` return **views** backed by the original TreeSet. Changes to the view reflect in the original.
 
+## SortedSet - Visual Memory
+
+```text
+first()                                  last()
+  │                                        │
+  ▼                                        ▼
+
+10 ─── 20 ─── 30 ─── 40 ─── 50 ─── 60 ─── 70
+
+    headSet(40)
+<───────────────>
+    [10,20,30]
+
+                    tailSet(40)
+                    <──────────────────────────>
+                            [40,50,60,70]
+
+subSet(20,60)
+      <──────────────────────>
+      [20,30,40,50]
+
+```
 ---
 
 ## NavigableSet Methods
@@ -269,18 +291,32 @@ TreeSet<Integer> rev = new TreeSet<>(Collections.reverseOrder());  // 40, 30, 20
 | `headSet(to, inclusive)` | `set.headSet(20,true)` | View with inclusive/exclusive boundary | O(1) view | O(1) |
 | `tailSet(from, inclusive)` | `set.tailSet(20,false)` | View with inclusive/exclusive boundary | O(1) view | O(1) |
 
----
-
-## Internal Working
-
-Unlike `HashSet` and `LinkedHashSet`, `TreeSet` internally uses a **Red-Black Tree** — a self-balancing binary search tree.
+## NavigableSet - Visual Memory
 
 ```text
-Insert: 30, 10, 40, 20
+           10 ─── 20 ─── 30 ─── 40 ─── 50 ─── 60 ─── 70
 
-        30
-       /       10    40
-              20
+Search around 40
+
+lower()    → 30      (<)
+floor()    → 40      (<=)
+ceiling()  → 40      (>=)
+higher()   → 50      (>)
+
+Views
+
+headSet(40,T)        [10,20,30,40]
+tailSet(40,F)        [50,60,70]
+subSet(20,T,60,F)    [20,30,40,50]
+
+Others
+
+pollFirst()          Remove 10
+pollLast()           Remove 70
+
+descendingSet()      70 ─ 60 ─ 50 ─ 40 ─ 30 ─ 20 ─ 10
+
+descendingIterator() 70 → 60 → 50 → 40 → 30 → 20 → 10
 ```
 
 | Feature | Description |
