@@ -187,14 +187,30 @@ public class Implementation {
         // Queue Methods
         // =====================================================
 
-        // Queue follows FIFO
-        //
-        // First In First Out
+        // Queue follows FIFO - First In First Out
 
+        /*
+
+        add(e)     -> Inserts element at rear.
+                      Throws IllegalStateException if insertion fails.
+
+        offer(e)   -> Inserts element at rear.
+                      Returns false if insertion fails. (Preferred)
+
+        remove()   -> Removes and returns the head.
+                      Throws NoSuchElementException if queue is empty.
+
+        poll()     -> Removes and returns the head.
+                      Returns null if queue is empty. (Preferred)
+
+        element()  -> Returns the head without removing.
+                      Throws NoSuchElementException if queue is empty.
+
+        peek()     -> Returns the head without removing.
+                      Returns null if queue is empty. (Preferred)
+        */
 
         Queue<Integer> queue = new LinkedList<>();
-
-
 
         // -----------------------------------------------------
         // offer()
@@ -202,15 +218,15 @@ public class Implementation {
 
         System.out.println("\noffer()");
 
-        queue.offer(10);
+        queue.offer(10); // return false if it's not added
         queue.offer(20);
         queue.offer(30);
+        queue.add(40); // throws exception if it's not added
 
         System.out.println(queue);
 
         // Note:
-        // Inserts element at the rear of the queue.
-
+        // Inserts element at the rear(back) of the queue.
 
 
         // -----------------------------------------------------
@@ -229,7 +245,6 @@ public class Implementation {
         // Returns null if queue is empty.
 
 
-
         // -----------------------------------------------------
         // element()
         // -----------------------------------------------------
@@ -243,7 +258,6 @@ public class Implementation {
         // Note:
         // Similar to peek().
         // Throws exception if queue is empty.
-
 
 
         // -----------------------------------------------------
@@ -261,7 +275,6 @@ public class Implementation {
         // Returns null if queue is empty.
 
 
-
         // -----------------------------------------------------
         // remove()
         // -----------------------------------------------------
@@ -277,62 +290,20 @@ public class Implementation {
         // Throws exception if queue is empty.
 
 
+        // =====================================================
+        // Deque - (Double Ended Queue) Methods
+        // =====================================================
 
-        // Queue Visualization
+        // Insertion and Deletion are possible from both Front and Rear.
 
-        Queue<Integer> demo = new LinkedList<>();
-
-        demo.offer(100);
-        demo.offer(200);
-        demo.offer(300);
-
-        System.out.println("\nQueue Demonstration");
-
-        System.out.println("Initial Queue : " + demo);
-
-        System.out.println("peek()  : " + demo.peek());
-
-        System.out.println("poll()  : " + demo.poll());
-
-        System.out.println("After poll : " + demo);
-
-        System.out.println("offer(400)");
-
-        demo.offer(400);
-
-        System.out.println(demo);
-
-        /*
-         * Queue Flow
-         *
-         * Front                    Rear
-         *
-         * 100 -> 200 -> 300
-         *
-         * poll()
-         *
-         * Front              Rear
-         *
-         * 200 -> 300
-         *
-         * offer(400)
-         *
-         * Front                     Rear
-         *
-         * 200 -> 300 -> 400
+        /* Methods :-
+        Front: addFirst, offerFirst, removeFirst, pollFirst, getFirst, peekFirst
+        Rear: addLast, offerLast, removeLast, pollLast, getLast, peekLast
+        Stack: push, pop
+        Occurrence: removeFirstOccurrence, removeLastOccurrence
          */
 
-        // =====================================================
-        // Deque Methods
-        // =====================================================
-
-        // Deque (Double Ended Queue)
-        //
-        // Insertion and Deletion are possible
-        // from both Front and Rear.
-
         Deque<Integer> deque = new LinkedList<>();
-
 
         // -----------------------------------------------------
         // addFirst()
@@ -350,7 +321,6 @@ public class Implementation {
         // Throws exception if insertion fails.
 
 
-
         // -----------------------------------------------------
         // addLast()
         // -----------------------------------------------------
@@ -364,7 +334,6 @@ public class Implementation {
 
         // Note:
         // Inserts element at the end.
-
 
 
         // -----------------------------------------------------
@@ -382,7 +351,6 @@ public class Implementation {
         // Returns true/false instead of throwing exception.
 
 
-
         // -----------------------------------------------------
         // offerLast()
         // -----------------------------------------------------
@@ -398,7 +366,6 @@ public class Implementation {
         // Returns true/false.
 
 
-
         // -----------------------------------------------------
         // getFirst()
         // -----------------------------------------------------
@@ -412,7 +379,6 @@ public class Implementation {
         // Throws exception if deque is empty.
 
 
-
         // -----------------------------------------------------
         // getLast()
         // -----------------------------------------------------
@@ -420,7 +386,6 @@ public class Implementation {
         System.out.println("\ngetLast()");
 
         System.out.println("Last : " + deque.getLast());
-
 
 
         // -----------------------------------------------------
@@ -435,7 +400,6 @@ public class Implementation {
         // Returns null if deque is empty.
 
 
-
         // -----------------------------------------------------
         // peekLast()
         // -----------------------------------------------------
@@ -443,7 +407,6 @@ public class Implementation {
         System.out.println("\npeekLast()");
 
         System.out.println("Last : " + deque.peekLast());
-
 
 
         // -----------------------------------------------------
@@ -461,7 +424,6 @@ public class Implementation {
         // Throws exception if deque is empty.
 
 
-
         // -----------------------------------------------------
         // removeLast()
         // -----------------------------------------------------
@@ -471,7 +433,6 @@ public class Implementation {
         System.out.println("Removed : " + deque.removeLast());
 
         System.out.println(deque);
-
 
 
         // -----------------------------------------------------
@@ -488,7 +449,6 @@ public class Implementation {
         // Returns null if deque is empty.
 
 
-
         // -----------------------------------------------------
         // pollLast()
         // -----------------------------------------------------
@@ -500,6 +460,7 @@ public class Implementation {
         System.out.println(deque);
 
 
+        // LIFO
 
         // -----------------------------------------------------
         // push()
@@ -513,20 +474,9 @@ public class Implementation {
 
         System.out.println(deque);
 
-        /*
-         * Stack Representation
-         *
-         * Top
-         *
-         * 300
-         * 200
-         * 100
-         */
-
         // Note:
         // push() inserts element at the front.
         // Used when LinkedList behaves like a Stack.
-
 
 
         // -----------------------------------------------------
@@ -541,7 +491,6 @@ public class Implementation {
 
         // Note:
         // Removes top element.
-
 
 
         // -----------------------------------------------------
@@ -568,7 +517,6 @@ public class Implementation {
         // Removes only first matching element.
 
 
-
         // -----------------------------------------------------
         // removeLastOccurrence()
         // -----------------------------------------------------
@@ -593,10 +541,34 @@ public class Implementation {
         // Removes only last matching element.
 
 
-
         // -----------------------------------------------------
         // descendingIterator()
         // -----------------------------------------------------
+
+        /*
+        Declared in:
+        Deque<E> Interface
+
+        Implemented by:
+        ArrayDeque
+        LinkedList
+
+        Returns an Iterator that traverses the deque from rear (last) to front (first).
+
+        It does NOT sort the elements.
+        It only reverses the traversal direction.
+
+        Example:
+
+        Deque : [40, 70, 20, 100]
+
+        iterator()            -> 40 70 20 100
+        descendingIterator()  -> 100 20 70 40
+
+        Traversal:
+        iterator()            : Front -> Rear
+        descendingIterator()  : Rear  -> Front
+        */
 
         deque.clear();
 
@@ -617,89 +589,16 @@ public class Implementation {
         System.out.println();
 
         /*
-         * Output
-         *
-         * 40 30 20 10
+        Already Covered (Same as ArrayList)
+
+        ✓ clone() (Shallow Copy Demo)
+        ✓ Reference Type Demonstration
+        ✓ forEach()
+        ✓ replaceAll()
+        ✓ sort()
+        ✓ spliterator()
+        ✓ Object Methods
          */
-
-
-
-
-        // =====================================================
-        // Deque Demonstration
-        // =====================================================
-
-        Deque<Integer> demoDeque = new LinkedList<>();
-
-        demoDeque.addFirst(20);
-        demoDeque.addFirst(10);
-
-        demoDeque.addLast(30);
-        demoDeque.addLast(40);
-
-        System.out.println("\nDeque Demonstration");
-
-        System.out.println(demoDeque);
-
-        /*
-         * Front                     Rear
-         *
-         * 10 <-> 20 <-> 30 <-> 40
-         */
-
-        System.out.println("\nremoveFirst()");
-
-        demoDeque.removeFirst();
-
-        System.out.println(demoDeque);
-
-        /*
-         * Front               Rear
-         *
-         * 20 <-> 30 <-> 40
-         */
-
-        System.out.println("\nremoveLast()");
-
-        demoDeque.removeLast();
-
-        System.out.println(demoDeque);
-
-        /*
-         * Front        Rear
-         *
-         * 20 <-> 30
-         */
-/*
-        ---
-
-## ✅ Part 2 Covers
-
-                - `addFirst()`
-        - `addLast()`
-        - `offerFirst()`
-        - `offerLast()`
-        - `getFirst()`
-        - `getLast()`
-        - `peekFirst()`
-        - `peekLast()`
-        - `removeFirst()`
-        - `removeLast()`
-        - `pollFirst()`
-        - `pollLast()`
-        - `push()`
-        - `pop()`
-        - `removeFirstOccurrence()`
-        - `removeLastOccurrence()`
-        - `descendingIterator()`
-        - Complete **Deque demonstration**
-                - Complete **Stack demonstration**
-
-                **Next (Part 3)** will complete the implementation with:
-        - `clone()` (including shallow copy demo like your ArrayList)
-        - Reference type demonstration (`Collection`, `List`, `Queue`, `Deque`, `LinkedList`)
-        - Optimized overrides (`forEach`, `replaceAll`, `sort`, `spliterator()`)
-                - Remaining methods/comments ("Exists in Java but Not Covered Yet", Object methods). */
 
     }
 }

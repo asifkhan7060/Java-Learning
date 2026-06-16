@@ -324,82 +324,23 @@ nums.hashCode();
 
 # Collection Methods - Easy Memory Trick
 
-## Short Memory Sentence
+## Memory Word
 
-> **Add → Remove → Check → Count → Clear → Convert → Compare**
+> **ARCCCCC** or * AR5C *
 
-This follows the natural lifecycle of working with a collection.
+| Letter | Meaning | Methods |
+|--------|---------|---------|
+| **A** | Add | `add()`, `addAll()` |
+| **R** | Remove | `remove()`, `removeAll()`, `retainAll()`, `removeIf()` |
+| **C** | Check | `contains()`, `containsAll()` |
+| **C** | Count | `size()`, `isEmpty()` |
+| **C** | Clear | `clear()` |
+| **C** | Convert | `toArray()`, `toArray(T[] a)` |
+| **C** | Compare | `equals()`, `hashCode()` |
 
----
+### One-Line Revision
 
-## Expansion
-
-### ➕ Add
-
-```text
-add()
-addAll()
-```
-
----
-
-### ➖ Remove
-
-```text
-remove()
-removeAll()
-retainAll()
-```
-
-> `retainAll()` keeps only the common elements.
-
----
-
-### ✅ Check
-
-```text
-contains()
-containsAll()
-```
-
----
-
-### 📊 Count
-
-```text
-size()
-isEmpty()
-```
-
----
-
-### 🗑️ Clear
-
-```text
-clear()
-```
-
----
-
-### 🔄 Convert
-
-```text
-toArray()
-toArray(T[] a)
-```
-
----
-
-### ⚖️ Compare
-
-```text
-equals()
-hashCode()
-```
-
-## One-Line Revision
-
-> **Add → Remove → Check → Count → Clear → Convert → Compare**
+> **ARCCCCC** → **Add → Remove → Check → Count → Clear → Convert → Compare**
 
 ---
 

@@ -150,7 +150,6 @@ public class Implementation {
 
         ArrayList<Integer> list2 = new ArrayList<>(10);   // You are saying: "Dear ArrayList, create enough internal space to hold at least 10 elements."
 
-
         list2.add(100);
         list2.add(200);
         list2.add(300);
@@ -226,10 +225,6 @@ public class Implementation {
 
         System.out.println("After ensureCapacity()  : " + ensureDemo);
 
-        // Note:
-        // ensureCapacity() increases only the internal capacity.
-        // It does NOT change the current size or elements.
-
 
         // -----------------------------------------------------
         // trimToSize()
@@ -254,67 +249,6 @@ public class Implementation {
         // Note:
         // Capacity becomes equal to current size.
         // Elements remain unchanged.
-
-
-        // -----------------------------------------------------
-        // ensureCapacity() + trimToSize()
-        // -----------------------------------------------------
-
-        ArrayList<Integer> demo = new ArrayList<>();
-
-        demo.ensureCapacity(50);
-
-        demo.add(100);
-        demo.add(200);
-        demo.add(300);
-
-        System.out.println("\nensureCapacity() + trimToSize()");
-
-        System.out.println("Before trim : " + demo);
-
-        demo.trimToSize();
-
-        System.out.println("After trim  : " + demo);
-
-        // Note:
-        // ensureCapacity() is useful before inserting a large number of elements.
-        // trimToSize() is useful after removing many elements.
-
-
-        // -----------------------------------------------------
-        // Capacity vs Size
-        // -----------------------------------------------------
-
-        ArrayList<Integer> capacityDemo = new ArrayList<>(20);
-
-        capacityDemo.add(10);
-        capacityDemo.add(20);
-        capacityDemo.add(30);
-
-        System.out.println("\nCapacity vs Size");
-
-        System.out.println("Elements : " + capacityDemo);
-
-        System.out.println("Size : " + capacityDemo.size());
-
-        // Capacity cannot be accessed directly.
-        // It is maintained internally by ArrayList.
-
-        // Current Situation
-        //
-        // Capacity = 20
-        // Size = 3
-        //
-        // After trimToSize()
-        //
-        // Capacity = 3
-        // Size = 3
-        //
-        // After ensureCapacity(100)
-        //
-        // Capacity >= 100
-        // Size = 3
-
 
 
         // =====================================================
@@ -348,7 +282,7 @@ public class Implementation {
         // clone() creates a shallow copy.
 
         // =====================================================
-        // Shallow Copy Demonstration
+        // Shallow Copy Demonstration with Class
         // =====================================================
 
         ArrayList<Car> originalCars = new ArrayList<>();
@@ -377,7 +311,7 @@ public class Implementation {
         // Note:
         // Only the ArrayList is copied.
         // The Car objects are NOT copied.
-        // Both lists refer to the same Car objects.
+        // Both lists (copiedCars, originalCars) refer to the same Car objects.
 
 
         // =====================================================
@@ -434,8 +368,7 @@ public class Implementation {
          */
 
         fruits.forEach(fruit ->
-                System.out.println("Fruit : " + fruit));
-
+                System.out.println("Fruit : " + fruit));  //like replaceAll
 
 
         // 5. replaceAll()
@@ -451,7 +384,7 @@ public class Implementation {
          * Replaces every element using the given operation.
          */
 
-        names.replaceAll(String::toUpperCase);
+        names.replaceAll(String::toUpperCase); //like a sort()
 
         System.out.println(names);
 
@@ -507,9 +440,7 @@ public class Implementation {
          *
          *               ├──────────────────────────────────────────────
          *               │
-         *               ├── 🆕 removeIf(Predicate<? super E> filter)
-         *               ├── 🆕 toArray(IntFunction<T[]> generator)
-         *               └── 🔒 removeRange(int fromIndex, int toIndex) (protected)
+         *               ├── 🔒 removeRange(int fromIndex, int toIndex) (protected)
          *
          * ==========================================================
          */

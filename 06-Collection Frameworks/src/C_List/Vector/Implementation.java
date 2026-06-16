@@ -2,14 +2,6 @@ package C_List.Vector;
 
 import java.util.*;
 
-// In Which areas Vector is used ?
-//
-// Vector implements:
-// 1. List
-//
-// Vector is a Thread-Safe implementation of List.
-// It internally uses a Dynamic Array.
-
 public class Implementation {
 
     static void main() {
@@ -71,7 +63,6 @@ public class Implementation {
         // sort(Comparator<? super E> c)
 
 
-
         // =====================================================
         // Basic Vector Implementation
         // =====================================================
@@ -91,7 +82,6 @@ public class Implementation {
         }
 
 
-
         // Controlled Datatypes (Generics)
 
         Vector<String> languages1 = new Vector<>();
@@ -104,10 +94,9 @@ public class Implementation {
 
         System.out.println("\nUsing Vector<String>");
 
-        for (String language : languages1) {
-            System.out.println(language);
+        for (String languages12 : languages1) {
+            System.out.println(languages12);
         }
-
 
 
         // Iterator
@@ -119,7 +108,6 @@ public class Implementation {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
-
 
 
         // Using Custom Class
@@ -136,11 +124,9 @@ public class Implementation {
         }
 
 
-
         // =====================================================
         // Constructors
         // =====================================================
-
 
         // -----------------------------------------------------
         // Vector()
@@ -159,7 +145,6 @@ public class Implementation {
         // Note:
         // Default Capacity = 10
         // Capacity doubles automatically when full.
-
 
 
         // -----------------------------------------------------
@@ -181,7 +166,6 @@ public class Implementation {
         // Note:
         // Initial Capacity = 5
         // Current Size = 3
-
 
 
         // -----------------------------------------------------
@@ -215,8 +199,6 @@ public class Implementation {
          */
 
 
-
-
         // -----------------------------------------------------
         // Vector(Collection)
         // -----------------------------------------------------
@@ -239,7 +221,6 @@ public class Implementation {
 
         // Note:
         // Creates a new Vector by copying another Collection.
-
 
 
         // =====================================================
@@ -274,76 +255,9 @@ public class Implementation {
          * 20
          */
 
-
-
-
-        // =====================================================
-        // Capacity Increment Demonstration
-        // =====================================================
-
-        Vector<Integer> growth = new Vector<>(5, 3);
-
-        System.out.println("\nCapacity Increment Demonstration");
-
-        System.out.println("Initial Capacity : "
-                + growth.capacity());
-
-        for (int i = 1; i <= 12; i++) {
-
-            growth.add(i);
-
-            System.out.println(
-                    "Size : "
-                            + growth.size()
-                            + "  Capacity : "
-                            + growth.capacity());
-        }
-
-        /*
-         * Output
-         *
-         * Size : 5  Capacity : 5
-         * Size : 6  Capacity : 8
-         * Size : 9  Capacity : 11
-         * Size : 12 Capacity : 14
-         */
-
-
-
-
-        // =====================================================
-        // Thread Safety Demonstration
-        // =====================================================
-
-        Vector<Integer> numbers1 = new Vector<>();
-
-        numbers1.add(10);
-        numbers1.add(20);
-        numbers1.add(30);
-
-        System.out.println("\nThread Safety");
-
-        System.out.println(numbers1);
-
-        /*
-         * All public methods of Vector
-         * are synchronized.
-         *
-         * Multiple threads can safely
-         * access the same Vector.
-         *
-         * Therefore,
-         *
-         * Vector is Thread-Safe.
-         *
-         * Due to synchronization,
-         * Vector is slower than ArrayList.
-         */
-
         // =====================================================
         // Vector Specific Public Methods
         // =====================================================
-
 
         // -----------------------------------------------------
         // capacity()
@@ -366,7 +280,6 @@ public class Implementation {
         // Note:
         // capacity() returns the current storage capacity.
         // It is different from size().
-
 
 
         // -----------------------------------------------------
@@ -392,11 +305,7 @@ public class Implementation {
         System.out.println(numbers);
 
         // Note:
-        // Ensures that the Vector can store
-        // at least the specified number of elements
-        // without resizing.
-
-
+        // Ensures that the Vector can store at least the specified number of elements without resizing.
 
         // -----------------------------------------------------
         // trimToSize()
@@ -425,7 +334,6 @@ public class Implementation {
         // Note:
         // Reduces the capacity
         // to match the current size.
-
 
 
         // -----------------------------------------------------
@@ -465,7 +373,6 @@ public class Implementation {
         // Decreasing size removes extra elements.
 
 
-
         // -----------------------------------------------------
         // copyInto()
         // -----------------------------------------------------
@@ -478,7 +385,7 @@ public class Implementation {
 
         System.out.println("\ncopyInto()");
 
-        Object[] array = new Object[languages.size()];
+        Object[] array = new Object[5];  // languages.size() preferred
 
         languages.copyInto(array);
 
@@ -489,14 +396,19 @@ public class Implementation {
         }
 
         // Note:
-        // Copies all Vector elements
-        // into the specified array.
-
+        // Copies all Vector elements into the specified array.
 
 
         // -----------------------------------------------------
-        // elements()
+        // elements() - Legacy Method
         // -----------------------------------------------------
+
+        /*
+        elements() returns an Enumeration for traversing Vector elements.
+
+        It exists for backward compatibility.
+        Modern Java prefers Iterator, enhanced for-loop, or Streams.
+        */
 
         Vector<String> names1 = new Vector<>();
 
@@ -522,359 +434,55 @@ public class Implementation {
         // but does not support remove().
 
 
-
         // -----------------------------------------------------
         // clone()
         // -----------------------------------------------------
 
-        Vector<String> original = new Vector<>();
+        // same as arraylist,linkedlist
 
-        original.add("Java");
-        original.add("Python");
-        original.add("C++");
 
-        System.out.println("\nclone()");
+        /*
+        =====================================================
+        Vector Legacy Methods (Not Recommended to learn)
+        =====================================================
 
-        @SuppressWarnings("unchecked")
-        Vector<String> copy =
-                (Vector<String>) original.clone();
+        These methods exist for backward compatibility.
+        Prefer the modern List methods in new applications.
 
-        System.out.println("Original : " + original);
+        | Legacy Method             | Modern Equivalent         |
+        |--------------------------|---------------------------|
+        | addElement(E obj)        | add(E e)                  |
+        | insertElementAt(E, int)  | add(int, E)               |
+        | removeElement(Object)    | remove(Object)            |
+        | removeElementAt(int)     | remove(int)               |
+        | firstElement()           | get(0)                    |
+        | lastElement()            | get(size() - 1)           |
+        | setElementAt(E, int)     | set(int, E)               |
+        | elementAt(int)           | get(int)                  |
+        | removeAllElements()      | clear()                   |
 
-        System.out.println("Copied   : " + copy);
-
-        copy.add("JavaScript");
-
-        System.out.println("\nAfter Modifying Copied Vector");
-
-        System.out.println("Original : " + original);
-
-        System.out.println("Copied   : " + copy);
-
-        // Note:
-        // clone() creates a shallow copy.
-        // Only the Vector object is copied.
-
+        Use these methods only when working with legacy Java code.
 
 
         // =====================================================
-        // Shallow Copy Demonstration
+        // Optimized Overrides - Already Covered in ArrayList
         // =====================================================
 
-        Vector<Car> originalCars = new Vector<>();
-
-        originalCars.add(new Car("BMW", 900));
-        originalCars.add(new Car("Toyota", 500));
-
-        @SuppressWarnings("unchecked")
-        Vector<Car> copiedCars =
-                (Vector<Car>) originalCars.clone();
-
-        System.out.println("\nShallow Copy Demo");
-
-        System.out.println("Original : " + originalCars);
-
-        System.out.println("Copied   : " + copiedCars);
-
-        copiedCars.get(0).brand = "Audi";
-
-        System.out.println("\nAfter Modifying Object Inside Copied Vector");
-
-        System.out.println("Original : " + originalCars);
-
-        System.out.println("Copied   : " + copiedCars);
-
-        // Note:
-        // Vector object is copied.
-        // Stored objects are shared.
-        // Both vectors point to the same Car objects.
-
-        // =====================================================
-        // Legacy Methods
-        // =====================================================
-
-
-        // -----------------------------------------------------
-        // addElement()
-        // -----------------------------------------------------
-
-        Vector<String> legacy = new Vector<>();
-
-        System.out.println("\naddElement()");
-
-        legacy.addElement("Java");
-        legacy.addElement("Python");
-        legacy.addElement("C++");
-
-        System.out.println(legacy);
-
-        // Note:
-        // Legacy version of add(E).
-
-
-        // -----------------------------------------------------
-        // insertElementAt()
-        // -----------------------------------------------------
-
-        System.out.println("\ninsertElementAt()");
-
-        legacy.insertElementAt("JavaScript", 1);
-
-        System.out.println(legacy);
-
-        // Note:
-        // Legacy version of add(index, element).
-
-
-
-        // -----------------------------------------------------
-        // removeElement()
-        // -----------------------------------------------------
-
-        System.out.println("\nremoveElement()");
-
-        legacy.removeElement("Python");
-
-        System.out.println(legacy);
-
-        // Note:
-        // Removes the first matching element.
-
-
-
-        // -----------------------------------------------------
-        // removeElementAt()
-        // -----------------------------------------------------
-
-        System.out.println("\nremoveElementAt()");
-
-        legacy.removeElementAt(1);
-
-        System.out.println(legacy);
-
-        // Note:
-        // Removes element using index.
-
-
-
-        // -----------------------------------------------------
-        // firstElement()
-        // -----------------------------------------------------
-
-        System.out.println("\nfirstElement()");
-
-        System.out.println("First : " + legacy.firstElement());
-
-
-
-        // -----------------------------------------------------
-        // lastElement()
-        // -----------------------------------------------------
-
-        System.out.println("\nlastElement()");
-
-        System.out.println("Last : " + legacy.lastElement());
-
-
-
-        // -----------------------------------------------------
-        // setElementAt()
-        // -----------------------------------------------------
-
-        System.out.println("\nsetElementAt()");
-
-        legacy.setElementAt("Oracle Java", 0);
-
-        System.out.println(legacy);
-
-        // Note:
-        // Replaces the element at specified index.
-
-
-
-        // -----------------------------------------------------
-        // elementAt()
-        // -----------------------------------------------------
-
-        System.out.println("\nelementAt()");
-
-        System.out.println(legacy.elementAt(0));
-
-        // Note:
-        // Returns element at specified index.
-
-
-
-        // -----------------------------------------------------
-        // removeAllElements()
-        // -----------------------------------------------------
-
-        System.out.println("\nremoveAllElements()");
-
-        legacy.removeAllElements();
-
-        System.out.println(legacy);
-
-        // Note:
-        // Removes all elements from Vector.
-
-
-
-        // =====================================================
-        // Reference Type Demonstration
-        // =====================================================
-
-
-        // -----------------------------------------------------
-        // Collection Reference
-        // -----------------------------------------------------
-
-        Collection<Integer> collection =
-                new Vector<>();
-
-        collection.add(10);
-
-        // Can access only Collection methods.
-
-        // collection.get(0);             // ❌
-        // collection.capacity();         // ❌
-
-
-
-        // -----------------------------------------------------
-        // List Reference
-        // -----------------------------------------------------
-
-        List<Integer> list =
-                new Vector<>();
-
-        list.add(10);
-
-        list.get(0);
-
-        // Can access:
-        //
-        // Collection
-        // List
-
-        // list.capacity();              // ❌
-
-
-
-        // -----------------------------------------------------
-        // Vector Reference
-        // -----------------------------------------------------
-
-        Vector<Integer> vectorRef =
-                new Vector<>();
-
-        vectorRef.add(10);
-
-        vectorRef.capacity();
-
-        vectorRef.ensureCapacity(50);
-
-        vectorRef.trimToSize();
-
-        vectorRef.setSize(5);
-
-        vectorRef.elements();
-
-        vectorRef.clone();
-
-        // Can access:
-        //
-        // Collection
-        // List
-        // Vector Specific Methods
-        // Legacy Methods
-
-
-
-        // =====================================================
-        // Optimized Overrides
-        // =====================================================
-
-
-        Vector<String> fruits1 = new Vector<>();
-
-        fruits1.add("Apple");
-        fruits1.add("Banana");
-        fruits1.add("Mango");
-
-
-
-        // -----------------------------------------------------
-        // forEach()
-        // -----------------------------------------------------
-
-        System.out.println("\n========== forEach() ==========");
-
-        fruits.forEach(System.out::println);
-
-
-
-        // -----------------------------------------------------
-        // replaceAll()
-        // -----------------------------------------------------
-
-        System.out.println("\n========== replaceAll() ==========");
-
-        Vector<String> names = new Vector<>();
-
-        names.add("maaz");
-        names.add("john");
-        names.add("alex");
-
-        names.replaceAll(String::toUpperCase);
-
-        System.out.println(names);
-
-
-
-        // -----------------------------------------------------
-        // sort()
-        // -----------------------------------------------------
-
-        System.out.println("\n========== sort() ==========");
-
-        Vector<Integer> marks = new Vector<>();
-
-        marks.add(78);
-        marks.add(45);
-        marks.add(99);
-        marks.add(61);
-        marks.add(85);
-
-        marks.sort(Comparator.naturalOrder());
-
-        System.out.println("Ascending  : " + marks);
-
-        marks.sort(Comparator.reverseOrder());
-
-        System.out.println("Descending : " + marks);
-
-
-
-        // -----------------------------------------------------
-        // spliterator()
-        // -----------------------------------------------------
-
-        System.out.println("\n========== spliterator() ==========");
-
-        Vector<String> cities1 = new Vector<>();
-
-        cities1.add("Mumbai");
-        cities1.add("Delhi");
-        cities1.add("Pune");
-        cities1.add("Hyderabad");
-
-        Spliterator<String> spliterator =
-                cities1.spliterator();
-
-        spliterator.forEachRemaining(System.out::println);
-
-
+        /*
+        The following methods behave the same in Vector.
+        Refer to ArrayList Implementation.java.
+
+        ✓ forEach()
+        ✓ replaceAll()
+        ✓ sort()
+        ✓ spliterator()
+
+        Reason:
+        Vector implements the List interface, so these
+        default methods work exactly the same. The only
+        difference is that Vector methods are synchronized
+        (thread-safe).
+        */
 
 
         /*

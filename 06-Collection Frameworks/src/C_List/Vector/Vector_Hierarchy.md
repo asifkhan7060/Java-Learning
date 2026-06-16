@@ -210,6 +210,21 @@ Vector<E>
 ├── setElementAt(E obj, int index)
 └── elementAt(int index)
 
+Legacy Methods (Vector)
+
+These methods are kept for backward compatibility with
+pre-Java 1.2 code.
+
+For modern Java development, use the corresponding
+List methods instead.
+
+Examples:
+addElement()      → add()
+elementAt()       → get()
+setElementAt()    → set()
+removeElement()   → remove()
+removeAllElements() → clear()
+
 │
 ├──────────────────────────────────────────────
 │ Optimized Overrides

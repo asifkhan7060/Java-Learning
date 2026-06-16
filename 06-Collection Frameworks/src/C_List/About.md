@@ -66,6 +66,35 @@ Need LIFO (stack) behavior?  → Stack (or ArrayDeque in modern Java)
 | `replaceAll(UnaryOperator)` | Transform all elements | `list.replaceAll(n -> n * 2)` |
 | `sort(Comparator)` | Sort in place | `list.sort(Integer::compareTo)` |
 
+# List-Specific Methods - Easy Memory Trick
+
+## Memory Word
+
+> **GESARFIMS** *(Pronounced: "Gee-Sar-Fims")*
+
+Use this word to remember the order of **List-specific (Index-Based) methods**.
+
+---
+
+## Expansion
+
+| Letter | Meaning | Methods                                                                                |
+|--------|---------|----------------------------------------------------------------------------------------|
+| **GE** | Get | `get(int index)`                                                                       |
+| **S** | Set | `set(int index, E e)`                                                                  |
+| **A** | Add | `add(int index, E e)`<br>`addAll(int index, Collection<? extends E> c)`                |
+| **R** | Remove | `remove(int index)/removeif()`                                                         |
+| **F** | Find | `indexOf(Object o)`<br>`lastIndexOf(Object o)`                                         |
+| **I** | Iterate | `listIterator()`<br>`listIterator(int index)`<br>`subList(int fromIndex, int toIndex)` |
+| **M** | Modify | `replaceAll(UnaryOperator<E> operator)`                                                |
+| **S** | Sort | `sort(Comparator<? super E> c)`                                                        |
+
+---
+
+## One-Line Revision
+
+> **GESARFIMS** → **Get → Set → Add → Remove → Find → Iterate → Modify → Sort**
+
 ### Java 21+ SequencedCollection Methods
 
 ```java

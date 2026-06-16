@@ -2,13 +2,6 @@ package C_List.Vector.Stack;
 
 import java.util.*;
 
-// In Which areas Stack is used ?
-//
-// Stack extends Vector.
-//
-// Stack follows the
-// LIFO (Last In First Out) principle.
-
 public class Implementation {
 
     static void main() {
@@ -71,7 +64,6 @@ public class Implementation {
         // sort(Comparator<? super E> c)
 
 
-
         // =====================================================
         // Methods Inherited from Vector
         // =====================================================
@@ -85,8 +77,6 @@ public class Implementation {
         // copyInto()
         // elements()
         // clone()
-
-
 
 
         // =====================================================
@@ -107,8 +97,6 @@ public class Implementation {
             System.out.println(user);
         }
 
-
-
         // Controlled Datatypes (Generics)
 
         Stack<String> languages = new Stack<>();
@@ -126,7 +114,6 @@ public class Implementation {
         }
 
 
-
         // Iterator
 
         System.out.println("\nUsing Iterator");
@@ -136,7 +123,6 @@ public class Implementation {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
-
 
 
         // Using Custom Class
@@ -153,8 +139,6 @@ public class Implementation {
         }
 
 
-
-
         // =====================================================
         // Constructor
         // =====================================================
@@ -162,6 +146,66 @@ public class Implementation {
         // -----------------------------------------------------
         // Stack()
         // -----------------------------------------------------
+
+        /*
+        =====================================================
+        Stack vs Deque (Stack Operations)
+        =====================================================
+
+        Stack (extends Vector)
+
+        push(10)
+        push(20)
+        push(30)
+
+        Prints:
+        [10, 20, 30]
+
+        Reason:
+        Stack pushes elements at the end of the underlying Vector.
+        Vector's toString() prints elements in insertion order
+        (Bottom -> Top).
+
+        -----------------------------------------------------
+
+        Deque (LinkedList / ArrayDeque)
+
+        push(10)
+        push(20)
+        push(30)
+
+        Prints:
+        [30, 20, 10]
+
+        Reason:
+        In Deque,
+
+        push() == addFirst()
+
+        Each push inserts the element at the front.
+        LinkedList/ArrayDeque toString() prints from Front -> Rear.
+
+        Equivalent:
+
+        push(e)  == addFirst(e)
+        pop()    == removeFirst()
+        peek()   == peekFirst()
+
+        -----------------------------------------------------
+
+        Conclusion
+
+        Stack:
+        Bottom -> Top
+        [10, 20, 30]
+
+        Deque (used as Stack):
+        Front -> Rear
+        [30, 20, 10]
+
+        Both follow the LIFO principle.
+        Only the internal insertion position and printed order differ.
+        */
 
         Stack<Integer> stack = new Stack<>();
 
@@ -178,8 +222,6 @@ public class Implementation {
         // Internally it uses Vector.
 
 
-
-
         // =====================================================
         // push()
         // =====================================================
@@ -193,25 +235,6 @@ public class Implementation {
         numbers.push(30);
 
         System.out.println(numbers);
-
-        /*
-         * Stack
-         *
-         * Top
-         *  │
-         *  ▼
-         * 30
-         * 20
-         * 10
-         *
-         * Bottom
-         */
-
-        // Note:
-        // Adds an element
-        // to the Top of the Stack.
-
-
 
 
         // =====================================================
@@ -230,8 +253,6 @@ public class Implementation {
         // Does NOT remove it.
 
 
-
-
         // =====================================================
         // pop()
         // =====================================================
@@ -243,28 +264,9 @@ public class Implementation {
 
         System.out.println("Stack : " + numbers);
 
-        /*
-         * Before pop()
-         *
-         * Top
-         *
-         * 30
-         * 20
-         * 10
-         *
-         * After pop()
-         *
-         * Top
-         *
-         * 20
-         * 10
-         */
-
         // Note:
         // Removes and returns
         // the Top element.
-
-
 
 
         // =====================================================
@@ -278,20 +280,6 @@ public class Implementation {
         numbers.clear();
 
         System.out.println(numbers.empty());
-
-        /*
-         * Output
-         *
-         * false
-         *
-         * true
-         */
-
-        // Note:
-        // Returns true
-        // if Stack contains no elements.
-
-
 
 
         // =====================================================
@@ -332,380 +320,35 @@ public class Implementation {
          * Not Found -> -1
          */
 
-
-
-
-        // =====================================================
-        // LIFO Demonstration
-        // =====================================================
-
-        Stack<String> demo = new Stack<>();
-
-        demo.push("Book");
-        demo.push("Laptop");
-        demo.push("Mobile");
-        demo.push("Headphones");
-
-        System.out.println("\nLIFO Demonstration");
-
-        System.out.println("Initial Stack : " + demo);
-
-        System.out.println("peek() : "
-                + demo.peek());
-
-        System.out.println("pop() : "
-                + demo.pop());
-
-        System.out.println("After pop()");
-
-        System.out.println(demo);
-
         /*
-         * Push
-         *
-         * Book
-         * Laptop
-         * Mobile
-         * Headphones
-         *
-         * Top
-         *
-         * pop()
-         *
-         * Removes
-         *
-         * Headphones
-         */
-
-        // =====================================================
-        // clone()
-        // =====================================================
-
-        Stack<String> originalStack = new Stack<>();
-
-        originalStack.push("Java");
-        originalStack.push("Python");
-        originalStack.push("C++");
-
-        System.out.println("\nclone()");
-
-        @SuppressWarnings("unchecked")
-        Stack<String> clonedStack =
-                (Stack<String>) originalStack.clone();
-
-        System.out.println("Original Stack : " + originalStack);
-        System.out.println("Cloned Stack   : " + clonedStack);
-
-        // Modify cloned stack
-
-        clonedStack.push("JavaScript");
-
-        System.out.println("\nAfter Modifying Cloned Stack");
-
-        System.out.println("Original Stack : " + originalStack);
-        System.out.println("Cloned Stack   : " + clonedStack);
-
-        // Note:
-        // clone() creates a shallow copy.
-        // Only the Stack object is copied.
-        // Stored objects are shared between both stacks.
-
-
-
-        // =====================================================
-        // Shallow Copy Demonstration
-        // =====================================================
-
-        Stack<Car> originalCars = new Stack<>();
-
-        originalCars.push(new Car("BMW", 900));
-        originalCars.push(new Car("Toyota", 500));
-
-        @SuppressWarnings("unchecked")
-        Stack<Car> copiedCars =
-                (Stack<Car>) originalCars.clone();
-
-        System.out.println("\nShallow Copy Demo");
-
-        System.out.println("Original : " + originalCars);
-        System.out.println("Copied   : " + copiedCars);
-
-        // Modify object inside copied stack
-
-        copiedCars.peek().brand = "Audi";
-
-        System.out.println("\nAfter Modifying Object Inside Copied Stack");
-
-        System.out.println("Original : " + originalCars);
-        System.out.println("Copied   : " + copiedCars);
-
-        /*
-         * copiedCars.peek()
-         *
-         * Returns the Top Car object.
-         *
-         * Top
-         *  │
-         *  ▼
-         * Toyota
-         * BMW
-         *
-         * copiedCars.get(0)
-         *
-         * Returns the Bottom Car object.
-         *
-         * Bottom
-         *  │
-         *  ▼
-         * BMW
-         * Toyota
-         *
-         * Since Stack extends Vector,
-         * both peek() and get(index)
-         * are valid.
-         *
-         * peek() is preferred because
-         * it follows Stack behaviour.
-         */
-
-        // Note:
-        // Only the Stack object is copied.
-        // Car objects are NOT copied.
-        // Both stacks point to the same Car objects.
-
-
-
-
-        // =====================================================
-        // Reference Type Demonstration
-        // =====================================================
-
-
-        // -----------------------------------------------------
-        // Collection Reference
-        // -----------------------------------------------------
-
-        Collection<Integer> collectionRef =
-                new Stack<>();
-
-        collectionRef.add(10);
-
-        // Can access:
-        //
-        // Collection Methods
-        //
-        // Cannot access:
-        //
-        // List Methods
-        // Vector Methods
-        // Stack Methods
-
-        // collectionRef.get(0);       // ❌
-        // collectionRef.push(10);     // ❌
-
-
-
-        // -----------------------------------------------------
-        // List Reference
-        // -----------------------------------------------------
-
-        List<Integer> listRef =
-                new Stack<>();
-
-        listRef.add(10);
-
-        listRef.get(0);
-
-        // Can access:
-        //
-        // Collection Methods
-        // List Methods
-        //
-        // Cannot access:
-        //
-        // Vector Methods
-        // Stack Methods
-
-        // listRef.capacity();         // ❌
-        // listRef.push(10);           // ❌
-
-
-
-        // -----------------------------------------------------
-        // Vector Reference
-        // -----------------------------------------------------
-
-        Vector<Integer> vectorRef =
-                new Stack<>();
-
-        vectorRef.add(10);
-
-        vectorRef.capacity();
-
-        vectorRef.ensureCapacity(20);
-
-        vectorRef.trimToSize();
-
-        vectorRef.clone();
-
-        // Can access:
-        //
-        // Collection Methods
-        // List Methods
-        // Vector Methods
-        //
-        // Cannot access:
-        //
-        // Stack Methods
-
-        // vectorRef.push(10);         // ❌
-
-
-
-        // -----------------------------------------------------
-        // Stack Reference
-        // -----------------------------------------------------
-
-        Stack<Integer> stackRef =
-                new Stack<>();
-
-        stackRef.push(10);
-
-        stackRef.peek();
-
-        stackRef.pop();
-
-        stackRef.search(10);
-
-        stackRef.empty();
-
-        // Can access:
-        //
-        // Collection Methods
-        // List Methods
-        // Vector Methods
-        // Stack Methods
-
-
-
-        // Note:
-        //
-        // Collection Reference
-        // Recommended when only Collection operations are required.
-        //
-        // List Reference
-        // Recommended for index-based operations.
-        //
-        // Vector Reference
-        // Required when using Vector-specific methods.
-        //
-        // Stack Reference
-        // Required when using push(), pop(), peek(),
-        // empty() and search().
-
-        // =====================================================
-        // Optimized Overrides
-        // =====================================================
-
-
-        // -----------------------------------------------------
-        // forEach()
-        // -----------------------------------------------------
-
-        Stack<String> fruitStack = new Stack<>();
-
-        fruitStack.push("Apple");
-        fruitStack.push("Banana");
-        fruitStack.push("Mango");
-
-        System.out.println("\n========== forEach() ==========");
-
-        fruitStack.forEach(System.out::println);
-
-        // Note:
-        // Executes the given action
-        // for every element in the Stack.
-
-
-
-        // -----------------------------------------------------
-        // replaceAll()
-        // -----------------------------------------------------
-
-        Stack<String> nameStack = new Stack<>();
-
-        nameStack.push("maaz");
-        nameStack.push("john");
-        nameStack.push("alex");
-
-        System.out.println("\n========== replaceAll() ==========");
-
-        nameStack.replaceAll(String::toUpperCase);
-
-        System.out.println(nameStack);
-
-        // Note:
-        // Replaces every element
-        // using the specified operation.
-
-
-
-        // -----------------------------------------------------
-        // sort()
-        // -----------------------------------------------------
-
-        Stack<Integer> markStack = new Stack<>();
-
-        markStack.push(78);
-        markStack.push(45);
-        markStack.push(99);
-        markStack.push(61);
-        markStack.push(85);
-
-        System.out.println("\n========== sort() ==========");
-
-        markStack.sort(Comparator.naturalOrder());
-
-        System.out.println("Ascending  : " + markStack);
-
-        markStack.sort(Comparator.reverseOrder());
-
-        System.out.println("Descending : " + markStack);
-
-        // Note:
-        // Since Stack extends Vector,
-        // sorting is supported.
-        //
-        // However, sorting changes the
-        // natural LIFO ordering of a Stack.
-        //
-        // Generally not recommended
-        // for stack-based algorithms.
-
-
-
-        // -----------------------------------------------------
-        // spliterator()
-        // -----------------------------------------------------
-
-        Stack<String> cityStack = new Stack<>();
-
-        cityStack.push("Mumbai");
-        cityStack.push("Delhi");
-        cityStack.push("Pune");
-        cityStack.push("Hyderabad");
-
-        System.out.println("\n========== spliterator() ==========");
-
-        Spliterator<String> stackSpliterator =
-                cityStack.spliterator();
-
-        stackSpliterator.forEachRemaining(System.out::println);
-
-        // Note:
-        // Returns a Spliterator
-        // for traversing Stack elements.
-
+        =====================================================
+        Already Covered in ArrayList
+        =====================================================
+
+        The following methods/concepts behave the same for Stack.
+        Refer to ArrayList Implementation.java.
+
+        ✓ clone() (Shallow Copy Demo)
+        ✓ Reference Type Demonstration
+        ✓ forEach()
+        ✓ replaceAll()
+        ✓ spliterator()
+        ✓ Object Methods
+        ✓ removeIf()
+        ✓ stream()
+        ✓ parallelStream()
+        ✓ toArray(IntFunction<T[]>)
+
+        =====================================================
+        Stack-Specific Note
+        =====================================================
+
+        ✓ sort()
+
+        Although Stack supports sort() (because it extends Vector),
+        sorting is generally NOT recommended as it changes the
+        natural LIFO ordering of the Stack.
+        */
 
 
 

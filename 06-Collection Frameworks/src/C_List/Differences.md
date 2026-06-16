@@ -89,15 +89,19 @@ null ← 10 ⇄ 20 ⇄ 30 ⇄ 40 ⇄ 50 → null
 ## 4. Side-by-Side Comparison
 
 | Feature | **ArrayList** | **LinkedList** | **Vector** | **Stack** |
-|---------|:-----------:|:------------:|:--------:|:-------:|
-| Internal | Dynamic Array | Doubly Linked List | Dynamic Array | Dynamic Array (Vector) |
-| `get(index)` | **O(1)** | O(n) | **O(1)** | **O(1)** |
+|---------|:-------------:|:--------------:|:----------:|:---------:|
+| Internal | Dynamic Array | Doubly Linked List | Dynamic Array | Dynamic Array (extends Vector) |
+| `get(index)` | **O(1)** | **O(n)** | **O(1)** | **O(1)** |
 | `add(end)` | **O(1)*** | **O(1)** | **O(1)*** | **O(1)** |
-| `add(middle)` | O(n) | O(n) | O(n) | O(n) |
-| `remove(middle)` | O(n) | O(1) at node | O(n) | O(1) at top |
-| Memory | Low | **High** (node overhead) | Low | Low |
+| `add(index)` | **O(n)** | **O(n)** *(Traversal + O(1) Insertion)* | **O(n)** | **O(n)** |
+| `remove(index)` | **O(n)** | **O(n)** *(Traversal + O(1) Removal)* | **O(n)** | **O(n)** |
+| Insert/Delete at Known Node | ❌ **O(n)** | ✅ **O(1)** | ❌ **O(n)** | ✅ **O(1)** *(Top Only)* |
+| Memory | Low | **High** (Node Overhead) | Low | Low |
 | Thread-Safe | ❌ | ❌ | ✅ | ✅ |
 | Cache Friendly | ✅ | ❌ | ✅ | ✅ |
+| Allows Duplicates | ✅ | ✅ | ✅ | ✅ |
+| Allows `null` | ✅ Multiple | ✅ Multiple | ✅ Multiple | ✅ Multiple |
+| Maintains Insertion Order | ✅ | ✅ | ✅ | ✅ (LIFO Operations) |
 | Modern? | ✅ | ✅ | ❌ Legacy | ❌ Legacy |
 
 > *Amortized O(1)

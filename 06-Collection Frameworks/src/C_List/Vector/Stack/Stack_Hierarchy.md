@@ -76,95 +76,34 @@ Examples include:
 
 A `Stack` follows the **LIFO (Last In First Out)** principle.
 
-Example
+## LIFO (Last In, First Out)
 
 ```text
 push(10)
-
-↓
-
-10
-
-↓
-
 push(20)
-
-↓
-
-10
-20
-
-↓
-
 push(30)
 
-↓
-
-10
-20
+Top
+ │
+ ▼
 30
+20
+10
 ```
-
-Now perform
 
 ```java
 pop();
 ```
 
-Result
-
 ```text
-10
-20
-```
-
-The **last inserted element (30)** is removed first.
-
----
-
-## LIFO Principle
-
-```text
-Push Operations
-
-push(10)
-
-↓
-
-push(20)
-
-↓
-
-push(30)
-
-↓
-
-push(40)
-
-
 Top
  │
  ▼
-40
-30
-20
-10
-
-
-pop()
-
-↓
-
-40 Removed
-
-
-Top
- │
- ▼
-30
 20
 10
 ```
+
+**Output:** `30` is removed first because **Stack follows the LIFO (Last In, First Out) principle.**
 
 ---
 
