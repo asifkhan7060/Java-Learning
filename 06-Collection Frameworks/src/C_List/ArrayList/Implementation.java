@@ -346,9 +346,6 @@ public class Implementation {
 
         // Note:
         // clone() creates a shallow copy.
-        // Only the ArrayList object is copied.
-        // Stored objects are shared between both lists.
-
 
         // =====================================================
         // Shallow Copy Demonstration

@@ -1,1281 +1,323 @@
-# Table of Contents
+# Java Queue Interface — Complete Guide
 
-## Part 1 : Queue Interface
+## 1. What is Queue?
 
-1. What is Queue?
+`Queue<E>` is a child interface of `Collection<E>` designed for **processing elements sequentially**. Most implementations follow **FIFO (First In, First Out)** — elements are inserted at the **rear (tail)** and removed from the **front (head)**.
 
-2. Queue Hierarchy
+Some implementations like `PriorityQueue` do not follow FIFO; they process elements by **priority** instead.
 
-3. Features of Queue
-
-4. Types of Queue Implementations
-
-    * PriorityQueue
-    * Deque
-
-        * ArrayDeque
-        * LinkedList
-    * BlockingQueue
-
-        * ArrayBlockingQueue
-        * LinkedBlockingQueue
-        * PriorityBlockingQueue
-        * DelayQueue
-        * SynchronousQueue
-        * TransferQueue
-
-            * LinkedTransferQueue
-    * BlockingDeque
-
-        * LinkedBlockingDeque
-
-5. Difference Between Queue Implementations
-
-6. Methods Available in Queue Hierarchy
-
-    * Collection Methods
-    * Queue Interface (New Methods)
-    * Additional Methods Provided by Deque
-    * Additional Methods Provided by BlockingQueue
-    * Additional Methods Provided by TransferQueue
-    * Additional Methods Provided by BlockingDeque
-    * Overall Queue Method Hierarchy
-    * Important Notes
-
-7. Detailed Queue Hierarchy Methods
-
-### Queue Methods
-
-1. add()
-2. offer()
-3. remove()
-4. poll()
-5. element()
-6. peek()
-
-### Deque Methods
-
-7. addFirst()
-8. addLast()
-9. offerFirst()
-10. offerLast()
-11. removeFirst()
-12. removeLast()
-13. pollFirst()
-14. pollLast()
-15. getFirst()
-16. getLast()
-17. peekFirst()
-18. peekLast()
-19. push()
-20. pop()
-21. removeFirstOccurrence()
-22. removeLastOccurrence()
-23. descendingIterator()
-24. reversed() *(Java 21+)*
-
-### BlockingQueue Methods
-
-25. put()
-26. take()
-27. offer(E, long, TimeUnit)
-28. poll(long, TimeUnit)
-29. remainingCapacity()
-30. drainTo()
-
-### TransferQueue Methods
-
-31. transfer()
-32. tryTransfer(E)
-33. tryTransfer(E, long, TimeUnit)
-34. hasWaitingConsumer()
-35. getWaitingConsumerCount()
-
-### BlockingDeque Methods
-
-36. putFirst()
-
-37. putLast()
-
-38. takeFirst()
-
-39. takeLast()
-
-40. offerFirst(E, long, TimeUnit)
-
-41. offerLast(E, long, TimeUnit)
-
-42. pollFirst(long, TimeUnit)
-
-43. pollLast(long, TimeUnit)
-
-44. Ways to Traverse a Queue
-
-* Enhanced For Loop
-* Iterator
-* Spliterator
-* Stream API
-
-9. Interview Questions
-
----
-
-# Java Queue Interface
-
-## What is Queue?
-
-`Queue` is a child interface of the **Collection** interface.
-
-It represents a collection designed for **processing elements sequentially**.
-
-Most Queue implementations follow the **FIFO (First In, First Out)** principle, where the first element inserted is generally the first element removed.
-
-Unlike `List`, a Queue **does not provide index-based access**. Instead, elements are inserted at the **rear (tail)** and removed from the **front (head)**.
-
-Some implementations, such as **PriorityQueue**, do not follow FIFO and instead process elements according to their priority.
+Unlike `List`, Queue provides **no index-based access**.
 
 ```java
 public interface Queue<E> extends Collection<E>
 ```
 
-> **Note**
->
-> Queue defines the basic contract for queue operations.
->
-> Different implementations provide different ordering mechanisms, concurrency support, and internal data structures.
-
----
-
-# Queue Hierarchy
-
-```text
-Java Collection Framework
-
-Iterable
-    │
-    ▼
-Collection
-    │
-    ▼
-Queue
-│
-├── PriorityQueue
-│
-├── Deque
-│   ├── ArrayDeque
-│   └── LinkedList
-│
-├── BlockingQueue
-│   ├── ArrayBlockingQueue
-│   ├── LinkedBlockingQueue
-│   ├── PriorityBlockingQueue
-│   ├── DelayQueue
-│   ├── SynchronousQueue
-│   └── TransferQueue
-│       └── LinkedTransferQueue
-│
-└── BlockingDeque
-    └── LinkedBlockingDeque
+**Hierarchy:**
+```
+Iterable → Collection → Queue
+                           ├── PriorityQueue
+                           ├── Deque
+                           │   ├── ArrayDeque
+                           │   └── LinkedList
+                           ├── BlockingQueue
+                           │   ├── ArrayBlockingQueue
+                           │   ├── LinkedBlockingQueue
+                           │   ├── PriorityBlockingQueue
+                           │   ├── DelayQueue
+                           │   ├── SynchronousQueue
+                           │   └── TransferQueue
+                           │       └── LinkedTransferQueue
+                           └── BlockingDeque
+                               └── LinkedBlockingDeque
 ```
 
 ---
 
-# Features of Queue
+## 2. Queue Implementations
 
-* Follows **FIFO (First In, First Out)** ordering in most implementations.
-* Designed for sequential processing of elements.
-* Allows duplicate elements.
-* Dynamic in size.
-* Supports Generics.
-* Does **not** support index-based access.
-* Efficient insertion and removal operations.
-* Ordering depends on the implementation.
-* Null handling depends on the implementation.
-* Specialized implementations support multithreading and concurrent programming.
+| Feature | **PriorityQueue** | **ArrayDeque** | **LinkedList** | **BlockingQueue** | **LinkedBlockingDeque** |
+|---------|-------------------|----------------|----------------|-------------------|-------------------------|
+| Ordering | Priority Order | FIFO / LIFO | FIFO / LIFO | FIFO | FIFO / LIFO |
+| Null Allowed | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Thread-Safe | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Blocking Operations | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Stack Operations | ❌ | ✅ | ✅ | ❌ | ✅ |
+| Primary Use | Scheduling | General Queue | Queue + List | Producer–Consumer | Concurrent Deque |
+
+### When to Choose What
+
+```
+Need priority-based processing?
+        │
+       Yes ───► PriorityQueue
+        │
+        No
+        ▼
+Need general FIFO queue?
+        │
+       Yes ───► ArrayDeque
+        │
+        No
+        ▼
+Need Queue + List features?
+        │
+       Yes ───► LinkedList
+        │
+        No
+        ▼
+Need thread safety / blocking?
+        │
+       Yes ───► BlockingQueue / BlockingDeque
+        │
+        No
+        ▼
+   Default: ArrayDeque
+```
 
 ---
 
-# Types of Queue Implementations
+## 3. Core Queue Methods
 
-## 1. PriorityQueue
+### Inherited from Collection
+`add()`, `addAll()`, `remove()`, `removeAll()`, `removeIf()`, `retainAll()`, `contains()`, `containsAll()`, `size()`, `isEmpty()`, `clear()`, `toArray()`, `stream()`, `equals()`, `hashCode()`
 
-### Description
+### Queue Interface Methods (6 new methods)
 
-* Internally uses a **Binary Heap**.
-* Maintains **priority order** instead of insertion order.
-* Does **not** allow `null` elements.
-* Best suited for scheduling and priority-based processing.
+| Method | Throws on Failure | Returns on Failure | Description |
+|--------|-------------------|--------------------|-------------|
+| `add(E e)` | `IllegalStateException` | — | Insert at rear (Collection legacy) |
+| `offer(E e)` | — | `false` | Insert at rear (preferred) |
+| `remove()` | `NoSuchElementException` | — | Remove and return head |
+| `poll()` | — | `null` | Remove and return head (preferred) |
+| `element()` | `NoSuchElementException` | — | Peek at head without removing |
+| `peek()` | — | `null` | Peek at head without removing (preferred) |
 
-### Example
+> **Rule of thumb:** Prefer `offer()` / `poll()` / `peek()` over `add()` / `remove()` / `element()` — they handle failure gracefully without exceptions.
+
+### Deque Methods (Double-Ended Queue)
+
+| Operation | Head (First) | Tail (Last) |
+|-----------|:----------:|:-----------:|
+| **Insert** | `addFirst(e)` / `offerFirst(e)` | `addLast(e)` / `offerLast(e)` |
+| **Remove** | `removeFirst()` / `pollFirst()` | `removeLast()` / `pollLast()` |
+| **Examine** | `getFirst()` / `peekFirst()` | `getLast()` / `peekLast()` |
+| **Stack ops** | `push(e)` (=`addFirst`) | `pop()` (=`removeFirst`) |
+| **Remove occurrence** | `removeFirstOccurrence(o)` | `removeLastOccurrence(o)` |
+| **Reverse iteration** | `descendingIterator()` | — |
+| **Reverse view** | `reversed()` *(Java 21+)* | — |
+
+### BlockingQueue Methods (Thread-Safe)
 
 ```java
-Queue<Integer> queue = new PriorityQueue<>();
+put(E e)                    // Blocks until space available
+take()                      // Blocks until element available
+offer(E e, long t, TimeUnit u)  // Waits up to timeout
+poll(long t, TimeUnit u)    // Waits up to timeout
+remainingCapacity()         // Available space
+drainTo(Collection c)       // Remove all to collection
 ```
 
----
-
-## 2. Deque
-
-### Description
-
-* Represents a **Double Ended Queue**.
-* Allows insertion and deletion from both the front and rear.
-* Can be used as both a **Queue** and a **Stack**.
-
-### Common Implementations
-
-* ArrayDeque
-* LinkedList
-
-### Example
+### TransferQueue Methods (LinkedTransferQueue)
 
 ```java
-Deque<Integer> deque = new ArrayDeque<>();
+transfer(E e)               // Blocks until consumer receives
+tryTransfer(E e)            // Immediate, returns boolean
+tryTransfer(E e, long t, TimeUnit u)  // Timed
+hasWaitingConsumer()        // Any consumer waiting?
+getWaitingConsumerCount()   // Number of waiting consumers
 ```
 
----
-
-## 3. BlockingQueue
-
-### Description
-
-* Thread-safe Queue.
-* Supports **blocking insertion** and **blocking removal**.
-* Mainly used in **Producer–Consumer** applications.
-
-### Common Implementations
-
-* ArrayBlockingQueue
-* LinkedBlockingQueue
-* PriorityBlockingQueue
-* DelayQueue
-* SynchronousQueue
-* LinkedTransferQueue
-
-### Example
+### BlockingDeque Methods (LinkedBlockingDeque)
 
 ```java
-BlockingQueue<Integer> queue =
-        new LinkedBlockingQueue<>();
+putFirst(E e) / putLast(E e)        // Blocking insert at ends
+takeFirst() / takeLast()            // Blocking remove from ends
+offerFirst(E e, t, u) / offerLast() // Timed offer at ends
+pollFirst(t, u) / pollLast(t, u)    // Timed poll from ends
 ```
 
 ---
 
-## 4. BlockingDeque
-
-### Description
-
-* Thread-safe implementation of **Deque**.
-* Supports blocking operations at both ends.
-* Extends both **BlockingQueue** and **Deque**.
-
-### Common Implementation
-
-* LinkedBlockingDeque
-
-### Example
+## 4. Traversal Methods
 
 ```java
-BlockingDeque<Integer> deque =
-        new LinkedBlockingDeque<>();
+// 1. Enhanced For Loop
+for (Integer value : queue) {
+    System.out.println(value);
+}
+
+// 2. Iterator
+Iterator<Integer> it = queue.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}
+
+// 3. Spliterator
+queue.spliterator().forEachRemaining(System.out::println);
+
+// 4. Stream
+queue.stream().forEach(System.out::println);
 ```
 
----
-
-# Difference Between Queue Implementations
-
-| Feature             | PriorityQueue  | ArrayDeque    | LinkedList   | BlockingQueue     | LinkedBlockingDeque |
-| ------------------- | -------------- | ------------- | ------------ | ----------------- | ------------------- |
-| Ordering            | Priority Order | FIFO / LIFO   | FIFO / LIFO  | FIFO              | FIFO / LIFO         |
-| Null Allowed        | ❌              | ❌             | ✅            | ❌                 | ❌                   |
-| Thread Safe         | ❌              | ❌             | ❌            | ✅                 | ✅                   |
-| Blocking Operations | ❌              | ❌             | ❌            | ✅                 | ✅                   |
-| Stack Operations    | ❌              | ✅             | ✅            | ❌                 | ✅                   |
-| Primary Use         | Scheduling     | General Queue | Queue + List | Producer–Consumer | Concurrent Deque    |
+> ⚠️ **Note:** Traversing a Queue does not remove elements. For destructive traversal, use `poll()` in a loop.
 
 ---
 
-# Methods Available in Queue Hierarchy
+## 5. Internal Working
 
-Unlike the `Set` interface, the **Queue** interface introduces **six new methods** specifically designed for queue operations.
+### PriorityQueue — Binary Heap
 
-Additional methods are introduced by:
-
-* Deque
-* BlockingQueue
-* TransferQueue
-* BlockingDeque
-
-(Detailed explanation of each method is covered later in this document.)
-
----
-
-# Overall Queue Method Hierarchy
-
-```text
-Collection Methods
-        │
-        ▼
-Queue
-        │
-        ├── add()
-        ├── offer()
-        ├── remove()
-        ├── poll()
-        ├── element()
-        └── peek()
-
-        │
-        ▼
-Deque
-        │
-        ├── addFirst()
-        ├── addLast()
-        ├── offerFirst()
-        ├── offerLast()
-        ├── removeFirst()
-        ├── removeLast()
-        ├── pollFirst()
-        ├── pollLast()
-        ├── getFirst()
-        ├── getLast()
-        ├── peekFirst()
-        ├── peekLast()
-        ├── push()
-        ├── pop()
-        ├── removeFirstOccurrence()
-        ├── removeLastOccurrence()
-        ├── descendingIterator()
-        └── reversed() (Java 21+)
-
-        │
-        ▼
-BlockingQueue
-        │
-        ├── put()
-        ├── take()
-        ├── offer(timeout)
-        ├── poll(timeout)
-        ├── remainingCapacity()
-        └── drainTo()
-
-        │
-        ▼
-TransferQueue
-        │
-        ├── transfer()
-        ├── tryTransfer()
-        ├── hasWaitingConsumer()
-        └── getWaitingConsumerCount()
-
-        │
-        ▼
-BlockingDeque
-        │
-        ├── putFirst()
-        ├── putLast()
-        ├── takeFirst()
-        ├── takeLast()
-        ├── offerFirst(timeout)
-        ├── offerLast(timeout)
-        ├── pollFirst(timeout)
-        └── pollLast(timeout)
+```
+        10
+       /       20    30
+    / \    /
+   40 50  60
 ```
 
----
+- Complete binary tree stored in an array
+- Parent ≤ children (min-heap by default)
+- `add()` / `remove()` = O(log n) (heapify up/down)
+- `peek()` = O(1) (root element)
+- Does **not** support null elements
 
-# Detailed Queue Hierarchy Methods
+### ArrayDeque — Circular Array
 
-The Queue hierarchy introduces several groups of methods.
-
-These methods are explained in detail under the following sections:
-
-* Queue Methods
-* Deque Methods
-* BlockingQueue Methods
-* TransferQueue Methods
-* BlockingDeque Methods
-
-Each method includes:
-
-* Purpose
-* Syntax
-* Example
-* Output
-* Important Notes
-
----
-
-# Ways to Traverse a Queue
-
-A Queue can be traversed using multiple approaches.
-
-* Enhanced For Loop
-* Iterator
-* Spliterator
-* Stream API
-
-Each approach is explained with examples later in this document.
-
----
-
-# Interview Questions
-
-* What is the Queue interface?
-* Which interface does Queue extend?
-* Which principle does Queue generally follow?
-* What is the difference between `add()` and `offer()`?
-* What is the difference between `remove()` and `poll()`?
-* What is the difference between `element()` and `peek()`?
-* Which Queue implementation maintains priority ordering?
-* Which Queue implementation supports blocking operations?
-* Which Queue implementation can be used as both Queue and Stack?
-* When should you use `PriorityQueue` instead of `ArrayDeque`?
-
-# Understanding Queue Internals
-
-A **Queue** is designed to process elements in a specific order rather than providing random access.
-
-Unlike a **List**, which focuses on index-based operations, or a **Set**, which focuses on uniqueness, the primary objective of a Queue is **ordered processing**.
-
-Most Queue implementations follow the **FIFO (First In, First Out)** principle, although some implementations use different ordering mechanisms such as **priority** or **delay**.
-
----
-
-# Why Do We Need Queue?
-
-Consider a ticket booking counter.
-
-Customers arrive in the following order:
-
-```text
-A → B → C → D
+```
+[_, 10, 20, 30, 40, _, _]
+      ↑head       ↑tail
 ```
 
-The customer who arrives first should be served first.
+- Resizable circular array
+- No capacity restrictions (grows as needed)
+- O(1) for all operations at both ends
+- More cache-friendly than LinkedList
+- No null elements allowed
 
-Processing Order
+### LinkedList — Doubly Linked List
 
-```text
-A → B → C → D
+```
+null ← 10 ⇄ 20 ⇄ 30 ⇄ 40 → null
 ```
 
-This is exactly how a Queue works.
+- Each node stores prev + data + next
+- O(1) insertion/removal at both ends
+- Allows null elements
+- Higher memory overhead than ArrayDeque
 
-Another common example is a **printer queue**.
+### BlockingQueue Implementations
 
-```text
-Print Request
-
-Document 1
-Document 2
-Document 3
-Document 4
-```
-
-The printer processes the documents one by one in the same order.
-
-Without a Queue, managing ordered requests would become difficult and inefficient.
-
----
-
-# Why Multiple Queue Implementations?
-
-Not every application has the same requirement.
-
-Some applications need:
-
-* Simple FIFO processing
-* Priority-based processing
-* Double-ended operations
-* Thread-safe communication
-* Delayed execution
-* High-performance concurrent processing
-
-Therefore, Java provides multiple Queue implementations.
-
-| Requirement                    | Recommended Implementation |
-| ------------------------------ | -------------------------- |
-| General Queue                  | ArrayDeque                 |
-| Priority Scheduling            | PriorityQueue              |
-| Queue + List Operations        | LinkedList                 |
-| Fixed Capacity Queue           | ArrayBlockingQueue         |
-| Dynamic Blocking Queue         | LinkedBlockingQueue        |
-| Delayed Task Scheduling        | DelayQueue                 |
-| Direct Thread Communication    | SynchronousQueue           |
-| Producer–Consumer Transfer     | LinkedTransferQueue        |
-| Thread-safe Double Ended Queue | LinkedBlockingDeque        |
+| Implementation | Internal Structure | Key Feature |
+|----------------|-------------------|-------------|
+| **ArrayBlockingQueue** | Circular Array + ReentrantLock | Fixed capacity, bounded |
+| **LinkedBlockingQueue** | Linked Nodes + Two Locks | Optional bounded, higher throughput |
+| **PriorityBlockingQueue** | Binary Heap + Lock | Thread-safe priority queue |
+| **DelayQueue** | Priority Queue + Delayed interface | Elements available only after delay expires |
+| **SynchronousQueue** | No internal storage | Direct handoff producer→consumer |
+| **LinkedTransferQueue** | Lock-free linked nodes | `transfer()` blocks until consumed |
+| **LinkedBlockingDeque** | Doubly linked list + locks | Blocking operations at both ends |
 
 ---
 
-# Internal Working Overview
+## 6. Real-World Use Cases
 
-Different Queue implementations use different internal data structures.
-
-```text
-Queue
-│
-├── PriorityQueue
-│      │
-│      └── Binary Heap
-│
-├── ArrayDeque
-│      │
-│      └── Circular Array
-│
-├── LinkedList
-│      │
-│      └── Doubly Linked List
-│
-├── ArrayBlockingQueue
-│      │
-│      └── Circular Array + Locks
-│
-├── LinkedBlockingQueue
-│      │
-│      └── Linked Nodes + Locks
-│
-├── PriorityBlockingQueue
-│      │
-│      └── Binary Heap + Locks
-│
-├── DelayQueue
-│      │
-│      └── Priority Queue + Delayed Elements
-│
-├── SynchronousQueue
-│      │
-│      └── No Internal Storage
-│
-├── LinkedTransferQueue
-│      │
-│      └── Lock-Free Linked Nodes
-│
-└── LinkedBlockingDeque
-       │
-       └── Doubly Linked List + Locks
-```
-
-Each implementation is optimized for a different purpose.
+| Scenario | Choice | Why |
+|----------|--------|-----|
+| Printer queue (FIFO) | **ArrayDeque** | Simple ordered processing |
+| Ticket booking system | **ArrayDeque** | First-come-first-serve |
+| CPU process scheduling (priority) | **PriorityQueue** | Higher priority first |
+| BFS (Breadth-First Search) | **ArrayDeque** | Level-by-level traversal |
+| Producer–Consumer problem | **LinkedBlockingQueue** | Thread-safe, blocking ops |
+| Delayed task execution | **DelayQueue** | Tasks execute after specified delay |
+| Thread pool task handoff | **SynchronousQueue** | Direct thread-to-thread transfer |
+| High-performance messaging | **LinkedTransferQueue** | Lock-free, direct transfer |
+| Work-stealing algorithm | **LinkedBlockingDeque** | Add/remove from both ends concurrently |
 
 ---
 
-# Core Queue Concepts
+## 7. Common Mistakes
 
-## 1. FIFO (First In, First Out)
-
-Most Queue implementations follow FIFO.
-
-Example
-
-```text
-Insert
-
-10
-20
-30
-40
-```
-
-Removal Order
-
-```text
-10
-20
-30
-40
-```
-
-The first inserted element is removed first.
+| Mistake | Problem | Solution |
+|---------|---------|----------|
+| Using `PriorityQueue` expecting insertion order | Output is priority-sorted, not insertion-ordered | Use `ArrayDeque` for FIFO, `LinkedHashSet` for ordered unique |
+| Using `remove()` on empty Queue | `NoSuchElementException` | Use `poll()` — returns `null` safely |
+| Using `element()` on empty Queue | `NoSuchElementException` | Use `peek()` — returns `null` safely |
+| Using `ArrayDeque` in multithreaded code | Race conditions, data corruption | Use `LinkedBlockingQueue` or `ArrayBlockingQueue` |
+| Adding `null` to `PriorityQueue` / `ArrayDeque` | `NullPointerException` | These implementations reject null |
+| Using `LinkedList` when `ArrayDeque` suffices | Higher memory, slower cache performance | Prefer `ArrayDeque` for Queue/Deque ops |
 
 ---
 
-## 2. Priority-Based Processing
+## 8. Best Practices
 
-`PriorityQueue` does **not** follow FIFO.
-
-Instead, elements are processed according to their priority.
-
-Example
-
-```text
-Inserted
-
-30
-10
-40
-20
-```
-
-Removal Order
-
-```text
-10
-20
-30
-40
-```
-
-Internally, it uses a **Binary Heap**.
+- ✅ Use **ArrayDeque** as default for Queue and Stack operations (faster than `LinkedList` and `Stack`)
+- ✅ Use **PriorityQueue** only when priority ordering is required
+- ✅ Prefer `offer()` over `add()`, `poll()` over `remove()`, `peek()` over `element()`
+- ✅ Use **BlockingQueue** implementations for all multithreaded producer-consumer scenarios
+- ✅ Use **LinkedTransferQueue** for high-performance concurrent messaging
+- ✅ Avoid storing `null` values in Queue implementations
+- ✅ Choose implementation based on **concurrency needs** first, then **ordering requirements**
+- ✅ For stack behavior: `Deque<Integer> stack = new ArrayDeque<>()` (modern, fast)
 
 ---
 
-## 3. Head and Tail
+## 9. Quick Reference
 
-Every Queue has two important positions.
-
-```text
-Front (Head)
-
-↓
-
-10 → 20 → 30 → 40
-
-                  ↑
-
-              Rear (Tail)
-```
-
-* Insertion normally occurs at the **Rear**.
-* Removal normally occurs from the **Front**.
+| Operation | ArrayDeque | LinkedList | PriorityQueue | ArrayBlockingQueue | LinkedBlockingQueue |
+|-----------|:----------:|:----------:|:-------------:|:------------------:|:-------------------:|
+| `offer()` | **O(1)** | **O(1)** | O(log n) | **O(1)** | **O(1)** |
+| `poll()` | **O(1)** | **O(1)** | O(log n) | **O(1)** | **O(1)** |
+| `peek()` | **O(1)** | **O(1)** | **O(1)** | **O(1)** | **O(1)** |
+| `addFirst()` | **O(1)** | **O(1)** | N/A | N/A | N/A |
+| `addLast()` | **O(1)** | **O(1)** | N/A | N/A | N/A |
+| Null support | ❌ | ✅ | ❌ | ❌ | ❌ |
+| Thread-safe | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Blocking | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Memory | Low | Medium | Low | Low | Medium |
 
 ---
 
-## 4. Blocking Operations
+## 10. Interview Q&A
 
-A normal Queue immediately returns if an operation cannot be completed.
+**Q: Why is `ArrayDeque` preferred over `LinkedList` for Queue operations?**  
+A: `ArrayDeque` is faster, uses less memory, and has better cache locality. `LinkedList` has node overhead and pointer chasing.
 
-A BlockingQueue waits until the operation becomes possible.
+**Q: Why doesn't `PriorityQueue` maintain insertion order?**  
+A: It uses a Binary Heap which organizes by priority (natural ordering or Comparator), not insertion sequence.
 
-Example
+**Q: Difference between `add()` and `offer()`?**  
+A: `add()` throws `IllegalStateException` on failure (Collection contract); `offer()` returns `false` gracefully. Prefer `offer()`.
 
-```text
-Consumer
+**Q: Difference between `remove()` and `poll()`?**  
+A: `remove()` throws `NoSuchElementException` if empty; `poll()` returns `null`. Prefer `poll()`.
 
-↓
+**Q: Difference between `element()` and `peek()`?**  
+A: `element()` throws `NoSuchElementException` if empty; `peek()` returns `null`. Prefer `peek()`.
 
-take()
+**Q: Which Queue stores no elements internally?**  
+A: `SynchronousQueue` — every `put()` waits for a `take()` and vice versa.
 
-↓
+**Q: Which Queue supports direct producer-to-consumer transfer?**  
+A: `LinkedTransferQueue` via `transfer()` — blocks until a consumer receives the element.
 
-Queue Empty
+**Q: Best Queue for Producer–Consumer problems?**  
+A: `LinkedBlockingQueue` (dynamic) or `ArrayBlockingQueue` (fixed capacity).
 
-↓
-
-Wait...
-```
-
-Producer
-
-```text
-put(100)
-
-↓
-
-Consumer Receives 100
-```
-
-This mechanism is widely used in **Producer–Consumer** problems.
+**Q: When to use `DelayQueue`?**  
+A: When elements should only be available after a specified delay (e.g., scheduled tasks, cache expiration).
 
 ---
 
-# Internal Data Structures
-
-| Implementation        | Internal Data Structure |
-| --------------------- | ----------------------- |
-| PriorityQueue         | Binary Heap             |
-| ArrayDeque            | Circular Array          |
-| LinkedList            | Doubly Linked List      |
-| ArrayBlockingQueue    | Circular Array          |
-| LinkedBlockingQueue   | Linked Nodes            |
-| PriorityBlockingQueue | Binary Heap             |
-| DelayQueue            | Priority Queue          |
-| SynchronousQueue      | No Internal Storage     |
-| LinkedTransferQueue   | Lock-Free Linked Nodes  |
-| LinkedBlockingDeque   | Doubly Linked List      |
-
----
-
-# Performance Comparison
-
-| Implementation        |  Insert  |  Remove  | Peek |
-| --------------------- | :------: | :------: | :--: |
-| ArrayDeque            |   O(1)   |   O(1)   | O(1) |
-| LinkedList            |   O(1)   |   O(1)   | O(1) |
-| PriorityQueue         | O(log n) | O(log n) | O(1) |
-| ArrayBlockingQueue    |   O(1)   |   O(1)   | O(1) |
-| LinkedBlockingQueue   |   O(1)   |   O(1)   | O(1) |
-| PriorityBlockingQueue | O(log n) | O(log n) | O(1) |
-| DelayQueue            | O(log n) | O(log n) | O(1) |
-| SynchronousQueue      |   O(1)*  |   O(1)*  |  N/A |
-| LinkedTransferQueue   |   O(1)   |   O(1)   | O(1) |
-| LinkedBlockingDeque   |   O(1)   |   O(1)   | O(1) |
-
-> **Note**
->
-> `SynchronousQueue` does not actually store elements.
-> Every insertion waits for a corresponding removal.
-
----
-
-# Memory Comparison
-
-| Implementation        | Memory Usage          |
-| --------------------- | --------------------- |
-| ArrayDeque            | ⭐ Lowest              |
-| PriorityQueue         | ⭐ Low                 |
-| ArrayBlockingQueue    | ⭐ Low                 |
-| LinkedList            | ⭐⭐ Medium             |
-| LinkedBlockingQueue   | ⭐⭐ Medium             |
-| PriorityBlockingQueue | ⭐⭐ Medium             |
-| DelayQueue            | ⭐⭐ Medium             |
-| LinkedTransferQueue   | ⭐⭐⭐ High              |
-| LinkedBlockingDeque   | ⭐⭐⭐ High              |
-| SynchronousQueue      | Very Low (No Storage) |
-
----
-
-# Decision Flow
-
-```text
-Need Priority Ordering?
-
-        │
-      Yes
-        ▼
- PriorityQueue
-
-        │
-       No
-        ▼
-Need Fast FIFO Queue?
-
-        │
-      Yes
-        ▼
- ArrayDeque
-
-        │
-       No
-        ▼
-Need Thread Safety?
-
-        │
-      Yes
-        ▼
- BlockingQueue
-
-        │
-       No
-        ▼
-Need Double Ended Operations?
-
-        │
-      Yes
-        ▼
- Deque
-```
-
----
-
-# When Should You Choose Which Queue?
-
-### Use **PriorityQueue**
-
-* Task Scheduling
-* Event Scheduling
-* Job Scheduling
-
----
-
-### Use **ArrayDeque**
-
-* General Queue
-* Stack
-* BFS
-* DFS
-
----
-
-### Use **LinkedList**
-
-* Queue + List functionality
-* Frequent insertion and deletion
-
----
-
-### Use **BlockingQueue**
-
-* Producer–Consumer
-* Thread Pools
-* Background Task Processing
-
----
-
-### Use **DelayQueue**
-
-* Scheduled Tasks
-* Delayed Execution
-* Timers
-
----
-
-### Use **SynchronousQueue**
-
-* Direct Thread-to-Thread Communication
-
----
-
-### Use **LinkedTransferQueue**
-
-* High-performance concurrent messaging
-
----
-
-### Use **LinkedBlockingDeque**
-
-* Blocking operations at both ends
-* Work-stealing algorithms
-
----
-
-# Summary
-
-* Queue is designed for **ordered processing**.
-* Most implementations follow **FIFO**.
-* `PriorityQueue` processes elements based on **priority**.
-* `Deque` supports insertion and deletion from **both ends**.
-* `BlockingQueue` enables **thread-safe communication**.
-* Different Queue implementations use different internal data structures.
-* Selecting the correct implementation improves both **performance** and **code quality**.
-
-# Practical Understanding of Queue
-
-Learning the Queue interface is not just about understanding its methods. It is equally important to know **where each Queue implementation should be used**, **which implementation is best for a particular problem**, and **what mistakes to avoid**.
-
-This section focuses on the practical side of the Queue interface.
-
----
-
-# Real-World Examples
-
-## 1. Printer Queue
-
-When multiple documents are sent to a printer, they are printed in the order they are received.
-
-**Recommended Implementation**
-
-```text
-ArrayDeque
-```
-
----
-
-## 2. Ticket Booking System
-
-Customers waiting for tickets are served in the order they arrive.
-
-**Recommended Implementation**
-
-```text
-ArrayDeque
-```
-
----
-
-## 3. CPU Process Scheduling
-
-Processes with higher priority should execute before lower-priority processes.
-
-**Recommended Implementation**
-
-```text
-PriorityQueue
-```
-
----
-
-## 4. Breadth First Search (BFS)
-
-Graphs and Trees use Queue to visit nodes level by level.
-
-**Recommended Implementation**
-
-```text
-ArrayDeque
-```
-
----
-
-## 5. Producer-Consumer Problem
-
-One thread produces data while another thread consumes it safely.
-
-**Recommended Implementation**
-
-```text
-LinkedBlockingQueue
-```
-
----
-
-## 6. Delayed Task Execution
-
-Tasks should execute only after a specified delay.
-
-**Recommended Implementation**
-
-```text
-DelayQueue
-```
-
----
-
-## 7. Thread Pool
-
-One thread hands over work directly to another thread.
-
-**Recommended Implementation**
-
-```text
-SynchronousQueue
-```
-
----
-
-## 8. High Performance Messaging System
-
-Messages should be transferred directly to waiting consumer threads whenever possible.
-
-**Recommended Implementation**
-
-```text
-LinkedTransferQueue
-```
-
----
-
-## 9. Work-Stealing Algorithm
-
-Tasks can be added or removed from both ends by multiple threads.
-
-**Recommended Implementation**
-
-```text
-LinkedBlockingDeque
-```
-
----
-
-# DSA Selection Guide
-
-| Problem                          | Recommended Queue   |
-| -------------------------------- | ------------------- |
-| Simple FIFO Queue                | ArrayDeque          |
-| Priority Scheduling              | PriorityQueue       |
-| Queue + Stack Operations         | ArrayDeque          |
-| Queue + List Operations          | LinkedList          |
-| Producer-Consumer                | LinkedBlockingQueue |
-| Fixed Capacity Queue             | ArrayBlockingQueue  |
-| Delayed Processing               | DelayQueue          |
-| Direct Thread Handoff            | SynchronousQueue    |
-| High Performance Transfer        | LinkedTransferQueue |
-| Blocking Operations at Both Ends | LinkedBlockingDeque |
-
----
-
-# Common Mistakes
-
-## ❌ Mistake 1
-
-Using **PriorityQueue** expecting insertion order.
-
-```java
-PriorityQueue<Integer> pq = new PriorityQueue<>();
-
-pq.add(30);
-pq.add(10);
-pq.add(20);
-```
-
-Output
-
-```text
-10
-20
-30
-```
-
-**Reason**
-
-PriorityQueue maintains **priority order**, not insertion order.
-
----
-
-## ❌ Mistake 2
-
-Using `remove()` on an empty Queue.
-
-```java
-queue.remove();
-```
-
-Result
-
-```text
-NoSuchElementException
-```
-
-Use
-
-```java
-queue.poll();
-```
-
-when the Queue may be empty.
-
----
-
-## ❌ Mistake 3
-
-Using `element()` on an empty Queue.
-
-```java
-queue.element();
-```
-
-Result
-
-```text
-NoSuchElementException
-```
-
-Prefer
-
-```java
-queue.peek();
-```
-
----
-
-## ❌ Mistake 4
-
-Using `ArrayDeque` in a multithreaded application.
-
-```text
-Wrong Choice
-```
-
-Use
-
-```text
-LinkedBlockingQueue
-```
-
-or
-
-```text
-ArrayBlockingQueue
-```
-
-instead.
-
----
-
-## ❌ Mistake 5
-
-Adding `null` into Queue implementations that do not support it.
-
-```java
-Queue<Integer> queue = new PriorityQueue<>();
-
-queue.add(null);
-```
-
-Result
-
-```text
-NullPointerException
-```
-
----
-
-# Best Practices
-
-* ✅ Use **ArrayDeque** for normal Queue operations.
-* ✅ Use **PriorityQueue** only when ordering by priority is required.
-* ✅ Prefer `offer()` instead of `add()` when insertion may fail.
-* ✅ Prefer `poll()` instead of `remove()` when the Queue may be empty.
-* ✅ Prefer `peek()` instead of `element()` when the Queue may be empty.
-* ✅ Use BlockingQueue implementations for multithreaded applications.
-* ✅ Avoid storing `null` values.
-* ✅ Choose the implementation based on the application's requirements instead of habit.
-
----
-
-# Quick Revision Table
-
-| Requirement                        | Best Choice         |
-| ---------------------------------- | ------------------- |
-| General Queue                      | ArrayDeque          |
-| Priority Scheduling                | PriorityQueue       |
-| Queue + Stack                      | ArrayDeque          |
-| Queue + List                       | LinkedList          |
-| Fixed Capacity Queue               | ArrayBlockingQueue  |
-| Dynamic Blocking Queue             | LinkedBlockingQueue |
-| Delayed Tasks                      | DelayQueue          |
-| Direct Thread Communication        | SynchronousQueue    |
-| High Performance Producer-Consumer | LinkedTransferQueue |
-| Double Ended Blocking Queue        | LinkedBlockingDeque |
-
----
-
-# Which Queue Should I Choose?
-
-```text
-Need Priority Processing?
-        │
-      Yes
-        ▼
- PriorityQueue
-        │
-       No
-        ▼
-Need General FIFO Queue?
-        │
-      Yes
-        ▼
- ArrayDeque
-        │
-       No
-        ▼
-Need Queue + List Features?
-        │
-      Yes
-        ▼
- LinkedList
-        │
-       No
-        ▼
-Need Thread Safety?
-        │
-      Yes
-        ▼
- BlockingQueue
-        │
-       No
-        ▼
-Need Blocking Operations at Both Ends?
-        │
-      Yes
-        ▼
- LinkedBlockingDeque
-```
-
----
-
-# Advanced Interview Questions
-
-### Q1. Why is `ArrayDeque` generally preferred over `LinkedList` for Queue operations?
-
-Because it is usually faster, uses less memory, and provides better cache locality.
-
----
-
-### Q2. Why doesn't `PriorityQueue` maintain insertion order?
-
-Because it internally uses a **Binary Heap**, which organizes elements according to priority.
-
----
-
-### Q3. What is the difference between `add()` and `offer()`?
-
-| add()              | offer()            |
-| ------------------ | ------------------ |
-| Throws Exception   | Returns `false`    |
-| Used in Collection | Preferred in Queue |
-
----
-
-### Q4. What is the difference between `remove()` and `poll()`?
-
-| remove()                    | poll()               |
-| --------------------------- | -------------------- |
-| Throws Exception            | Returns `null`       |
-| Queue must contain elements | Safe for empty Queue |
-
----
-
-### Q5. What is the difference between `element()` and `peek()`?
-
-| element()                    | peek()         |
-| ---------------------------- | -------------- |
-| Throws Exception             | Returns `null` |
-| Used when Queue is not empty | Safe retrieval |
-
----
-
-### Q6. Which Queue implementation is best for Producer–Consumer problems?
-
-* ArrayBlockingQueue
-* LinkedBlockingQueue
-
----
-
-### Q7. Which Queue implementation stores no elements internally?
-
-```text
-SynchronousQueue
-```
-
----
-
-### Q8. Which Queue implementation supports direct producer-to-consumer transfer?
-
-```text
-LinkedTransferQueue
-```
-
----
-
-# One-Line Revision
-
-* **PriorityQueue** → Priority-based Queue.
-* **ArrayDeque** → Fast FIFO/LIFO Queue.
-* **LinkedList** → Queue + List implementation.
-* **BlockingQueue** → Thread-safe Queue.
-* **DelayQueue** → Delayed task scheduling.
-* **SynchronousQueue** → Direct thread handoff.
-* **LinkedTransferQueue** → High-performance message transfer.
-* **LinkedBlockingDeque** → Thread-safe double-ended Queue.
-
----
-
-# Key Takeaways
-
-* Queue is designed for **ordered processing** of elements.
-* Most Queue implementations follow the **FIFO** principle.
-* `PriorityQueue` processes elements based on priority.
-* `Deque` supports insertion and deletion from both ends.
-* `BlockingQueue` enables safe communication between threads.
-* Different Queue implementations are optimized for different use cases.
-* Selecting the right implementation improves performance, scalability, and code readability.
-
----
-
-# Final Summary
-
-The **Queue** interface is one of the most important interfaces in the Java Collection Framework for sequential data processing.
-
-Different implementations are designed to solve different problems:
-
-* **PriorityQueue** → Priority-based processing
-* **ArrayDeque** → Fast general-purpose Queue
-* **LinkedList** → Queue with List functionality
-* **BlockingQueue** → Thread-safe producer-consumer communication
-* **DelayQueue** → Delayed execution
-* **SynchronousQueue** → Direct thread handoff
-* **LinkedTransferQueue** → High-performance concurrent transfer
-* **LinkedBlockingDeque** → Thread-safe double-ended operations
-
-Choosing the appropriate Queue implementation based on the application's requirements leads to cleaner, more efficient, and maintainable code.
+## One-Line Summary
+
+> **ArrayDeque** → Fast general-purpose FIFO/LIFO (default choice)  
+> **PriorityQueue** → Priority-based processing (heap-ordered)  
+> **LinkedList** → Queue + List functionality (allows null)  
+> **ArrayBlockingQueue** → Bounded thread-safe queue  
+> **LinkedBlockingQueue** → Unbounded/dynamic thread-safe queue  
+> **PriorityBlockingQueue** → Thread-safe priority queue  
+> **DelayQueue** → Delayed task scheduling  
+> **SynchronousQueue** → Direct thread handoff (no storage)  
+> **LinkedTransferQueue** → High-performance lock-free transfer  
+> **LinkedBlockingDeque** → Thread-safe double-ended queue
+
+> **Key Principle:** Choose based on **ordering needs** (FIFO vs priority), **concurrency requirements**, and **memory constraints**.

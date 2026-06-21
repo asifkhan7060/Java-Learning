@@ -1,1212 +1,402 @@
 # Choosing the Right Map Implementation
 
-## Table of Contents
+## 1. Why Multiple Map Implementations?
 
-1. Why Do We Need Multiple Map Implementations?
-2. One Interface, Multiple Implementations
-3. The Original Problem
-4. Why Arrays and Lists Are Not Suitable for Key-Value Data
-5. Why Java Introduced the Map Interface
-6. Internal Data Structures
-7. Introduction to HashMap
-8. Problems with HashMap
-9. Introduction to LinkedHashMap
-10. Problems with LinkedHashMap
-11. Introduction to TreeMap
-12. Introduction to HashTable
-13. Introduction to ConcurrentHashMap
-14. Introduction to IdentityHashMap
-15. Introduction to WeakHashMap
-16. Introduction to EnumMap
-
----
-
-# 1. Why Do We Need Multiple Map Implementations?
-
-A common question beginners ask is:
-
-> If `HashMap`, `LinkedHashMap`, `TreeMap`, and `Hashtable` all implement the `Map` interface, why doesn't Java provide only one implementation?
-
-The answer is simple:
-
-**No single data structure is best for every situation.**
-
-Different applications have different requirements.
-
-Some applications require:
-
+No single map structure optimizes everything. Different apps need:
 - Fast key-based lookup
-- Maintaining insertion order
-- Automatic sorting by keys
+- Preserved insertion order
+- Automatically sorted keys
 - Thread safety
-- Memory-efficient caching
-- Enum-specific keys
+- Memory-efficient caching (auto-expiring)
+- Enum-specific optimization
+- Reference equality semantics
 
-One implementation cannot optimize all of these requirements simultaneously.
+The `Map` interface defines **what** operations are possible; each implementation decides **how**.
 
-Therefore, Java provides multiple implementations of the `Map` interface.
+```java
+Map<String, Integer> m1 = new HashMap<>();              // Hash Table — fastest general
+Map<String, Integer> m2 = new LinkedHashMap<>();        // Hash Table + Linked List — ordered
+Map<String, Integer> m3 = new TreeMap<>();             // Red-Black Tree — sorted
+Map<String, Integer> m4 = new ConcurrentHashMap<>();   // Thread-safe concurrent
+```
+
+All store key-value pairs. The difference lies in **ordering guarantees, concurrency support, key comparison, and memory behavior**.
 
 ---
 
-# 2. One Interface, Multiple Implementations
+## 2. The Problem with Arrays/Lists for Key-Value Data
 
-The `Map` interface defines **what operations are possible**, while each implementation decides **how those operations are performed internally**.
+Using parallel arrays or lists for key-value lookup:
 
-```text
-                          Map
-                           │
-    ┌──────────┬───────────┼───────────┬──────────┬──────────┐
-    │          │           │           │          │          │
-HashMap  LinkedHashMap  TreeMap   HashTable  WeakHashMap  EnumMap
-    │          │           │           │          │          │
-    │          │           │           │          │          │
-    └──────────┘           │           │          │          │
-                           │           │          │          │
-                      SortedMap    ConcurrentHashMap   IdentityHashMap
-                           │
-                     NavigableMap
-                           │
-                        TreeMap
+```
+Names:  [Alice, Bob, Charlie, Alice]
+Marks:  [  85,  90,     78,    92]
 ```
 
-Example:
+Finding Bob's marks requires linear search — **O(n)**. For large datasets, this is inefficient.
 
-```java
-Map<String, Integer> map = new HashMap<>();
+What key-value storage actually needs:
+- Direct key-based access (no index traversal)
+- Unique keys (duplicates replace, not accumulate)
+- Fast lookup, insertion, deletion
 
-Map<String, Integer> map = new LinkedHashMap<>();
-
-Map<String, Integer> map = new TreeMap<>();
-
-Map<String, Integer> map = new Hashtable<>();
-```
-
-All of the above store key-value pairs.
-
-The difference lies in **how the entries are stored internally**.
+A Map naturally models this with **O(1)** or **O(log n)** operations.
 
 ---
 
-# 3. The Original Problem
+## 3. Implementation Deep Dive
 
-Before the Collection Framework, programmers mainly used arrays and lists to store data.
+### HashMap — Hash Table
 
-Suppose we need to store student names and their marks.
-
-```text
-Name     Marks
-Alice     85
-Bob       90
-Charlie   78
-Alice     92
+```
+Bucket 0 → null
+Bucket 1 → Entry("Alice", 85)
+Bucket 2 → Entry("Bob", 90)
+Bucket 3 → Entry("Charlie", 78) → Entry("Dave", 70) [collision]
+Bucket 4 → null
 ```
 
-Using separate arrays:
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Fastest average performance O(1), low memory, one null key, multiple null values |
+| **Weaknesses** | No ordering guarantee, not thread-safe |
+| **Best For** | General-purpose key-value storage, caching, configuration, indexing |
+| **Time** | `get()` O(1)* · `put()` O(1)* · `remove()` O(1)* |
+| **Null** | One null key ✅, multiple null values ✅ |
 
-```text
-Names:    Alice   Bob   Charlie   Alice
-Marks:      85    90      78       92
-```
-
-If we want to find Bob's marks, we must search through the entire array.
-
+**Example:**
 ```java
-for (int i = 0; i < names.length; i++) {
-    if (names[i].equals("Bob")) {
-        return marks[i];
+Map<String, Integer> marks = new HashMap<>();
+marks.put("Alice", 85);
+marks.put("Bob", 90);
+marks.put("Charlie", 78);
+System.out.println(marks.get("Bob"));  // 90 — O(1)
+// Iteration order: unpredictable
+```
+
+> Since Java 8, buckets convert to Red-Black Trees when collisions exceed a threshold, improving worst-case from O(n) to O(log n).
+
+---
+
+### LinkedHashMap — Hash Table + Doubly Linked List
+
+```
+Hash Table:    "Alice"=85    "Bob"=90    "Charlie"=78
+Linked List:   "Alice"=85 ⇄ "Bob"=90 ⇄ "Charlie"=78
+```
+
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | O(1)* operations + preserves insertion (or access) order |
+| **Weaknesses** | Higher memory than HashMap (extra linked list pointers) |
+| **Best For** | Ordered iteration, LRU caches |
+| **Time** | Same as HashMap; iteration order matches insertion |
+| **Null** | One null key ✅, multiple null values ✅ |
+
+**Example:**
+```java
+Map<String, Integer> marks = new LinkedHashMap<>();
+marks.put("Alice", 85);
+marks.put("Bob", 90);
+marks.put("Charlie", 78);
+// Iteration: Alice=85, Bob=90, Charlie=78 (insertion order preserved)
+```
+
+**LRU Cache:**
+```java
+// accessOrder=true: orders by last access, not insertion
+Map<String, String> lru = new LinkedHashMap<>(16, 0.75f, true) {
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+        return size() > 100;  // Evict oldest when size > 100
     }
-}
+};
 ```
-
-Time Complexity: O(n)
-
-For very large collections, this becomes inefficient.
-
-What we really need is:
-
-- Fast lookup by name
-- No duplicate names
-- Direct access to values
-
-This requirement led to the introduction of the `Map` interface.
 
 ---
 
-# 4. Why Arrays and Lists Are Not Suitable for Key-Value Data
+### TreeMap — Red-Black Tree
 
-Arrays and Lists are designed to maintain:
-
-- Order
-- Index
-- Duplicates
-
-Example:
-
-```text
-Index:    0      1        2       3
-Value:  Alice   Bob   Charlie   Alice
 ```
-
-If we want to find the marks for "Bob", we must iterate through the list.
-
-Time Complexity: O(n)
-
-What we really need is:
-
-- Direct key-based access
-- No duplicate keys
-- Fast searching
-
-This requirement led to the introduction of the `Map` interface.
-
----
-
-# 5. Why Java Introduced the Map Interface
-
-Java wanted to solve the key-value storage problem while providing efficient searching.
-
-Instead of forcing programmers to manually manage parallel arrays or lists, Java introduced the `Map` interface.
-
-The `Map` interface guarantees:
-
-- Unique keys
-- Key-value pair storage
-- Fast key-based lookup
-- Different internal implementations for different requirements
-
-For example,
-
-```java
-put()
-get()
-remove()
-containsKey()
-size()
-```
-
-are available in every Map implementation.
-
-Internally,
-
-- HashMap uses a Hash Table
-- LinkedHashMap uses a Hash Table + Linked List
-- TreeMap uses a Red-Black Tree
-- Hashtable uses a Synchronized Hash Table
-- WeakHashMap uses Weak References
-- EnumMap uses an Array
-
-Each implementation follows the same Map contract but stores data differently.
-
----
-
-# 6. Internal Data Structures
-
-## HashMap
-
-Internally uses a **Hash Table**.
-
-```text
-Bucket 0
-Bucket 1 → "Alice"=85
-Bucket 2 → "Bob"=90
-Bucket 3 → "Charlie"=78
-Bucket 4
-```
-
-Advantages
-
-- Very fast insertion: O(1)
-- Very fast searching: O(1)
-- Very fast deletion: O(1)
-
-Disadvantages
-
-- No insertion order
-- No sorting
-
----
-
-## LinkedHashMap
-
-Internally uses:
-
-- Hash Table
-- Doubly Linked List
-
-```text
-Hash Table
-
-↓
-
-"Alice"=85 ⇄ "Bob"=90 ⇄ "Charlie"=78
-```
-
-Advantages
-
-- Fast operations
-- Maintains insertion order
-
-Disadvantages
-
-- Extra memory required
-
----
-
-## TreeMap
-
-Internally uses a **Red-Black Tree**.
-
-```text
         "Bob"=90
-       /         \
-  "Alice"=85   "Charlie"=78
+       /           "Alice"=85   "Charlie"=78
+                /              ...  ...
 ```
 
-Advantages
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Auto-sorted keys, navigation methods (`higherKey`, `floorEntry`), range queries |
+| **Weaknesses** | O(log n) slower than HashMap, no null keys, higher memory |
+| **Best For** | Sorted data, dictionaries, leaderboards, range searches |
+| **Time** | `get()` O(log n) · `put()` O(log n) · `remove()` O(log n) |
+| **Null** | ❌ No null keys (can't compare null) |
 
-- Automatically sorted by keys
-- Navigation methods available
+**Example:**
+```java
+Map<String, Integer> marks = new TreeMap<>();
+marks.put("Charlie", 78);
+marks.put("Alice", 85);
+marks.put("Bob", 90);
+// Output: {Alice=85, Bob=90, Charlie=78} — always sorted by key
 
-Disadvantages
-
-- Slower than HashMap
+// Navigation
+TreeMap<String, Integer> tm = (TreeMap<String, Integer>) marks;
+System.out.println(tm.higherKey("Bob"));      // "Charlie"
+System.out.println(tm.floorEntry("B"));       // "Bob"=90
+System.out.println(tm.subMap("A", "C"));      // {Alice=85, Bob=90}
+```
 
 ---
 
-## Hashtable
+### Hashtable — Synchronized Hash Table (Legacy)
 
-Internally uses a **Synchronized Hash Table**.
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Thread-safe (synchronized methods) |
+| **Weaknesses** | Locks entire table, slower than ConcurrentHashMap, no null keys/values, legacy |
+| **Best For** | Legacy code only |
+| **Time** | O(1)* but with synchronization overhead |
+| **Null** | ❌ No null keys, no null values |
 
-```text
-Hash Table (Synchronized)
-
-Bucket 1 → "Alice"=85
-Bucket 2 → "Bob"=90
-```
-
-Advantages
-
-- Thread-safe
-
-Disadvantages
-
-- Slower than HashMap
-- No null keys or values
+> ⚠️ **Avoid in new code.** Use `ConcurrentHashMap` instead.
 
 ---
 
-## ConcurrentHashMap
+### ConcurrentHashMap — Concurrent Hash Table
 
-Internally uses a **Segmented Hash Table**.
-
-```text
+```
 Segment 0    Segment 1    Segment 2
 |          |          |
 Bucket     Bucket     Bucket
+  (lock)    (lock)     (lock)
 ```
 
-Advantages
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Thread-safe without full-table locking, high concurrency, atomic compute/merge methods |
+| **Weaknesses** | No null keys/values, slightly higher memory |
+| **Best For** | Multi-threaded applications, shared caches, concurrent config |
+| **Time** | O(1)* with fine-grained locking (Java 8+: CAS + synchronized nodes) |
+| **Null** | ❌ No null keys, no null values |
 
-- Thread-safe without full locking
-- Better concurrent performance
-
-Disadvantages
-
-- No null keys or values
-
----
-
-## IdentityHashMap
-
-Uses reference equality (`==`) instead of `equals()`.
-
-```text
-Key Reference → Value
-```
-
-Advantages
-
-- Reference-based equality
-
-Disadvantages
-
-- Rarely used in general applications
-
----
-
-## WeakHashMap
-
-Keys are stored as weak references.
-
-```text
-Weak Reference Key → Value
-```
-
-Advantages
-
-- Automatic cleanup when key is no longer referenced
-- Useful for caches
-
-Disadvantages
-
-- Unpredictable entry removal
-
----
-
-## EnumMap
-
-Keys must be of the same enum type.
-
-Internally uses an array indexed by enum ordinal.
-
-```text
-Index 0 → "SUNDAY"="Holiday"
-Index 1 → "MONDAY"="Working Day"
-```
-
-Advantages
-
-- Very fast: O(1)
-- Memory efficient
-
-Disadvantages
-
-- Keys restricted to single enum type
-
----
-
-# 7. Introduction to HashMap
-
-HashMap is the most commonly used implementation of the `Map` interface.
-
-It internally stores entries using a **Hash Table**.
-
-### Best Use Cases
-
-- Fast key-based lookup
-- Fast insertion
-- Fast deletion
-- General purpose key-value storage
-
-Example:
-
+**Example:**
 ```java
-Map<String, Integer> marks = new HashMap<>();
-
-marks.put("Alice", 85);
-marks.put("Bob", 90);
-marks.put("Charlie", 78);
-
-System.out.println(marks.get("Bob"));
-```
-
-Output:
-
-```text
-90
-```
-
-Average Time Complexity:
-
-```text
-put()    → O(1)
-get()    → O(1)
-remove() → O(1)
+ConcurrentMap<String, Integer> map = new ConcurrentHashMap<>();
+map.put("count", 0);
+map.compute("count", (k, v) -> v + 1);  // Atomic increment
 ```
 
 ---
 
-# 8. Problems with HashMap
+### WeakHashMap — Weak References
 
-Suppose we insert:
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Entries auto-removed when key is GC'd, useful for memory-sensitive caches |
+| **Weaknesses** | Unpredictable entry lifetime, not thread-safe |
+| **Best For** | Caches, metadata association, listener registries |
+| **Time** | O(1)* |
+| **Null** | One null key ✅ |
 
-```text
-"Alice"=85
-"Bob"=90
-"Charlie"=78
+**How it works:**
 ```
+Strong Ref → Key → Value
+                ↓
+           Weak Ref (in WeakHashMap)
 
-Output may become:
-
-```text
-{Bob=90, Alice=85, Charlie=78}
+When no Strong Refs exist → Key GC'd → Entry auto-removed
 ```
-
-or any other order.
-
-The order is **not guaranteed**.
-
-Therefore, HashMap should not be used when insertion order or sorting is required.
 
 ---
 
-# 9. Introduction to LinkedHashMap
+### IdentityHashMap — Reference Equality
 
-LinkedHashMap extends the capabilities of HashMap.
-
-It maintains the **insertion order** of entries.
-
-Example:
-
-```java
-Map<String, Integer> marks = new LinkedHashMap<>();
-
-marks.put("Alice", 85);
-marks.put("Bob", 90);
-marks.put("Charlie", 78);
-
-System.out.println(marks);
-```
-
-Output:
-
-```text
-{Alice=85, Bob=90, Charlie=78}
-```
-
-Best Use Cases:
-
-- Maintaining insertion order
-- Fast key-based lookup
-- Cache implementations (LRU)
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Uses `==` not `equals()`, tracks object identity |
+| **Weaknesses** | Rarely needed, breaks Map contract expectations |
+| **Best For** | Serialization frameworks, object graph traversal, identity-based metadata |
+| **Time** | O(1)* |
+| **Null** | Multiple null keys allowed (since == distinguishes null references) |
 
 ---
 
-# 10. Problems with LinkedHashMap
+### EnumMap — Enum Keys
 
-Although LinkedHashMap preserves insertion order, it requires additional memory because it maintains linked references between entries.
+| Aspect | Detail |
+|--------|--------|
+| **Strengths** | Fastest Map implementation O(1), most memory-efficient, type-safe |
+| **Weaknesses** | Keys restricted to single enum type |
+| **Best For** | Enum-based lookups, state machines, day-based scheduling |
+| **Time** | O(1) — array indexed by enum ordinal |
+| **Null** | ❌ No null keys |
 
-Compared to HashMap:
-
-- Slightly slower
-- Higher memory consumption
-
-If automatic sorting is required, LinkedHashMap is not suitable.
-
-Instead, TreeMap should be used.
-
----
-
-# 11. Introduction to TreeMap
-
-Sometimes applications require data to remain **automatically sorted by keys**.
-
-Example:
-
-```java
-Map<String, Integer> marks = new TreeMap<>();
-
-marks.put("Charlie", 78);
-marks.put("Alice", 85);
-marks.put("Bob", 90);
-
-System.out.println(marks);
-```
-
-Output:
-
-```text
-{Alice=85, Bob=90, Charlie=78}
-```
-
-TreeMap automatically stores entries in **sorted order by keys**.
-
-Internally, it uses a **Red-Black Tree**.
-
-Advantages:
-
-- Automatically sorted
-- Navigation methods available
-
-Disadvantages:
-
-- Slower than HashMap
-- Does not allow null keys
-
----
-
-# 12. Introduction to HashTable
-
-Hashtable is a legacy class from Java 1.0.
-
-Every public method is synchronized, making it thread-safe.
-
-Example:
-
-```java
-Map<String, Integer> map = new Hashtable<>();
-
-map.put("Alice", 85);
-map.put("Bob", 90);
-```
-
-Advantages:
-
-- Thread-safe
-
-Disadvantages:
-
-- Slower than HashMap
-- No null keys or values
-- Legacy class
-
-Nowadays, developers prefer `ConcurrentHashMap` for thread-safe maps.
-
----
-
-# 13. Introduction to ConcurrentHashMap
-
-ConcurrentHashMap provides thread safety without locking the entire map.
-
-It uses **segment-level locking** or **bucket-level locking**.
-
-Example:
-
-```java
-Map<String, Integer> map = new ConcurrentHashMap<>();
-
-map.put("Alice", 85);
-map.put("Bob", 90);
-```
-
-Advantages:
-
-- Thread-safe
-- Better concurrent performance than Hashtable
-
-Disadvantages:
-
-- No null keys or values
-
----
-
-# 14. Introduction to IdentityHashMap
-
-IdentityHashMap uses reference equality (`==`) instead of `equals()`.
-
-```java
-Map<String, Integer> map = new IdentityHashMap<>();
-```
-
-Use Cases:
-
-- Serialization frameworks
-- Object graph traversal
-- Reference-based equality
-
----
-
-# 15. Introduction to WeakHashMap
-
-WeakHashMap stores keys as weak references.
-
-When the key is no longer strongly referenced, the entry is garbage collected.
-
-```java
-Map<String, Integer> map = new WeakHashMap<>();
-```
-
-Use Cases:
-
-- Caches
-- Associating metadata with objects
-
----
-
-# 16. Introduction to EnumMap
-
-EnumMap is optimized for enum keys.
-
+**Example:**
 ```java
 enum Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY }
 
-Map<Day, String> map = new EnumMap<>(Day.class);
-```
-
-Use Cases:
-
-- Enum-based lookups
-- Very fast operations
-
----
-
-# Part 2 : Comparison, Selection Guide and Real World Usage
-
----
-
-# 17. Comparison of Map Implementations
-
-| Feature | HashMap | LinkedHashMap | TreeMap | HashTable | ConcurrentHashMap |
-| ---------------- | ----------------- | ---------------------- | ----------------- | ----------------- | ---------------------- |
-| Internal Structure | Hash Table | Hash Table + Linked List | Red-Black Tree | Hash Table | Hash Table (Segmented) |
-| Duplicate Keys | No | No | No | No | No |
-| Duplicate Values | Yes | Yes | Yes | Yes | Yes |
-| Null Key | One | One | No | No | No |
-| Null Values | Yes | Yes | Yes | No | No |
-| Insertion Order | No | Yes | No | No | No |
-| Sorted Order | No | No | Yes | No | No |
-| Thread Safe | No | No | No | Yes | Yes |
-| Legacy Class | No | No | No | Yes | No |
-
----
-
-# 18. Time Complexity Comparison
-
-| Operation | HashMap | LinkedHashMap | TreeMap | HashTable | ConcurrentHashMap |
-| --------- | ------- | ------------- | ------- | --------- | ----------------- |
-| put() | O(1)* | O(1)* | O(log n) | O(1)* | O(1)* |
-| get() | O(1)* | O(1)* | O(log n) | O(1)* | O(1)* |
-| remove() | O(1)* | O(1)* | O(log n) | O(1)* | O(1)* |
-| containsKey() | O(1)* | O(1)* | O(log n) | O(1)* | O(1)* |
-| size() | O(1) | O(1) | O(1) | O(1) | O(1) |
-| traversal | O(n) | O(n) | O(n) | O(n) | O(n) |
-
-*Average Case
-
-> Note:
->
-> HashMap, LinkedHashMap, and Hashtable provide constant-time performance on average because of hashing.
->
-> TreeMap requires tree traversal, therefore most operations take O(log n).
->
-> Since Java 8, HashMap buckets are converted into Red-Black Trees when many collisions occur, improving worst-case lookup from O(n) to O(log n).
-
----
-
-# 19. Memory Comparison
-
-## HashMap
-
-Stores entries inside a Hash Table.
-
-```text
-Bucket
-
-↓
-
-Key → Value
-```
-
-Memory Usage:
-
-Low
-
----
-
-## LinkedHashMap
-
-Stores:
-
-- Hash Table
-- Doubly Linked List
-
-```text
-Bucket
-
-↓
-
-Key → Value
-
-⇄
-
-Next Entry
-```
-
-Memory Usage:
-
-Higher than HashMap.
-
----
-
-## TreeMap
-
-Stores entries as tree nodes.
-
-Each node stores:
-
-- Key
-- Value
-- Left Child
-- Right Child
-- Parent
-- Color Information
-
-```text
-Left | Key → Value | Right
-```
-
-Memory Usage:
-
-Higher than HashMap.
-
----
-
-## Hashtable
-
-Almost identical to HashMap.
-
-Additional synchronization overhead.
-
----
-
-# 20. Which One Should I Choose?
-
-## Choose HashMap When
-
-- Fast searching is required.
-- Fast insertion is required.
-- Order does not matter.
-- General-purpose key-value storage.
-
-Examples:
-
-- User ID to User Object mapping
-- Configuration settings
-- Caching (basic)
-
----
-
-## Choose LinkedHashMap When
-
-- Insertion order should be preserved.
-- Fast searching is required.
-- LRU cache implementation.
-
-Examples:
-
-- Recently accessed items
-- Ordered configuration
-- Session management
-
----
-
-## Choose TreeMap When
-
-- Data should always remain sorted by keys.
-- Navigation operations are required.
-- Range-based searching is needed.
-
-Examples:
-
-- Sorted rankings
-- Dictionary words
-- Score boards
-
----
-
-## Choose Hashtable When
-
-- Working with legacy synchronized code.
-- Maintaining older enterprise applications.
-
-Modern projects rarely use Hashtable.
-
----
-
-## Choose ConcurrentHashMap When
-
-- Thread-safe concurrent access is required.
-- Better performance than Hashtable in multi-threaded environments.
-
-Examples:
-
-- Shared caches
-- Concurrent configuration maps
-
----
-
-## Choose WeakHashMap When
-
-- Automatic cleanup of entries is desired.
-- Cache with garbage collection support.
-
----
-
-## Choose EnumMap When
-
-- Keys are enum constants.
-- Maximum performance is required.
-
----
-
-# 21. DSA Selection Guide
-
-## Scenario 1
-
-Need fast key-based lookup.
-
-Choose:
-
-```java
-HashMap
-```
-
-Reason:
-
-```text
-get(key) → O(1)
+Map<Day, String> schedule = new EnumMap<>(Day.class);
+schedule.put(Day.MONDAY, "Working Day");
+schedule.put(Day.SUNDAY, "Holiday");
+// Internally: array[1] = "Working Day", array[0] = "Holiday"
 ```
 
 ---
 
-## Scenario 2
+## 4. Side-by-Side Comparison
 
-Need insertion order.
+| Feature | **HashMap** | **LinkedHashMap** | **TreeMap** | **Hashtable** | **ConcurrentHashMap** | **WeakHashMap** | **EnumMap** | **IdentityHashMap** |
+|---------|:-----------:|:-----------------:|:-----------:|:-------------:|:---------------------:|:---------------:|:-----------:|:-------------------:|
+| Internal | Hash Table | Hash Table + Linked List | Red-Black Tree | Hash Table | Hash Table (segmented) | Hash Table | Array | Hash Table |
+| Ordering | Unpredictable | Insertion/Access | Sorted by key | Unpredictable | Unpredictable | Unpredictable | Enum order | Unpredictable |
+| `get()` | **O(1)*** | **O(1)*** | O(log n) | **O(1)*** | **O(1)*** | **O(1)*** | **O(1)** | **O(1)*** |
+| `put()` | **O(1)*** | **O(1)*** | O(log n) | **O(1)*** | **O(1)*** | **O(1)*** | **O(1)** | **O(1)*** |
+| Null Key | One | One | ❌ | ❌ | ❌ | One | ❌ | Multiple |
+| Null Values | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Thread-Safe | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Memory | Low | Medium | Medium | Medium | Higher | Low | Lowest | Low |
+| Modern? | ✅ | ✅ | ✅ | ❌ Legacy | ✅ | ✅ | ✅ | ✅ |
 
-Choose:
+> *Average case
 
-```java
-LinkedHashMap
+---
+
+## 5. Decision Guide
+
 ```
-
-Reason:
-
-Maintains insertion order.
-
----
-
-## Scenario 3
-
-Need sorted keys.
-
-Choose:
-
-```java
-TreeMap
-```
-
-Reason:
-
-Automatically maintains sorted order by keys.
-
----
-
-## Scenario 4
-
-Need thread safety.
-
-Choose:
-
-```java
-ConcurrentHashMap
-```
-
-Reason:
-
-Better concurrent performance than Hashtable.
-
----
-
-## Scenario 5
-
-Need navigation methods like higher(), lower(), ceiling(), floor().
-
-Choose:
-
-```java
-TreeMap
-```
-
----
-
-## Scenario 6
-
-Need best overall performance.
-
-Choose:
-
-```java
-HashMap
-```
-
-This is why HashMap is the most commonly used Map implementation in Java.
-
----
-
-# 22. Common Misconceptions
-
-### Myth 1
-
-HashMap stores entries randomly.
-
-❌ False.
-
-Entries are stored according to hash values of keys, not randomly.
-
----
-
-### Myth 2
-
-LinkedHashMap is completely different from HashMap.
-
-❌ False.
-
-LinkedHashMap extends HashMap by maintaining insertion order.
-
----
-
-### Myth 3
-
-TreeMap sorts entries only once.
-
-❌ False.
-
-TreeMap keeps the collection sorted after every insertion and deletion.
-
----
-
-### Myth 4
-
-HashMap is always faster.
-
-❌ False.
-
-If sorted data is required, TreeMap is the correct choice despite being slower.
-
----
-
-### Myth 5
-
-Map extends Collection.
-
-❌ False.
-
-Map is a separate interface and does NOT extend Collection.
-
----
-
-# 23. Decision Flowchart
-
-```text
-Need Key-Value Storage?
-
+Need key-value storage?
         │
         ▼
-
-Need Fast Lookup?
-
-      Yes ─────────► HashMap
-
-       No
-       │
-       ▼
-
-Need Insertion Order?
-
-      Yes ─────────► LinkedHashMap
-
-       No
-       │
-       ▼
-
-Need Sorted Keys?
-
-      Yes ─────────► TreeMap
-
-       No
-       │
-       ▼
-
-Need Thread Safety?
-
-      Yes ─────────► ConcurrentHashMap
+Need maximum performance (fast lookup)?
+        │
+       Yes ───► HashMap
+        │
+        No
+        ▼
+Need insertion/access order preserved?
+        │
+       Yes ───► LinkedHashMap
+        │
+        No
+        ▼
+Need sorted keys or range queries?
+        │
+       Yes ───► TreeMap
+        │
+        No
+        ▼
+Need thread safety?
+        │
+       Yes ───► ConcurrentHashMap
+        │
+        No
+        ▼
+Need enum keys only?
+        │
+       Yes ───► EnumMap
+        │
+        No
+        ▼
+Need auto-expiring cache (GC-sensitive)?
+        │
+       Yes ───► WeakHashMap
+        │
+        No
+        ▼
+Need reference equality (== not equals)?
+        │
+       Yes ───► IdentityHashMap
+        │
+        No
+        ▼
+   Default: HashMap
 ```
 
 ---
 
-# Part 3 : Real-World Examples, Interview Guide and Summary
+## 6. Real-World Use Cases
+
+| Scenario | Choice | Why |
+|----------|--------|-----|
+| User ID → Profile mapping | **HashMap** | Fastest general lookup |
+| Configuration settings | **HashMap** | Key-value config, no ordering needed |
+| In-memory cache | **HashMap** / **ConcurrentHashMap** | Fast access, concurrent if needed |
+| Recently accessed items (LRU) | **LinkedHashMap** | Access-order iteration for eviction |
+| Session management | **LinkedHashMap** | Ordered session tracking |
+| Dictionary (word → meaning) | **TreeMap** | Alphabetically sorted keys |
+| Leaderboard (sorted scores) | **TreeMap** | Auto-sorted + range queries |
+| Phone contacts (number → name) | **HashMap** | Fast lookup by phone number |
+| Word frequency counter | **HashMap** | Fast counting by word |
+| Shared cache in multi-threaded server | **ConcurrentHashMap** | Thread-safe, high concurrency |
+| Real-time data processing config | **ConcurrentHashMap** | Atomic compute/merge operations |
+| Memory-sensitive metadata cache | **WeakHashMap** | Auto-cleanup when objects GC'd |
+| Listener/observer registries | **WeakHashMap** | Auto-remove dead listeners |
+| Day-of-week scheduling | **EnumMap** | Enum keys, maximum speed |
+| Status-based routing | **EnumMap** | Type-safe state machine |
+| Object identity tracking | **IdentityHashMap** | Reference equality for specific instances |
+| Serialization framework internals | **IdentityHashMap** | Track visited object references |
 
 ---
 
-# 24. Real-World Examples
+## 7. Common Misconceptions
 
-Understanding where each implementation is used in real applications helps in selecting the right data structure.
-
----
-
-## HashMap
-
-### Why?
-
-- Fast key-based lookup
-- Fast insertion
-- Most operations involve reading data
-
-### Real-World Applications
-
-- User ID to User Profile mapping
-- Configuration settings (key-value pairs)
-- In-memory caching
-- Index mapping
-- Word frequency counting
-
-Example:
-
-```text
-User ID → User Object
-
-101 → Alice
-102 → Bob
-103 → Charlie
-```
-
-Searching by user ID is very fast.
+| Myth | Reality |
+|------|---------|
+| HashMap stores entries randomly | ❌ Stored by key's hash value, not randomly — but order is unpredictable |
+| LinkedHashMap is completely different from HashMap | ❌ It **extends** HashMap and adds a linked list for order |
+| TreeMap sorts only once | ❌ TreeMap is **always** sorted — rebalances after every insertion/deletion |
+| HashMap is always the best choice | ❌ If you need ordering, sorting, or thread safety, HashMap is wrong |
+| Map extends Collection | ❌ `Map` is a **separate** interface; it does NOT extend `Collection` |
+| Hashtable is fine for new code | ❌ Legacy class; `ConcurrentHashMap` is the modern replacement |
+| All Maps allow null keys | ❌ Only HashMap, LinkedHashMap, WeakHashMap, IdentityHashMap allow null keys |
 
 ---
 
-## LinkedHashMap
+## 8. Common Mistakes
 
-### Why?
-
-Insertion and order preservation are important.
-
-### Real-World Applications
-
-- Recently accessed items
-- Ordered configuration files
-- Session management
-- LRU cache implementation
-- Browser history (ordered)
-
-Example:
-
-```text
-Page 1 → Page 2 → Page 3 → Page 4
-```
-
-Order of access is preserved.
+| Mistake | Problem | Solution |
+|---------|---------|----------|
+| Using `HashMap` when order matters | Unpredictable iteration order | Use `LinkedHashMap` |
+| Using `TreeMap` just for fast lookup | O(log n) overhead unnecessary | Use `HashMap` for simple lookup |
+| Using `LinkedHashMap` expecting sorted data | Only insertion order, not sorted | Use `TreeMap` for sorting |
+| Storing non-`Comparable` keys in `TreeMap` without `Comparator` | `ClassCastException` | Implement `Comparable` or provide `Comparator` |
+| Using `Hashtable` in modern code | Synchronization overhead, legacy | Use `ConcurrentHashMap` |
+| Using mutable objects as keys in `HashMap` | Changing key fields breaks `hashCode()`/`equals()` | Use immutable keys |
+| Not overriding `equals()` and `hashCode()` for custom keys | Keys with same data treated as different | Always override both |
+| Expecting duplicate keys to coexist | Old value is silently replaced | Check `put()` return value |
 
 ---
 
-## TreeMap
+## 9. Interview Quick Reference
 
-### Why?
-
-Sorted data is required.
-
-### Real-World Applications
-
-- Sorted rankings
-- Dictionary words
-- Score boards
-- Calendar events
-- Time-based data
-
-Example:
-
-```text
-Alice=85
-Bob=90
-Charlie=78
-```
-
-Sorted by name:
-
-```text
-Alice=85
-Bob=90
-Charlie=78
-```
+| Question | Answer |
+|----------|--------|
+| Why multiple Map implementations? | Different needs: speed, order, sorting, concurrency, key type. |
+| Why is `HashMap` faster than `TreeMap`? | HashMap uses hashing (O(1) avg); TreeMap uses Red-Black Tree (O(log n)). |
+| Why does `LinkedHashMap` use more memory? | Extra doubly linked list to maintain insertion/access order. |
+| Why doesn't `TreeMap` allow null keys? | Cannot compare null with other keys during tree operations. |
+| Why is `ConcurrentHashMap` preferred over `Hashtable`? | `Hashtable` locks entire table; `ConcurrentHashMap` uses fine-grained locking/CAS. |
+| What happens when duplicate keys are added? | Old value is replaced; `put()` returns the previous value. |
+| Which Map for navigation methods (`higherKey`, `floorEntry`)? | `TreeMap` via `NavigableMap`. |
+| Which Map is most memory-efficient? | `EnumMap` — compact array, no hashing overhead. |
+| Which Map auto-expires entries? | `WeakHashMap` — entries removed when key is GC'd. |
+| Difference `HashMap` vs `IdentityHashMap`? | `HashMap` uses `equals()`; `IdentityHashMap` uses `==`. |
+| Why no null in `ConcurrentHashMap`? | `null` is ambiguous in concurrent context (can't distinguish "not found" from "null value"). |
+| How does Java 8 improve `HashMap` worst case? | Buckets convert to Red-Black Trees when collisions exceed threshold (O(log n) vs O(n)). |
 
 ---
 
-## Hashtable
+## 10. One-Line Summary
 
-### Why?
+| Need | Use |
+|------|-----|
+| Fast general key-value lookup | **HashMap** |
+| Preserve insertion/access order | **LinkedHashMap** |
+| Auto-sorted keys + range queries | **TreeMap** |
+| Thread-safe concurrent access | **ConcurrentHashMap** |
+| Legacy synchronized code | **Hashtable** (avoid) |
+| Auto-expiring cache | **WeakHashMap** |
+| Enum keys (maximum performance) | **EnumMap** |
+| Reference equality (`==`) | **IdentityHashMap** |
 
-Legacy thread-safe code.
-
-### Real-World Applications
-
-- Legacy enterprise applications
-- Older Java systems
-
-Modern projects rarely use Hashtable.
-
----
-
-## ConcurrentHashMap
-
-### Why?
-
-Thread-safe concurrent access.
-
-### Real-World Applications
-
-- Shared caches in multi-threaded servers
-- Concurrent configuration maps
-- Real-time data processing
-
----
-
-## WeakHashMap
-
-### Why?
-
-Automatic cleanup of entries.
-
-### Real-World Applications
-
-- Memory-sensitive caches
-- Associating metadata with objects
-- Listener management
-
----
-
-## EnumMap
-
-### Why?
-
-Enum keys with maximum performance.
-
-### Real-World Applications
-
-- Day-based scheduling
-- Status-based routing
-- Priority-based processing
-
----
-
-# 25. Quick Revision Table
-
-| Implementation | Order | Null Key | Null Values | Thread-Safe | Use Case |
-| ---------------|-------|----------|-------------|-------------|----------|
-| HashMap | Unordered | One | Yes | No | General purpose |
-| LinkedHashMap | Insertion | One | Yes | No | Ordered access |
-| TreeMap | Sorted | No | Yes | No | Sorted keys |
-| Hashtable | Unordered | No | No | Yes | Legacy |
-| ConcurrentHashMap | Unordered | No | No | Yes | Concurrent access |
-| WeakHashMap | Unordered | One | Yes | No | Cache with GC |
-| EnumMap | Enum order | No | Yes | No | Enum keys |
-| IdentityHashMap | Unordered | Multiple | Yes | No | Reference equality |
-
----
-
-# 26. Key Takeaways
-
-- HashMap is the most commonly used Map implementation.
-- LinkedHashMap preserves insertion order.
-- TreeMap automatically sorts keys.
-- Hashtable is legacy and synchronized.
-- ConcurrentHashMap is preferred for thread safety.
-- Map does NOT extend Collection.
-- Keys are always unique; values can be duplicated.
-
----
-
-# 27. Final Summary
-
-| Need | Choose |
-|------|--------|
-| Fast lookup | HashMap |
-| Insertion order | LinkedHashMap |
-| Sorted keys | TreeMap |
-| Thread safety | ConcurrentHashMap |
-| Legacy code | Hashtable |
-| Cache with GC | WeakHashMap |
-| Enum keys | EnumMap |
-| Reference equality | IdentityHashMap |
-
----
-
-# End of Map Differences
+> **Key Principle:** Choose based on **ordering** (none vs insertion vs sorted), **concurrency needs**, **key type**, and **memory constraints** — not familiarity.
