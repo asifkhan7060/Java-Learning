@@ -2,20 +2,20 @@
 
 ## Table of Contents
 
-1. Collection Interface
-2. Collection Methods
-3. Collection vs Collections
-4. Iterator
-5. Iterator Methods
-6. ListIterator
-7. ListIterator Methods
-8. Spliterator
-9. Spliterator Methods
-10. Interview Questions
+- Collection Interface
+- Collection Methods
+- Collection vs Collections
+- Iterator
+- Iterator Methods
+- ListIterator
+- ListIterator Methods
+- Spliterator
+- Spliterator Methods
+- Interview Questions
 
 ---
 
-# Part 1 : Collection Interface
+# Collection Interface
 
 ## What is Collection?
 
@@ -51,7 +51,7 @@ List Set Queue
 
 ---
 
-# Part 2 : Collection Methods
+# Collection Methods
 
 ## add()
 
@@ -115,7 +115,7 @@ boolean remove(Object o)
 ### Example
 
 ```java
-nums.remove(10);
+nums.remove(10); //removes via giving value
 ```
 
 ---
@@ -322,9 +322,88 @@ int hashCode()
 nums.hashCode();
 ```
 
+# Collection Methods - Easy Memory Trick
+
+## Short Memory Sentence
+
+> **Add → Remove → Check → Count → Clear → Convert → Compare**
+
+This follows the natural lifecycle of working with a collection.
+
 ---
 
-# Collection vs Collections
+## Expansion
+
+### ➕ Add
+
+```text
+add()
+addAll()
+```
+
+---
+
+### ➖ Remove
+
+```text
+remove()
+removeAll()
+retainAll()
+```
+
+> `retainAll()` keeps only the common elements.
+
+---
+
+### ✅ Check
+
+```text
+contains()
+containsAll()
+```
+
+---
+
+### 📊 Count
+
+```text
+size()
+isEmpty()
+```
+
+---
+
+### 🗑️ Clear
+
+```text
+clear()
+```
+
+---
+
+### 🔄 Convert
+
+```text
+toArray()
+toArray(T[] a)
+```
+
+---
+
+### ⚖️ Compare
+
+```text
+equals()
+hashCode()
+```
+
+## One-Line Revision
+
+> **Add → Remove → Check → Count → Clear → Convert → Compare**
+
+---
+
+# Collection vs Collections (For Collection Refer 07-UtilityClasses Folder there u will understand(Better to learn Collections first))
 
 | Collection                 | Collections                  |
 | -------------------------- | ---------------------------- |
@@ -335,7 +414,7 @@ nums.hashCode();
 
 ---
 
-# Part 3 : Iterator
+# Iterator
 
 ## What is Iterator?
 
@@ -361,7 +440,7 @@ Collection
 
 ---
 
-# Part 4 : Iterator Methods
+# Iterator Methods
 
 ## hasNext()
 
@@ -430,7 +509,7 @@ while(it.hasNext())
 
 ---
 
-# Part 5 : ListIterator
+# ListIterator
 
 ## What is ListIterator?
 
@@ -441,11 +520,11 @@ public interface ListIterator<E>
         extends Iterator<E>
 ```
 
-Works only with List implementations.
+Works only with List implementations (Becuz the listiterator() method only available in List Interface)
 
 ---
 
-# Part 6 : ListIterator Methods
+# ListIterator Methods
 
 ## hasPrevious()
 
@@ -508,7 +587,7 @@ ListIterator<Integer> it =
 
 ---
 
-# Part 7 : Spliterator
+# Spliterator (Not So used)
 
 ## What is Spliterator?
 
@@ -526,7 +605,7 @@ public interface Spliterator<T>
 
 ---
 
-# Part 8 : Spliterator Methods
+# Spliterator Methods
 
 ## tryAdvance()
 
