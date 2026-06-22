@@ -1,4 +1,4 @@
-package B_CollectionsAndIterator;
+package B_Collection_and_Iterator;
 
 import java.util.*;
 
@@ -6,87 +6,288 @@ public class Implementation {
 
     public static void main(String[] args) {
 
+        // =====================================================
+        // Collection Declaration
+        // =====================================================
+
+        // Syntax:
+        // ReferenceType<GenericType> referenceVariable = new ConcreteClass<>();
+
+        /*
+        Collection<Integer> nums = new ArrayList<>();
+
         // Collection is an Interface
         // ArrayList is a Class that implements Collection indirectly
 
-        Collection<Integer> nums = new ArrayList<>(); // Integer is used for type safety as a concept of generics
+        Explanation:
 
-        // add() method
+        Collection        -> Interface (Reference Type)
+        Integer           -> Generic Type (Type Parameter)
+        nums              -> Reference Variable
+        new               -> Object Creation Keyword
+        ArrayList         -> Concrete / Implementation Class
+        ()                -> Constructor Call
+        new ArrayList<>() -> Creates an instance (object) of ArrayList
+
+
+        Why <Integer>?
+        ---------------
+
+        Generics provide type safety.
+
+        Only Integer objects can be stored in this collection.
+
+        Example:
+
+        nums.add(10);        // ✔ Allowed
+        nums.add(20);        // ✔ Allowed
+        nums.add("Java");    // ✘ Compile-time Error
+
+
+        Without Generics:
+
+        Collection nums = new ArrayList(); // Raw Type
+        // Collection<Object> nums = new ArrayList<>();  // preferred
+
+        nums.add(10);
+        nums.add("Java");
+        nums.add(true);
+
+        Different object types can be added, which may cause
+        runtime errors while retrieving elements.
+
+
+        =====================================================
+        Loose Coupling
+        =====================================================
+
+        We program to the interface, not the implementation.
+
+        ✔ Preferred
+
+        Collection<Integer> nums = new ArrayList<>();
+
+        Because the implementation can be changed easily.
+
+        Collection<Integer> nums = new LinkedList<>();
+        Collection<Integer> nums = new HashSet<>();
+
+        (The reference type remains the same.)
+
+
+        =====================================================
+        Can we create an object of an interface?
+        =====================================================
+
+        ✘ No
+
+        Collection<Integer> nums = new Collection<>();
+
+        Reason:
+
+        Collection is an interface, and interfaces cannot
+        be instantiated.
+
+        ✔ We must create an object of a concrete class.
+
+        Collection<Integer> nums = new ArrayList<>();
+        Collection<Integer> nums = new LinkedList<>();
+        Collection<Integer> nums = new HashSet<>();
+
+
+        =====================================================
+        Which Reference Types Can Be Used?
+        =====================================================
+
+        Depending on the implementation class:
+
+        Collection<Integer> c = new ArrayList<>();
+        List<Integer>       l = new ArrayList<>();
+        Iterable<Integer>   i = new ArrayList<>();
+
+        Collection<Integer> c = new LinkedList<>();
+        List<Integer>       l = new LinkedList<>();
+        Deque<Integer>      d = new LinkedList<>();
+        Queue<Integer>      q = new LinkedList<>();
+        Iterable<Integer>   i = new LinkedList<>();
+
+        Collection<Integer> c = new HashSet<>();
+        Set<Integer>        s = new HashSet<>();
+        Iterable<Integer>   i = new HashSet<>();
+
+        The reference type must be a superclass or interface
+        implemented by the concrete class.
+        */
+
+        Collection<Integer> nums = new ArrayList<>(); // Integer is used for type safety (Generics)
+
+        // Methods : Add → Remove → Check → Count → Clear → Convert → Compare
+
+        // =====================================================
+        // Add
+        // =====================================================
+
+        // add() - Adds a single element
         nums.add(10);
         nums.add(20);
         nums.add(30);
         nums.add(40);
 
-        System.out.println("After add(): " + nums);
+        System.out.println("After add() : " + nums);
 
-        // size()
-        System.out.println("Size : " + nums.size());
-
-        // contains()
-        System.out.println("Contains 20 ? " + nums.contains(20));
-        System.out.println("Contains 100 ? " + nums.contains(100));
-
-        // isEmpty()
-        System.out.println("Is Empty ? " + nums.isEmpty());
-
-        // remove()
-        nums.remove(20);
-        System.out.println("After remove(20): " + nums);
-
-        // addAll()
+        // addAll() - Adds all elements from another collection
         Collection<Integer> other = new ArrayList<>();
 
         other.add(50);
         other.add(60);
 
         nums.addAll(other);
-        System.out.println("After addAll(): " + nums);
-        System.out.println("After addAll() other list values: " + other);
 
-        // containsAll()
-        System.out.println("Contains All (you see other items 50,60 present in nums list)? " + nums.containsAll(other)); // Checks other list items available in the nums list ? if yes true otherwise false
+        System.out.println("After addAll() : " + nums);
+        System.out.println("Other Collection : " + other);
 
-        // equals()
-        // Compares two collections
-        Collection<Integer> compareList = new ArrayList<>();
+        System.out.println();
 
-        compareList.add(10);
-        compareList.add(30);
-        compareList.add(40);
-        compareList.add(50);
-        compareList.add(60);
 
-        System.out.println("\ncompareList : " + compareList);
-        System.out.println("nums : " + nums);
+        // =====================================================
+        // Remove
+        // =====================================================
 
-        System.out.println("equals() ? " + nums.equals(compareList));
+        // remove() - Removes a specific element
+        nums.remove(20);
 
-        // hashCode()
-        // Returns hash value of collection
-        System.out.println("nums hashCode : " + nums.hashCode());
-        System.out.println("compareList hashCode : " + compareList.hashCode());
+        System.out.println("After remove(20) : " + nums);
 
-        // toArray()
-        // Convert Collection into Array
-        Object[] arr = nums.toArray();
+        // removeAll() - Removes all matching elements
+        Collection<Integer> removeList = new ArrayList<>();
 
-        System.out.println("\nArray Elements");
+        removeList.add(30);
+        removeList.add(50);
 
-        for (Object obj : arr) {
+        nums.removeAll(removeList);
 
+        System.out.println("After removeAll() : " + nums);
+
+        // retainAll() - Keeps only common elements
+        Collection<Integer> keepList = new ArrayList<>();
+
+        keepList.add(10);
+        keepList.add(60);
+
+        nums.retainAll(keepList);
+
+        System.out.println("After retainAll() : " + nums);
+
+        System.out.println();
+
+
+        // =====================================================
+        // Check
+        // =====================================================
+
+        // contains() - Checks whether an element exists
+        System.out.println("Contains 10 ? " + nums.contains(10));
+        System.out.println("Contains 100 ? " + nums.contains(100));
+
+        // containsAll() - Checks whether all elements of another collection exist
+        System.out.println("Contains All ? " + nums.containsAll(keepList));
+
+        System.out.println();
+
+
+        // =====================================================
+        // Count
+        // =====================================================
+
+        // size() - Returns number of elements
+        System.out.println("Size : " + nums.size());
+
+        // isEmpty() - Checks whether collection is empty
+        System.out.println("Is Empty ? " + nums.isEmpty());
+
+        System.out.println();
+
+
+        // =====================================================
+        // Clear
+        // =====================================================
+
+        // Create a backup because clear() removes everything
+        Collection<Integer> backup = new ArrayList<>(nums);
+
+        // clear() - Removes all elements
+        nums.clear();
+
+        System.out.println("After clear() : " + nums);
+        System.out.println("Is Empty ? " + nums.isEmpty());
+
+        System.out.println();
+
+        // Restore data for remaining examples
+        nums.addAll(backup);
+
+
+        // =====================================================
+        // Convert
+        // =====================================================
+
+        // toArray() - Converts Collection into Object Array
+        Object[] objectArray = nums.toArray();
+
+        System.out.println("Object Array");
+
+        for (Object obj : objectArray) {
             System.out.println(obj);
         }
 
-        // toArray(T[] a)
-        // Converts Collection into Typed Array
-        Integer[] typedArray = nums.toArray(new Integer[0]);
+        System.out.println();
 
-        System.out.println("\nTyped Array Elements");
+        // toArray(T[] a) - Converts Collection into Typed Array
+        Integer[] typedArray = nums.toArray(new Integer[0]); // 0 - "I'm giving Java an empty Integer array. You create a new array of the required size if needed"
 
-        for(Integer value : typedArray)
-        {
+        /*
+        Java sees:
+        Collection Size = 3
+        Array Size = 0
+
+        Since the array is too small, Java automatically creates a new array. [10,20,30] and returns it.
+         */
+
+        System.out.println("Typed Array");
+
+        for (Integer value : typedArray) {
             System.out.println(value);
         }
+
+        System.out.println();
+
+
+        // =====================================================
+        // Compare
+        // =====================================================
+
+        // equals() - Compares two collections
+        Collection<Integer> compareList = new ArrayList<>();
+
+        compareList.add(10);
+        compareList.add(60);
+
+        System.out.println("nums        : " + nums);
+        System.out.println("compareList : " + compareList);
+
+        System.out.println("equals() : " + nums.equals(compareList));
+
+        /*
+        One-Line Revision
+        containsAll() → "Are all elements of the other collection present in this collection?"
+        equals() → "Are both collections exactly the same?" (it checks as exact with order,elements,size) */
+
+        // hashCode() - Returns hash value
+        System.out.println("nums hashCode        : " + nums.hashCode());
+        System.out.println("compareList hashCode : " + compareList.hashCode());
+
+
+        // Other methods (stream, parallel stream, remove if)
 
         // stream()
         // Creates a sequential stream from the collection.
@@ -103,41 +304,23 @@ public class Implementation {
 
         nums.parallelStream().forEach(System.out::println);
 
-        // retainAll()
-        // Keeps only common elements
-        Collection<Integer> retainDemo = new ArrayList<>();
+        System.out.println();
 
-        retainDemo.add(10);
-        retainDemo.add(50);
-
-        System.out.println("\nItems in nums"+nums);
-        System.out.println("Items in retainDemo"+retainDemo);
-
-        nums.retainAll(retainDemo);
-
-        System.out.println("After retainAll() nums become: " + nums);
-
-        // removeAll()
-        // Removes all matching elements
-        nums.add(100);
-        nums.add(200);
-
-        System.out.println("\nBefore removeAll() nums is: " + nums);
-        System.out.println("Before removeAll() retainDemo is: " + retainDemo);
-
-        nums.removeAll(retainDemo); // removes item of retainDemo from nums items
-
-        System.out.println("After removeAll(): " + nums);
-
-        // clear()
-        // Removes all elements
+        // removeIf() - Removes elements that satisfy the given condition (Java 8+)
+        System.out.println("Values in nums: "+nums);
         nums.clear();
+        nums.addAll(Arrays.asList(10, 20, 30, 40, 50, 60)); // Adding new list via array
 
-        System.out.println("\nAfter clear(): " + nums);
+        System.out.println("Before removeIf() : " + nums);
 
-        // isEmpty()
-        System.out.println("Is Empty ? " + nums.isEmpty());
+        // Remove all even numbers
+        nums.removeIf(num -> num % 2 == 0);
 
+        System.out.println("After removeIf() (Removed Even Numbers) : " + nums);
+
+        // Restore the collection for the remaining examples
+        nums.clear();
+        nums.addAll(Arrays.asList(10, 60));
 
 
 
@@ -227,7 +410,6 @@ public class Implementation {
 
         // iterator(), hasNext(), next()
 
-        Iterable<Integer> iterable = iteratorDemo; // possible (If you want to use iterable Interface but not recommended)
         Iterator<Integer> it = iteratorDemo.iterator(); // iterator() returns an Iterator object. Therefore, we store the returned object in an Iterator reference.
 
         System.out.println("\nUsing Iterator");
@@ -257,7 +439,7 @@ public class Implementation {
         // FOR EACH LOOP
         // =====================================================
 
-        // To simplify use of above method java implement this for each loop but in backend above while loop process occurs
+        // To simplify use of above method java implement this for each loop but in backend (above while loop) process occurs
 
         System.out.println("\nUsing For Each Loop");
 
@@ -371,6 +553,8 @@ public class Implementation {
         System.out.println("\nAfter remove()");
         System.out.println(list);
 
+
+
         // =====================================================
         // SPLITERATOR
         // =====================================================
@@ -399,7 +583,6 @@ public class Implementation {
         spliteratorList.add(30);
         spliteratorList.add(40);
 
-        Iterable<Integer> iterable1 = spliteratorList; // possible (If you want to use iterable Interface but not recommended)
         Spliterator<Integer> sp = spliteratorList.spliterator(); // Returns a Spliterator Object
 
         // tryAdvance() - Move one step forward then Execute given action
