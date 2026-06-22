@@ -631,7 +631,7 @@ public class Implementation {
             splitPart.forEachRemaining(System.out::println); // here remaining next element gets printed (i.e 20 as 10 already processed)
         }
 
-        System.out.println("\nRemaining Elements"); //printing the remaining elements
+        System.out.println("\nRemaining Elements"); //printing the remaining elements....
 
         sp.forEachRemaining(System.out::println);
 
