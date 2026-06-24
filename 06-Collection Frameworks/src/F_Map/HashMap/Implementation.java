@@ -1,4 +1,4 @@
-package E_Map.HashMap;
+package F_Map.HashMap;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package B_List.ArrayList;
+package C_List.ArrayList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,9 +41,11 @@ public class Implementation {
         }
 
         // Iterator
+        int a=0;
         Iterator<String> it = users1.iterator();
         while (it.hasNext()){
-            System.out.println("Using Iterator: "+it.next());
+            System.out.println("Using Iterator [" +a+ "]:"+it.next());
+            a++;
         }
 
         // Indexing

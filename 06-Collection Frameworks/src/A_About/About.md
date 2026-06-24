@@ -56,7 +56,7 @@ numbers.add(30);
 ```text
 Collection
 │
-├── B_List
+├── C_List
 ├── Set
 ├── Queue
 │
@@ -65,16 +65,16 @@ Map (Separate Interface)
 
 Major parts:
 
-1. B_List
+1. C_List
 2. Set
 3. Queue
 4. Map
 
 ---
 
-# B_List
+# C_List
 
-A **B_List** is an ordered collection of elements.
+A **C_List** is an ordered collection of elements.
 
 ### Characteristics
 
@@ -86,7 +86,7 @@ A **B_List** is an ordered collection of elements.
 ### Example
 
 ```java
-B_List<String> names = new ArrayList<>();
+C_List<String> names = new ArrayList<>();
 
 names.add("John");
 names.add("Ali");
@@ -227,7 +227,7 @@ Collections are usually used with Generics.
 ### Without Generics
 
 ```java
-B_List list = new ArrayList();
+C_List list = new ArrayList();
 
 list.add("John");
 list.add(10);
@@ -238,7 +238,7 @@ Different data types can be added.
 ### With Generics
 
 ```java
-B_List<String> users = new ArrayList<>();
+C_List<String> users = new ArrayList<>();
 ```
 
 Only String values are allowed.
@@ -246,15 +246,15 @@ Only String values are allowed.
 ### Syntax
 
 ```java
-B_List<Type> variableName;
+C_List<Type> variableName;
 ```
 
 Examples:
 
 ```java
-B_List<String> names;
-B_List<Integer> numbers;
-B_List<Double> marks;
+C_List<String> names;
+C_List<Integer> numbers;
+C_List<Double> marks;
 ```
 
 ---
@@ -325,7 +325,7 @@ list.isEmpty();
 
 # Real-Life Examples
 
-### B_List
+### C_List
 
 Student attendance register.
 
@@ -385,7 +385,7 @@ Each key uniquely identifies a value.
 
 - Collection = Group of Objects
 - Collection Framework = Toolbox for managing objects
-- B_List → Ordered, duplicates allowed
+- C_List → Ordered, duplicates allowed
 - Set → Unordered, duplicates not allowed
 - Queue → FIFO structure
 - Map → Key-Value pair
@@ -398,7 +398,7 @@ Each key uniquely identifies a value.
 
 | Interface | Ordered | Duplicates | Example |
 |------------|----------|------------|---------|
-| B_List | Yes | Yes | ArrayList |
+| C_List | Yes | Yes | ArrayList |
 | Set | No | No | HashSet |
 | Queue | FIFO | Yes | LinkedList |
 | Map | Key-Value | Unique Keys | HashMap |
