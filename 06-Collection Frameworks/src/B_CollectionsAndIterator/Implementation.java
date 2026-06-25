@@ -88,6 +88,21 @@ public class Implementation {
             System.out.println(value);
         }
 
+        // stream()
+        // Creates a sequential stream from the collection.
+
+        System.out.println("\nUsing stream()");
+
+        nums.stream().forEach(System.out::println);
+
+        // parallelStream()
+        // Creates a parallel stream.
+        // Elements may not be processed in order.
+
+        System.out.println("\nUsing parallelStream()");
+
+        nums.parallelStream().forEach(System.out::println);
+
         // retainAll()
         // Keeps only common elements
         Collection<Integer> retainDemo = new ArrayList<>();
@@ -151,6 +166,9 @@ public class Implementation {
           Iterable (Interface)
             │
             │ Provides Methods
+            │
+            │── forEach()
+            │
             │
             ├── iterator() ─── returns ──► Iterator (Interface) Ex: Iterator<Integer> it = nums.iterator();
             │                                │
@@ -395,6 +413,13 @@ public class Implementation {
         System.out.println("\nestimateSize()");
         System.out.println(sp.estimateSize());
 
+        // getExactSizeIfKnown()
+        // Returns the exact number of remaining elements.
+        // Returns -1 if the exact size is unknown.
+
+        System.out.println("\ngetExactSizeIfKnown()");
+        System.out.println(sp.getExactSizeIfKnown());
+
         // characteristics() - provides the bit mask number (always same on every printing as each no indicate something)
         /*
         It represents properties like:
@@ -427,5 +452,22 @@ public class Implementation {
 
         sp.forEachRemaining(System.out::println);
 
+        // getComparator()
+        
+        /*
+        Returns the Comparator used to sort the collection.
+
+        Works only for SORTED collections (e.g., TreeSet, TreeMap).
+
+        ArrayList is NOT a sorted collection. It only maintains
+        insertion order, so calling getComparator() on its
+        Spliterator throws IllegalStateException.
+
+        Recommended:
+
+        if (sp.hasCharacteristics(Spliterator.SORTED)) {
+            System.out.println(sp.getComparator());
+        }
+        */
     }
 }
