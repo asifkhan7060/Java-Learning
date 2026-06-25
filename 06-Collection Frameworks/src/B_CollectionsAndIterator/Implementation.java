@@ -353,7 +353,6 @@ public class Implementation {
         System.out.println("\nAfter remove()");
         System.out.println(list);
 
-        //pending 
         // =====================================================
         // SPLITERATOR
         // =====================================================
@@ -362,42 +361,69 @@ public class Implementation {
         System.out.println("Spliterator Examples");
         System.out.println("=========================");
 
-        Collection<Integer> spliteratorList = new ArrayList<>();
+        /*
+        /*
+          Spliterator
+            Introduced in Java 8.
+            Means: Split + Iterator
+            Used for: Streams API, Parallel Processing, Large Data Traversal
+            Methods:
+            tryAdvance()
+            trySplit()
+            estimateSize()
+            characteristics()
+         */
+
+        Collection<Integer> spliteratorList = new ArrayList<>(); //
 
         spliteratorList.add(10);
         spliteratorList.add(20);
         spliteratorList.add(30);
         spliteratorList.add(40);
 
-        Spliterator<Integer> sp = spliteratorList.spliterator();
+        Iterable<Integer> iterable1 = spliteratorList; // possible (If you want to use iterable Interface but not recommended)
+        Spliterator<Integer> sp = spliteratorList.spliterator(); // Returns a Spliterator Object
 
-        // tryAdvance()
+        // tryAdvance() - Move one step forward then Execute given action
         System.out.println("\ntryAdvance()");
 
-        sp.tryAdvance(System.out::println);
+        sp.tryAdvance(System.out::println);  // System.out::println means x -> System.out.println(x)
 
-// estimateSize()
+        // Now one element has already been processed.
 
+        // estimateSize() - prints size of remaining elements since one gets processed now remains 3
         System.out.println("\nestimateSize()");
         System.out.println(sp.estimateSize());
 
-// characteristics()
-
+        // characteristics() - provides the bit mask number (always same on every printing as each no indicate something)
+        /*
+        It represents properties like:
+        Ordered
+        Sized
+        Non-null
+        Immutable
+        Sorted
+         */
         System.out.println("\ncharacteristics()");
         System.out.println(sp.characteristics());
 
-// trySplit()
+        // Usually used in such as way -
+        if(sp.hasCharacteristics(Spliterator.ORDERED))
+        {
+            System.out.println("Ordered");
+        }
 
+        // trySplit() - Java tries to divide the remaining data.
         Spliterator<Integer> splitPart = sp.trySplit();
 
         System.out.println("\ntrySplit()");
 
         if (splitPart != null) {
 
-            splitPart.forEachRemaining(System.out::println);
+            splitPart.forEachRemaining(System.out::println); // here remaining next element gets printed (i.e 20 as 10 already processed)
         }
 
-        System.out.println("\nRemaining Elements");
+        System.out.println("\nRemaining Elements"); //printing the remaining elements
 
         sp.forEachRemaining(System.out::println);
 
