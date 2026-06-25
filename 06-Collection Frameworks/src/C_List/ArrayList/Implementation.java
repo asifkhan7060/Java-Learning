@@ -1,8 +1,6 @@
 package C_List.ArrayList;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 // In Which areas list interface are used ?
 // Hold ctrl and move cursor to List keyword -> go to that file hold again ctrl and move to list and click -> dropdown project files and keep All Places to see where list are implemented
@@ -10,14 +8,73 @@ import java.util.List;
 public class Implementation {
     static void main() {
 
+        // =====================================================
+        // Methods Inherited from Collection
+        // =====================================================
+
+        // Already implemented in Collection topic
+
+        // add(E e)
+        // addAll(Collection<? extends E> c)
+        //
+        // remove(Object o)
+        // removeAll(Collection<?> c)
+        // retainAll(Collection<?> c)
+        //
+        // contains(Object o)
+        // containsAll(Collection<?> c)
+        //
+        // size()
+        // isEmpty()
+        // clear()
+        //
+        // toArray()
+        // toArray(T[] a)
+        //
+        // stream()
+        // parallelStream()
+        //
+        // equals(Object o)
+        // hashCode()
+
+
+        // =====================================================
+        // Methods Inherited from List
+        // =====================================================
+
+        // Already implemented in List topic
+
+        // get(int index)
+        // set(int index, E element)
+        //
+        // add(int index, E element)
+        // addAll(int index, Collection<? extends E> c)
+        //
+        // remove(int index)
+        //
+        // indexOf(Object o)
+        // lastIndexOf(Object o)
+        //
+        // listIterator()
+        // listIterator(int index)
+        //
+        // subList(int fromIndex, int toIndex)
+        //
+        // replaceAll(UnaryOperator<E> operator)
+        //
+        // sort(Comparator<? super E> c)
+
+
+        // Basic Implementation of ArrayList with learning generics and loop usage
+
         // Uncontrolled Datatypes (Without TypeSafety - default Object)
         List<Object> users = new ArrayList<>(); // or List users = new ArrayList<>();
         users.add("Alice");
         users.add(1);
 
         // Using For Each
-        for (Object user : users){
-            System.out.println("Using For Each: "+user);
+        for (Object user : users) {
+            System.out.println("Using For Each: " + user);
         }
 
         System.out.println();
@@ -32,179 +89,457 @@ public class Implementation {
         // users1.add(1); // Shows error
 
         // Using For Each
-        for (String user : users1){  // Object also can be used but if we know confirmed datatype then this recommended
-            System.out.println("User: "+user); // Output is ordered
+        for (String user : users1) {  // Object also can be used but if we know confirmed datatype then this recommended
+            System.out.println("User: " + user); // Output is ordered
         }
 
         // Using For
         for (int i = 0; i < users1.size(); i++) {
-            System.out.println("Using For loop: "+users1.get(i));
+            System.out.println("Using For loop: " + users1.get(i));
         }
 
         // Iterator
-        int a=0;
+        int a = 0;
         Iterator<String> it = users1.iterator();
-        while (it.hasNext()){
-            System.out.println("Using Iterator [" +a+ "]:"+it.next());
+        while (it.hasNext()) {
+            System.out.println("Using Iterator [" + a + "]:" + it.next());
             a++;
         }
 
-        // Work with Class
-        Car car1 = new Car("BMW",900);
+        // Work with Class (Generics as a Custom Class)
+        Car car1 = new Car("BMW", 900);
 
         List<Car> carList = new ArrayList<>();
         carList.add(car1);
-        carList.add(new Car("Toyota",500));
+        carList.add(new Car("Toyota", 500));
 
         System.out.println("All Cars");
-        for (Car car : carList){
-            System.out.println("Brand: "+car.brand+", Speed: "+car.speed);
+        for (Car car : carList) {
+            System.out.println("Brand: " + car.brand + ", Speed: " + car.speed);
         }
 
         System.out.println(carList); //Need to implement to String method to get clear values instead Garbage Values
 
 
-        System.out.println("Collections Methods that Used by List");
-        // ArrayList is a Class that implements List interface
-        // List extends Collection, therefore ArrayList inherits all Collection methods.
+        // -----------------------------------------------------
+        // Normal ArrayList()
+        // -----------------------------------------------------
 
-        ArrayList<Integer> nums = new ArrayList<>(); // or List<Integer> nums = new ArrayList<>();
+        ArrayList<Integer> list1 = new ArrayList<>();
 
-        // add()
-        nums.add(10);
-        nums.add(20);
-        nums.add(30);
-        nums.add(40);
+        list1.add(10);
+        list1.add(20);
+        list1.add(30);
 
-        System.out.println("After add(): " + nums);
+        System.out.println("\nArrayList()");
+        System.out.println(list1);
 
-        // size()
-        System.out.println("Size : " + nums.size());
+        // Note:
+        // Creates an empty ArrayList.
+        // Default constructor.
+        // Internal capacity grows automatically when required.
 
-// contains()
-        System.out.println("Contains 20 ? " + nums.contains(20));
-        System.out.println("Contains 100 ? " + nums.contains(100));
 
-// isEmpty()
-        System.out.println("Is Empty ? " + nums.isEmpty());
+        // -----------------------------------------------------
+        // ArrayList(int initialCapacity)
+        // -----------------------------------------------------
 
-// remove(Object)
-        nums.remove(Integer.valueOf(20)); // Removes element 20
-        System.out.println("After remove(20): " + nums);
+        ArrayList<Integer> list2 = new ArrayList<>(10);   // You are saying: "Dear ArrayList, create enough internal space to hold at least 10 elements."
 
-// addAll()
-        ArrayList<Integer> other = new ArrayList<>();
 
-        other.add(50);
-        other.add(60);
+        list2.add(100);
+        list2.add(200);
+        list2.add(300);
 
-        nums.addAll(other);
+        System.out.println("\nArrayList(int initialCapacity)");
+        System.out.println(list2);
 
-        System.out.println("After addAll(): " + nums);
-        System.out.println("Other List : " + other);
+        // Note:
+        // Initial Capacity = 10
+        // Current Size = 3
+        // Capacity is maintained internally and cannot be viewed directly.
 
-// containsAll()
-        System.out.println(
-                "Contains All (50 & 60)? " + nums.containsAll(other)
-        );
+        /*
+        Q: What happens when an ArrayList exceeds its capacity?
 
-// equals()
-        ArrayList<Integer> compareList = new ArrayList<>();
+        Answer:
+        When an ArrayList becomes full, it automatically creates a larger internal array,
+        copies all existing elements into the new array, and then adds the new element.
+        This resizing happens automatically, so no exception is thrown
+        */
 
-        compareList.add(10);
-        compareList.add(30);
-        compareList.add(40);
-        compareList.add(50);
-        compareList.add(60);
 
-        System.out.println("\ncompareList : " + compareList);
-        System.out.println("nums : " + nums);
+        // -----------------------------------------------------
+        // ArrayList(Collection)
+        // -----------------------------------------------------
 
-        System.out.println("equals() ? " + nums.equals(compareList));
+        ArrayList<Integer> list3 = new ArrayList<>(list1);
 
-// hashCode()
-        System.out.println("nums hashCode : " + nums.hashCode());
-        System.out.println("compareList hashCode : " + compareList.hashCode());
+        System.out.println("\nArrayList(Collection)");
+        System.out.println("Original List : " + list1);
+        System.out.println("Copied List   : " + list3);
 
-// toArray()
-        Object[] arr = nums.toArray();
+        // Modify copied list
 
-        System.out.println("\nArray Elements");
+        list3.add(40);
 
-        for (Object obj : arr) {
+        System.out.println("\nAfter Modifying Copied List");
 
-            System.out.println(obj);
+        System.out.println("Original List : " + list1);
+        System.out.println("Copied List   : " + list3);
 
-        }
+        // Note:
+        // Only elements are copied.
+        // Original collection remains unchanged.
 
-// toArray(T[] a)
-        Integer[] typedArray = nums.toArray(new Integer[0]);
 
-        System.out.println("\nTyped Array Elements");
 
-        for (Integer value : typedArray) {
+        // =====================================================
+        // ArrayList Specific Methods
+        // =====================================================
 
-            System.out.println(value);
 
-        }
+        // -----------------------------------------------------
+        // ensureCapacity()
+        // -----------------------------------------------------
 
-// stream()
+        ArrayList<Integer> ensureDemo = new ArrayList<>();
 
-        System.out.println("\nUsing stream()");
+        System.out.println("\nensureCapacity()");
 
-        nums.stream().forEach(System.out::println);
+        // Initially
+        ensureDemo.add(10);
+        ensureDemo.add(20);
 
-// parallelStream()
+        System.out.println("Before ensureCapacity() : " + ensureDemo);
 
-        System.out.println("\nUsing parallelStream()");
+        // Ensures internal capacity becomes at least 100
+        ensureDemo.ensureCapacity(100); // You're telling Java: "I know I'll store about 100 elements. Please allocate space now."
 
-        nums.parallelStream().forEach(System.out::println);
+        // Add more elements
+        ensureDemo.add(30);
+        ensureDemo.add(40);
 
-// retainAll()
+        System.out.println("After ensureCapacity()  : " + ensureDemo);
 
-        ArrayList<Integer> retainDemo = new ArrayList<>();
+        // Note:
+        // ensureCapacity() increases only the internal capacity.
+        // It does NOT change the current size or elements.
 
-        retainDemo.add(10);
-        retainDemo.add(50);
 
-        System.out.println("\nItems in nums : " + nums);
-        System.out.println("Items in retainDemo : " + retainDemo);
+        // -----------------------------------------------------
+        // trimToSize()
+        // -----------------------------------------------------
 
-        nums.retainAll(retainDemo);
+        ArrayList<Integer> trimDemo = new ArrayList<>(100);
 
-        System.out.println("After retainAll(): " + nums);
+        trimDemo.add(1);
+        trimDemo.add(2);
+        trimDemo.add(3);
+        trimDemo.add(4);
 
-// removeAll()
+        System.out.println("\ntrimToSize()");
 
-        nums.add(100);
-        nums.add(200);
+        System.out.println("Before trimToSize() : " + trimDemo);
 
-        System.out.println("\nBefore removeAll() nums : " + nums);
-        System.out.println("retainDemo : " + retainDemo);
+        // Shrinks capacity to current size
+        trimDemo.trimToSize();
 
-        nums.removeAll(retainDemo);
+        System.out.println("After trimToSize()  : " + trimDemo);
 
-        System.out.println("After removeAll(): " + nums);
+        // Note:
+        // Capacity becomes equal to current size.
+        // Elements remain unchanged.
 
-// clear()
 
-        nums.clear();
+        // -----------------------------------------------------
+        // ensureCapacity() + trimToSize()
+        // -----------------------------------------------------
 
-        System.out.println("\nAfter clear(): " + nums);
+        ArrayList<Integer> demo = new ArrayList<>();
 
-// isEmpty()
+        demo.ensureCapacity(50);
 
-        System.out.println("Is Empty ? " + nums.isEmpty());
+        demo.add(100);
+        demo.add(200);
+        demo.add(300);
+
+        System.out.println("\nensureCapacity() + trimToSize()");
+
+        System.out.println("Before trim : " + demo);
+
+        demo.trimToSize();
+
+        System.out.println("After trim  : " + demo);
+
+        // Note:
+        // ensureCapacity() is useful before inserting a large number of elements.
+        // trimToSize() is useful after removing many elements.
+
+
+        // -----------------------------------------------------
+        // Capacity vs Size
+        // -----------------------------------------------------
+
+        ArrayList<Integer> capacityDemo = new ArrayList<>(20);
+
+        capacityDemo.add(10);
+        capacityDemo.add(20);
+        capacityDemo.add(30);
+
+        System.out.println("\nCapacity vs Size");
+
+        System.out.println("Elements : " + capacityDemo);
+
+        System.out.println("Size : " + capacityDemo.size());
+
+        // Capacity cannot be accessed directly.
+        // It is maintained internally by ArrayList.
+
+        // Current Situation
+        //
+        // Capacity = 20
+        // Size = 3
+        //
+        // After trimToSize()
+        //
+        // Capacity = 3
+        // Size = 3
+        //
+        // After ensureCapacity(100)
+        //
+        // Capacity >= 100
+        // Size = 3
+
+
+
+        // =====================================================
+        // clone()
+        // =====================================================
+
+        ArrayList<String> original = new ArrayList<>();
+
+        original.add("Java");
+        original.add("Python");
+        original.add("C++");
+
+        System.out.println("\nclone()");
+
+        @SuppressWarnings("unchecked")
+        ArrayList<String> copy = (ArrayList<String>) original.clone();
+
+        System.out.println("Original List : " + original);
+        System.out.println("Cloned List   : " + copy);
+
+        // Modify cloned list
+
+        copy.add("JavaScript");
+
+        System.out.println("\nAfter Modifying Cloned List");
+
+        System.out.println("Original List : " + original);
+        System.out.println("Cloned List   : " + copy);
+
+        // Note:
+        // clone() creates a shallow copy.
+        // Only the ArrayList object is copied.
+        // Stored objects are shared between both lists.
+
+
+        // =====================================================
+        // Shallow Copy Demonstration
+        // =====================================================
+
+        ArrayList<Car> originalCars = new ArrayList<>();
+
+        originalCars.add(new Car("BMW", 900));
+        originalCars.add(new Car("Toyota", 500));
+
+        @SuppressWarnings("unchecked")
+        ArrayList<Car> copiedCars =
+                (ArrayList<Car>) originalCars.clone();
+
+        System.out.println("\nShallow Copy Demo");
+
+        System.out.println("Original : " + originalCars);
+        System.out.println("Copied   : " + copiedCars);
+
+        // Modify object inside copied list
+
+        copiedCars.get(0).brand = "Audi";
+
+        System.out.println("\nAfter Modifying Object Inside Copied List");
+
+        System.out.println("Original : " + originalCars);
+        System.out.println("Copied   : " + copiedCars);
+
+        // Note:
+        // Only the ArrayList is copied.
+        // The Car objects are NOT copied.
+        // Both lists refer to the same Car objects.
+
+
+        // =====================================================
+        // Reference Type Demonstration
+        // =====================================================
+
+        // List Reference
+        // Can access only methods declared in List and inherited from Collection.
+        // Cannot access ArrayList-specific methods.
+
+        List<Integer> listed = new ArrayList<>(); // Interface Reference
+
+        listed.add(10);              // ✅ Collection
+        listed.get(0);               // ✅ List
+        // listed.ensureCapacity(100); // ❌ ArrayList method
+
+
+        // ArrayList Reference
+        // Can access all methods from Collection, List and ArrayList.
+
+        ArrayList<Integer> arrayList = new ArrayList<>();  // Class Reference
+
+        arrayList.add(10);               // ✅ Collection
+        arrayList.get(0);                // ✅ List
+        arrayList.ensureCapacity(100);   // ✅ ArrayList
+
+
+        // Note:
+        //
+        // Interface Reference
+        // Recommended for flexibility.
+        //
+        // Class Reference
+        // Required when using ArrayList specific methods.
+
+
+        /*
+         * ==========================================================
+         *                  Optimized Overrides
+         * ==========================================================
+         */
+
+        ArrayList<String> fruits = new ArrayList<>();
+
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+
+        // 4. forEach()
+        System.out.println("\n========== forEach() ==========");
+
+        /*
+         * Executes the given action for every element.
+         */
+
+        fruits.forEach(fruit ->
+                System.out.println("Fruit : " + fruit));
+
+
+
+        // 5. replaceAll()
+        System.out.println("\n========== replaceAll() ==========");
+
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("maaz");
+        names.add("john");
+        names.add("alex");
+
+        /*
+         * Replaces every element using the given operation.
+         */
+
+        names.replaceAll(String::toUpperCase);
+
+        System.out.println(names);
+
+
+        // 6. sort()
+        System.out.println("\n========== sort() ==========");
+
+        ArrayList<Integer> marks = new ArrayList<>();
+
+        marks.add(78);
+        marks.add(45);
+        marks.add(99);
+        marks.add(61);
+        marks.add(85);
+
+        /*
+         * Sorts the ArrayList using the given Comparator.
+         */
+
+        marks.sort(Comparator.naturalOrder());
+
+        System.out.println("Ascending  : " + marks);
+
+        marks.sort(Comparator.reverseOrder());
+
+        System.out.println("Descending : " + marks);
+
+
+        // 7. spliterator()
+        System.out.println("\n========== spliterator() ==========");
+
+        ArrayList<String> cities = new ArrayList<>();
+
+        cities.add("Mumbai");
+        cities.add("Delhi");
+        cities.add("Pune");
+        cities.add("Hyderabad");
+
+        /*
+         * Returns a Spliterator for traversing the elements.
+         *
+         * Spliterator supports sequential and parallel traversal.
+         */
+
+        Spliterator<String> spliterator = cities.spliterator();
+
+        spliterator.forEachRemaining(System.out::println);
+
+
+        /*
+         * ==========================================================
+         *             Exists in Java but Not Covered Yet
+         *
+         *               ├──────────────────────────────────────────────
+         *               │
+         *               ├── 🆕 removeIf(Predicate<? super E> filter)
+         *               ├── 🆕 toArray(IntFunction<T[]> generator)
+         *               └── 🔒 removeRange(int fromIndex, int toIndex) (protected)
+         *
+         * ==========================================================
+         */
+
+        /*
+         * ==========================================================
+         *               Methods Inherited from Object
+         *
+         *               ├── 🆕 toString()
+         *               ├── 🆕 getClass()
+         *               ├── 🆕 wait()
+         *               ├── 🆕 wait(long timeout)
+         *               ├── 🆕 wait(long timeout, int nanos)
+         *               ├── 🆕 notify()
+         *               ├── 🆕 notifyAll()
+         *               ├── 🆕 clone() (protected)
+         *               ├── 🆕 equals(Object)
+         *               ├── 🆕 hashCode()
+         *               ├── 🆕 finalize() (Deprecated)
+         *               └── 🆕 registerNatives() (Native, Internal - Ignore)
+         *
+         * ==========================================================
+         */
     }
-
-
 }
 
 class Car {
     String brand;
     int speed;
 
-    Car(String brand,int speed){
+    Car(String brand, int speed) {
         this.brand = brand;
         this.speed = speed;
     }
