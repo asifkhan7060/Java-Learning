@@ -1,6 +1,11 @@
-package D_Set.HashSet;
+package D_Set.LinkedHashSet;
 
 import java.util.*;
+
+// In Which areas LinkedHashSet class is used ?
+// Hold Ctrl and move cursor to LinkedHashSet keyword -> Go to that file.
+// Hold Ctrl again on LinkedHashSet -> Click -> Change search to
+// "All Places" to explore where LinkedHashSet is used.
 
 public class Implementation {
 
@@ -56,7 +61,25 @@ public class Implementation {
 
         /*
          * ==========================================================
-         *            Basic HashSet Implementation
+         *          Methods Inherited from HashSet
+         * ==========================================================
+         */
+
+        // clone()
+
+        /*
+         * LinkedHashSet introduces NO NEW PUBLIC METHODS.
+         *
+         * It extends HashSet.
+         *
+         * The main difference is the
+         * internal implementation.
+         */
+
+
+        /*
+         * ==========================================================
+         *        Basic LinkedHashSet Implementation
          * ==========================================================
          */
 
@@ -64,21 +87,21 @@ public class Implementation {
         // Raw Type (Without Type Safety)
         // ---------------------------------------------------------
 
-        HashSet rawUsers = new HashSet();
+        LinkedHashSet rawUsers = new LinkedHashSet();
 
         rawUsers.add("Alice");
         rawUsers.add(101);
         rawUsers.add(true);
 
-        System.out.println("Raw HashSet");
+        System.out.println("Raw LinkedHashSet");
         System.out.println(rawUsers);
 
         /*
-         * Raw Types:
-         * -----------
+         * Raw Types
+         *
          * Stores everything as Object.
+         *
          * Type Safety is NOT available.
-         * Avoid using Raw Types in modern Java.
          */
 
         System.out.println();
@@ -88,23 +111,25 @@ public class Implementation {
         // Generics
         // ---------------------------------------------------------
 
-        HashSet<String> users = new HashSet<>();
+        LinkedHashSet<String> users =
+                new LinkedHashSet<>();
 
         users.add("Rudra");
         users.add("Haya");
         users.add("Arman");
-        users.add("Arman");   // Duplicate
-//      users.add(100);       // Compile Time Error
+        users.add("Arman");     // Duplicate Ignored
 
-        System.out.println("HashSet with Generics");
+//      users.add(100);         // Compile Time Error
+
+        System.out.println("LinkedHashSet with Generics");
         System.out.println(users);
 
         /*
          * Note:
          *
-         * Duplicate values are ignored automatically.
+         * Duplicate values are ignored.
          *
-         * Output order is NOT guaranteed.
+         * Insertion Order is preserved.
          */
 
 
@@ -112,16 +137,18 @@ public class Implementation {
         // Duplicate Demonstration
         // ---------------------------------------------------------
 
-        HashSet<Integer> duplicateDemo = new HashSet<>();
+        LinkedHashSet<Integer> duplicateDemo =
+                new LinkedHashSet<>();
 
         duplicateDemo.add(10);
         duplicateDemo.add(20);
         duplicateDemo.add(30);
         duplicateDemo.add(20);
-        duplicateDemo.add(10);
         duplicateDemo.add(40);
+        duplicateDemo.add(10);
 
         System.out.println("\nDuplicate Demonstration");
+
         System.out.println(duplicateDemo);
 
         /*
@@ -137,10 +164,78 @@ public class Implementation {
 
 
         // ---------------------------------------------------------
+        // Insertion Order Demonstration
+        // ---------------------------------------------------------
+
+        LinkedHashSet<Integer> insertionDemo =
+                new LinkedHashSet<>();
+
+        insertionDemo.add(50);
+        insertionDemo.add(10);
+        insertionDemo.add(80);
+        insertionDemo.add(20);
+        insertionDemo.add(70);
+
+        System.out.println("\nInsertion Order");
+
+        System.out.println(insertionDemo);
+
+        /*
+         * Output
+         *
+         * 50
+         * 10
+         * 80
+         * 20
+         * 70
+         *
+         * Elements appear exactly
+         * in insertion order.
+         */
+
+
+        // ---------------------------------------------------------
+        // HashSet vs LinkedHashSet
+        // ---------------------------------------------------------
+
+        HashSet<Integer> hashSet1 =
+                new HashSet<>();
+
+        LinkedHashSet<Integer> linkedHashSet1 =
+                new LinkedHashSet<>();
+
+        int[] values1 = {30,10,40,20,50};
+
+        for(int value : values1){
+
+            hashSet1.add(value);
+            linkedHashSet1.add(value);
+
+        }
+
+        System.out.println("\nHashSet");
+        System.out.println(hashSet1);
+
+        System.out.println("\nLinkedHashSet");
+        System.out.println(linkedHashSet1);
+
+        /*
+         * HashSet
+         *
+         * Order NOT guaranteed.
+         *
+         * LinkedHashSet
+         *
+         * Preserves insertion order.
+         */
+
+
+        // ---------------------------------------------------------
         // Null Demonstration
         // ---------------------------------------------------------
 
-        HashSet<String> nullDemo = new HashSet<>();
+        LinkedHashSet<String> nullDemo =
+                new LinkedHashSet<>();
 
         nullDemo.add(null);
         nullDemo.add("Java");
@@ -148,10 +243,12 @@ public class Implementation {
         nullDemo.add("Python");
 
         System.out.println("\nNull Demonstration");
+
         System.out.println(nullDemo);
 
         /*
-         * HashSet allows only ONE null element.
+         * LinkedHashSet allows
+         * only ONE null element.
          */
 
 
@@ -161,8 +258,10 @@ public class Implementation {
 
         System.out.println("\nUsing For Each");
 
-        for (String user : users) {
+        for(String user : users){
+
             System.out.println(user);
+
         }
 
 
@@ -172,10 +271,13 @@ public class Implementation {
 
         System.out.println("\nUsing Iterator");
 
-        Iterator<String> iterator = users.iterator();
+        Iterator<String> iterator1 =
+                users.iterator();
 
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        while(iterator1.hasNext()){
+
+            System.out.println(iterator1.next());
+
         }
 
 
@@ -183,106 +285,103 @@ public class Implementation {
         // Working with Custom Class
         // ---------------------------------------------------------
 
-        HashSet<Car> cars = new HashSet<>();
+        LinkedHashSet<Car> cars =
+                new LinkedHashSet<>();
 
-        cars.add(new Car("BMW", 900));
-        cars.add(new Car("Toyota", 500));
-        cars.add(new Car("BMW", 900));      // Different Object
+        cars.add(new Car("BMW",900));
+        cars.add(new Car("Toyota",500));
+        cars.add(new Car("BMW",900));
 
         System.out.println("\nCustom Class");
 
-        for (Car car : cars) {
+        for(Car car : cars){
+
             System.out.println(car);
+
         }
 
         /*
-         * Note:
-         *
          * Since equals() and hashCode()
          * are NOT overridden,
          *
-         * HashSet considers every object different.
-         *
-         * Therefore duplicate logical objects
-         * are still stored.
+         * LinkedHashSet considers
+         * every object different.
          */
 
 
         /*
          * ==========================================================
-         *                    Constructors
+         *                  Constructors
          * ==========================================================
          */
 
 
         // ---------------------------------------------------------
-        // HashSet()
+        // LinkedHashSet()
         // ---------------------------------------------------------
 
-        HashSet<Integer> set1 = new HashSet<>();
+        LinkedHashSet<Integer> set1 =
+                new LinkedHashSet<>();
 
         set1.add(10);
         set1.add(20);
         set1.add(30);
 
-        System.out.println("\nHashSet()");
+        System.out.println("\nLinkedHashSet()");
         System.out.println(set1);
 
         /*
-         * Creates an empty HashSet.
-         *
          * Default Constructor.
          *
-         * Default Capacity  : 16
-         * Default LoadFactor: 0.75
+         * Default Capacity = 16
+         *
+         * Default Load Factor = 0.75
          */
 
 
         // ---------------------------------------------------------
-        // HashSet(int initialCapacity)
+        // LinkedHashSet(int initialCapacity)
         // ---------------------------------------------------------
 
-        HashSet<Integer> set2 = new HashSet<>(100);
+        LinkedHashSet<Integer> set2 =
+                new LinkedHashSet<>(100);
 
         set2.add(100);
         set2.add(200);
         set2.add(300);
 
-        System.out.println("\nHashSet(int initialCapacity)");
+        System.out.println("\nLinkedHashSet(int initialCapacity)");
         System.out.println(set2);
 
         /*
-         * Capacity is allocated internally.
-         *
-         * Useful when approximate size
+         * Useful when approximate
+         * number of elements
          * is already known.
          */
 
 
         // ---------------------------------------------------------
-        // HashSet(int initialCapacity,float loadFactor)
+        // LinkedHashSet(int initialCapacity,float loadFactor)
         // ---------------------------------------------------------
 
-        HashSet<Integer> set3 =
-                new HashSet<>(100, 0.75f);
+        LinkedHashSet<Integer> set3 =
+                new LinkedHashSet<>(100,0.75f);
 
         set3.add(1);
         set3.add(2);
         set3.add(3);
 
-        System.out.println("\nHashSet(int,float)");
+        System.out.println("\nLinkedHashSet(int,float)");
         System.out.println(set3);
 
         /*
-         * Allows custom Load Factor.
-         *
-         * Generally default value (0.75)
-         * is recommended.
+         * Allows custom
+         * Load Factor.
          */
 
 
         // ---------------------------------------------------------
-        // HashSet(Collection)
+        // LinkedHashSet(Collection)
         // ---------------------------------------------------------
 
         ArrayList<Integer> list =
@@ -293,22 +392,23 @@ public class Implementation {
         list.add(30);
         list.add(20);
 
-        HashSet<Integer> set4 =
-                new HashSet<>(list);
+        LinkedHashSet<Integer> set4 =
+                new LinkedHashSet<>(list);
 
-        System.out.println("\nHashSet(Collection)");
+        System.out.println("\nLinkedHashSet(Collection)");
 
-        System.out.println("Original List : " + list);
-        System.out.println("HashSet       : " + set4);
+        System.out.println("Original List    : " + list);
+        System.out.println("LinkedHashSet    : " + set4);
 
         /*
-         * Frequently used for:
+         * Removes duplicate values.
          *
-         * Removing Duplicate Elements
-         * from another Collection.
+         * Preserves insertion order
+         * of unique elements.
          */
 
-        // ----------- Part 2 Starts from clone() -----------
+
+        // ------------ Part 2 Starts from clone() ------------
 
         /*
          * ==========================================================
@@ -316,7 +416,8 @@ public class Implementation {
          * ==========================================================
          */
 
-        HashSet<String> original = new HashSet<>();
+        LinkedHashSet<String> original =
+                new LinkedHashSet<>();
 
         original.add("Java");
         original.add("Python");
@@ -325,57 +426,63 @@ public class Implementation {
         System.out.println("\nclone()");
 
         @SuppressWarnings("unchecked")
-        HashSet<String> cloned =
-                (HashSet<String>) original.clone();
+        LinkedHashSet<String> cloned =
+                (LinkedHashSet<String>) original.clone();
 
-        System.out.println("Original HashSet : " + original);
-        System.out.println("Cloned HashSet   : " + cloned);
+        System.out.println("Original LinkedHashSet : " + original);
+        System.out.println("Cloned LinkedHashSet   : " + cloned);
 
-        // Modify cloned HashSet
+        // Modify cloned LinkedHashSet
 
         cloned.add("JavaScript");
 
         System.out.println("\nAfter Modifying Clone");
 
-        System.out.println("Original HashSet : " + original);
-        System.out.println("Cloned HashSet   : " + cloned);
+        System.out.println("Original LinkedHashSet : " + original);
+        System.out.println("Cloned LinkedHashSet   : " + cloned);
 
         /*
          * Note:
          *
-         * clone() creates a SHALLOW COPY.
+         * clone() creates a
+         * SHALLOW COPY.
          *
-         * Only HashSet object is copied.
+         * Only the LinkedHashSet
+         * object is copied.
+         *
          * Stored objects are shared.
          */
 
 
         /*
          * ==========================================================
-         *              Shallow Copy Demonstration
+         *            Shallow Copy Demonstration
          * ==========================================================
          */
 
-        HashSet<Car> originalCars = new HashSet<>();
+        LinkedHashSet<Car> originalCars =
+                new LinkedHashSet<>();
 
         originalCars.add(new Car("BMW",900));
         originalCars.add(new Car("Toyota",500));
 
         @SuppressWarnings("unchecked")
-        HashSet<Car> copiedCars =
-                (HashSet<Car>) originalCars.clone();
+        LinkedHashSet<Car> copiedCars =
+                (LinkedHashSet<Car>) originalCars.clone();
 
         System.out.println("\nShallow Copy");
 
         System.out.println("Original : " + originalCars);
         System.out.println("Copied   : " + copiedCars);
 
-        // Modify object inside copied HashSet
+        // Modify object inside copied LinkedHashSet
 
         for(Car car : copiedCars){
 
             if(car.brand.equals("BMW")){
+
                 car.brand = "Audi";
+
             }
 
         }
@@ -386,14 +493,75 @@ public class Implementation {
         System.out.println("Copied   : " + copiedCars);
 
         /*
-         * Note:
+         * Only LinkedHashSet
+         * object is copied.
          *
-         * HashSet is copied.
+         * Car objects are shared.
+         */
+
+
+        /*
+         * ==========================================================
+         *      Hash Table + Doubly Linked List Concept
+         * ==========================================================
+         */
+
+        LinkedHashSet<String> structureDemo =
+                new LinkedHashSet<>();
+
+        structureDemo.add("Java");
+        structureDemo.add("Python");
+        structureDemo.add("C++");
+        structureDemo.add("SQL");
+
+        System.out.println("\nInternal Structure");
+
+        System.out.println(structureDemo);
+
+        /*
+         * LinkedHashSet internally uses
          *
-         * Car objects are NOT copied.
+         * Hash Table
          *
-         * Both HashSets refer to the
-         * same Car objects.
+         * +
+         *
+         * Doubly Linked List
+         *
+         * Hash Table
+         * ----------
+         * Fast Searching
+         * Fast Insertion
+         * Fast Deletion
+         *
+         * Doubly Linked List
+         * ------------------
+         * Preserves Insertion Order
+         */
+
+
+        /*
+         * ==========================================================
+         *             Insertion Order Working
+         * ==========================================================
+         */
+
+        LinkedHashSet<Integer> orderDemo =
+                new LinkedHashSet<>();
+
+        orderDemo.add(50);
+        orderDemo.add(20);
+        orderDemo.add(80);
+        orderDemo.add(10);
+        orderDemo.add(40);
+
+        System.out.println("\nInsertion Order Working");
+
+        System.out.println(orderDemo);
+
+        /*
+         * Elements always appear
+         * in the order
+         * they were inserted.
          */
 
 
@@ -403,8 +571,8 @@ public class Implementation {
          * ==========================================================
          */
 
-        HashSet<Integer> capacityDemo =
-                new HashSet<>(20);
+        LinkedHashSet<Integer> capacityDemo =
+                new LinkedHashSet<>(20);
 
         capacityDemo.add(10);
         capacityDemo.add(20);
@@ -420,25 +588,25 @@ public class Implementation {
         /*
          * Capacity
          *
-         * Number of Buckets
+         * Number of Buckets.
          *
-         * (Cannot be accessed directly)
-         *
+         * Cannot be accessed
+         * directly.
          *
          * Size
          *
-         * Number of Stored Elements
+         * Number of stored elements.
          */
 
 
         /*
          * ==========================================================
-         *                     Load Factor
+         *                  Load Factor
          * ==========================================================
          */
 
-        HashSet<Integer> loadFactorDemo =
-                new HashSet<>(16,0.75f);
+        LinkedHashSet<Integer> loadFactorDemo =
+                new LinkedHashSet<>(16,0.75f);
 
         loadFactorDemo.add(10);
         loadFactorDemo.add(20);
@@ -456,15 +624,12 @@ public class Implementation {
          * Formula
          *
          * Size / Capacity
-         *
-         * Default Value gives
-         * good performance.
          */
 
 
         /*
          * ==========================================================
-         *                      Threshold
+         *                    Threshold
          * ==========================================================
          */
 
@@ -479,7 +644,6 @@ public class Implementation {
          *
          * Capacity × LoadFactor
          *
-         *
          * Example
          *
          * Capacity = 16
@@ -487,26 +651,17 @@ public class Implementation {
          * LoadFactor = 0.75
          *
          * Threshold = 12
-         *
-         * When 13th element is inserted,
-         * HashSet performs Rehashing.
          */
 
 
         /*
          * ==========================================================
-         *                     Rehashing
+         *                    Rehashing
          * ==========================================================
          */
 
-        HashSet<Integer> rehashDemo =
-                new HashSet<>(4,0.75f);
-
-        /*
-         * Capacity = 4
-         *
-         * Threshold = 3
-         */
+        LinkedHashSet<Integer> rehashDemo =
+                new LinkedHashSet<>(4,0.75f);
 
         rehashDemo.add(10);
         rehashDemo.add(20);
@@ -516,10 +671,6 @@ public class Implementation {
 
         System.out.println(rehashDemo);
 
-        /*
-         * Next insertion exceeds threshold.
-         */
-
         rehashDemo.add(40);
 
         System.out.println("\nAfter Rehashing");
@@ -527,34 +678,33 @@ public class Implementation {
         System.out.println(rehashDemo);
 
         /*
-         * Internally
+         * When Threshold
+         * is exceeded,
          *
-         * Capacity increases.
+         * LinkedHashSet
+         * increases capacity.
          *
-         * Existing elements are
-         * redistributed into
-         * new buckets.
+         * Existing elements
+         * are redistributed
+         * into new buckets.
          *
-         * This process is called
-         * Rehashing.
+         * Insertion Order
+         * remains unchanged.
          */
 
 
         /*
          * ==========================================================
-         *            Reference Type Demonstration
+         *         Reference Type Demonstration
          * ==========================================================
          */
 
         /*
          * Set Reference
-         *
-         * Can access only methods
-         * declared in Set and Collection.
          */
 
         Set<Integer> setReference =
-                new HashSet<>();
+                new LinkedHashSet<>();
 
         setReference.add(10);
         setReference.add(20);
@@ -563,48 +713,64 @@ public class Implementation {
 
         System.out.println(setReference);
 
-        setReference.contains(10);
-
         // setReference.clone(); ❌
-        // clone() belongs to HashSet
 
 
         /*
          * HashSet Reference
-         *
-         * Can access every method
-         * of HashSet.
          */
 
-        HashSet<Integer> hashSetReference =
-                new HashSet<>();
+        HashSet<Integer> hashReference =
+                new LinkedHashSet<>();
 
-        hashSetReference.add(100);
-        hashSetReference.add(200);
+        hashReference.add(100);
+        hashReference.add(200);
 
-        hashSetReference.clone();      // ✔
+        hashReference.clone();
 
         System.out.println("\nHashSet Reference");
 
-        System.out.println(hashSetReference);
+        System.out.println(hashReference);
+
+        /*
+         * LinkedHashSet Reference
+         */
+
+        LinkedHashSet<Integer> linkedReference =
+                new LinkedHashSet<>();
+
+        linkedReference.add(500);
+        linkedReference.add(600);
+
+        linkedReference.clone();
+
+        System.out.println("\nLinkedHashSet Reference");
+
+        System.out.println(linkedReference);
 
         /*
          * Note:
          *
-         * Interface Reference
+         * Set Reference
          *
-         * Recommended because
-         * implementation can
-         * change easily.
+         * Accesses only
+         * Set methods.
          *
-         * Class Reference
+         * HashSet Reference
          *
-         * Required when using
-         * HashSet specific methods.
+         * Can access methods
+         * available in HashSet.
+         *
+         * LinkedHashSet Reference
+         *
+         * Can access every method
+         * available in
+         * LinkedHashSet
+         * and HashSet.
          */
 
 
-        // ------------- Part 3 Starts from Optimized Overrides -------------
+        // ---------- Part 3 Starts from Optimized Overrides ----------
 
         /*
          * ==========================================================
@@ -612,40 +778,65 @@ public class Implementation {
          * ==========================================================
          */
 
+
         // ---------------------------------------------------------
         // forEach()
         // ---------------------------------------------------------
 
-        HashSet<String> fruits = new HashSet<>();
+        LinkedHashSet<String> fruits =
+                new LinkedHashSet<>();
 
         fruits.add("Apple");
         fruits.add("Banana");
         fruits.add("Mango");
 
-        System.out.println("\nforEach()");
-
-        fruits.forEach(fruit ->
-                System.out.println(fruit));
+        System.out.println("\n========== forEach() ==========");
 
         /*
-         * forEach()
+         * Executes the given action
+         * for every element.
          *
-         * Introduced in Java 8.
-         *
-         * Uses Consumer Functional Interface.
+         * Iteration follows
+         * insertion order.
          */
+
+        fruits.forEach(fruit ->
+                System.out.println("Fruit : " + fruit));
 
 
         // ---------------------------------------------------------
         // Method Reference
         // ---------------------------------------------------------
 
-        System.out.println("\nMethod Reference");
+        System.out.println("\n========== Method Reference ==========");
 
         fruits.forEach(System.out::println);
 
         /*
-         * Cleaner version of Lambda Expression.
+         * Cleaner version of
+         * Lambda Expression.
+         */
+
+
+        // ---------------------------------------------------------
+        // iterator()
+        // ---------------------------------------------------------
+
+        System.out.println("\n========== iterator() ==========");
+
+        Iterator<String> iterator =
+                fruits.iterator();
+
+        while (iterator.hasNext()) {
+
+            System.out.println(iterator.next());
+
+        }
+
+        /*
+         * Iterator traverses
+         * elements in the
+         * insertion order.
          */
 
 
@@ -653,7 +844,7 @@ public class Implementation {
         // spliterator()
         // ---------------------------------------------------------
 
-        System.out.println("\nSpliterator");
+        System.out.println("\n========== spliterator() ==========");
 
         Spliterator<String> spliterator =
                 fruits.spliterator();
@@ -665,48 +856,29 @@ public class Implementation {
          *
          * Introduced in Java 8.
          *
-         * Supports Parallel Processing.
+         * Supports Sequential
+         * and Parallel Traversal.
          *
-         * Used by Java Streams internally.
-         */
-
-
-        // ---------------------------------------------------------
-        // iterator()
-        // ---------------------------------------------------------
-
-        System.out.println("\nIterator");
-
-        Iterator<String> itr =
-                fruits.iterator();
-
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
-        }
-
-        /*
-         * HashSet does NOT support
-         * ListIterator.
-         *
-         * Only Iterator is available.
+         * Preserves
+         * insertion order.
          */
 
 
         /*
          * ==========================================================
-         *              HashSet Characteristics
+         *           LinkedHashSet Characteristics
          * ==========================================================
          */
 
-        HashSet<Integer> characteristics =
-                new HashSet<>();
+        LinkedHashSet<Integer> characteristics =
+                new LinkedHashSet<>();
 
         characteristics.add(30);
         characteristics.add(10);
         characteristics.add(40);
         characteristics.add(20);
 
-        System.out.println("\nHashSet Characteristics");
+        System.out.println("\nLinkedHashSet Characteristics");
 
         System.out.println(characteristics);
 
@@ -717,19 +889,67 @@ public class Implementation {
          *
          * ✔ One Null Allowed
          *
-         * ✔ Unordered
+         * ✔ Maintains
+         *   Insertion Order
          *
          * ✔ No Index
          *
          * ✔ Fast Searching
          *
          * ✔ Average O(1)
+         *
+         * ✔ Uses Hash Table
+         *   +
+         *   Doubly Linked List
          */
 
 
         /*
          * ==========================================================
-         *              Methods Not Covered Yet
+         *       HashSet vs LinkedHashSet Comparison
+         * ==========================================================
+         */
+
+        HashSet<Integer> hashSet =
+                new HashSet<>();
+
+        LinkedHashSet<Integer> linkedHashSet =
+                new LinkedHashSet<>();
+
+        int[] values =
+                {50,20,80,10,40};
+
+        for (int value : values) {
+
+            hashSet.add(value);
+
+            linkedHashSet.add(value);
+
+        }
+
+        System.out.println("\nHashSet");
+
+        System.out.println(hashSet);
+
+        System.out.println("\nLinkedHashSet");
+
+        System.out.println(linkedHashSet);
+
+        /*
+         * HashSet
+         *
+         * Order NOT guaranteed.
+         *
+         * LinkedHashSet
+         *
+         * Maintains
+         * insertion order.
+         */
+
+
+        /*
+         * ==========================================================
+         *             Methods Not Covered Yet
          * ==========================================================
          */
 
@@ -744,17 +964,17 @@ public class Implementation {
          *
          * Java 21
          *
-         * HashSet.newHashSet(int expectedSize)
+         * LinkedHashSet.newLinkedHashSet(int expectedSize)
          */
 
 
         /*
          * ==========================================================
-         *              Methods Inherited from Object
+         *            Methods Inherited from Object
          * ==========================================================
          */
 
-        System.out.println("\nObject Methods");
+        System.out.println("\n========== Object Methods ==========");
 
         System.out.println(users.toString());
 
@@ -787,24 +1007,28 @@ public class Implementation {
 
         /*
          * ==========================================================
-         *                    Interview Notes
+         *                 Interview Notes
          * ==========================================================
          */
 
         /*
-         * 1. HashSet internally uses
-         *    HashMap.
+         * 1. LinkedHashSet extends
+         *    HashSet.
          *
-         * 2. HashSet stores only Keys.
+         * 2. LinkedHashSet internally
+         *    uses LinkedHashMap.
          *
-         * 3. Values are stored as
-         *    PRESENT (Dummy Object).
+         * 3. LinkedHashMap stores
+         *    Hash Table +
+         *    Doubly Linked List.
          *
          * 4. Duplicate detection
          *    uses hashCode()
          *    followed by equals().
          *
-         * 5. Average Complexity
+         * 5. Maintains insertion order.
+         *
+         * 6. Average Complexity
          *
          *    add()      O(1)
          *
@@ -812,22 +1036,25 @@ public class Implementation {
          *
          *    contains() O(1)
          *
-         * 6. Worst Case
+         * 7. Memory usage is
+         *    slightly higher than
+         *    HashSet because of
+         *    linked list pointers.
          *
-         *    O(log n)
-         *
-         *    (Java 8+
-         *     Red-Black Tree Buckets)
+         * 8. LinkedHashSet does
+         *    NOT introduce any
+         *    new public methods.
          */
 
 
         /*
          * ==========================================================
-         *                       End
+         *                      End
          * ==========================================================
          */
 
-        System.out.println("\nHashSet Implementation Completed.");
+        System.out.println(
+                "\nLinkedHashSet Implementation Completed.");
 
     }
 
@@ -836,16 +1063,18 @@ public class Implementation {
 
 /*
  * ==========================================================
- *                  Custom Class
+ *                    Custom Class
  * ==========================================================
  */
 
 class Car {
 
     String brand;
+
     int speed;
 
-    Car(String brand, int speed) {
+    Car(String brand,
+        int speed) {
 
         this.brand = brand;
         this.speed = speed;
@@ -869,13 +1098,18 @@ class Car {
  * IMPORTANT
  * ==========================================================
  *
- * Since equals() and hashCode() are NOT overridden,
- * HashSet treats every Car object as different.
+ * Since equals() and hashCode()
+ * are NOT overridden,
  *
- * Override both methods when logical equality
+ * LinkedHashSet considers every
+ * Car object as different.
+ *
+ * Override both methods
+ * when logical equality
  * is required.
  *
- * This will be covered in Object Class / HashMap topic.
+ * This will be covered in
+ * Object Class / HashMap topic.
  *
  * ==========================================================
  */
