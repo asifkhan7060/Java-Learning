@@ -121,6 +121,10 @@ public class Implementation {
         System.out.println(carList); //Need to implement to String method to get clear values instead Garbage Values
 
 
+        // =====================================================
+        // Constructors
+        // =====================================================
+
         // -----------------------------------------------------
         // Normal ArrayList()
         // -----------------------------------------------------
@@ -170,7 +174,7 @@ public class Implementation {
 
 
         // -----------------------------------------------------
-        // ArrayList(Collection)
+        // ArrayList(Collection)- shallow concept (copy changed but original remains same)
         // -----------------------------------------------------
 
         ArrayList<Integer> list3 = new ArrayList<>(list1);
