@@ -56,19 +56,27 @@ LinkedList
 
 # Interface Relationship
 
+---
+
+
 ```text
-                 Iterable
-                     ↑
-               Collection
-                     ↑
-                  List
-                     ↑
-                  Queue
-                     ↑
-                  Deque
-                     ↑
-                LinkedList
+                    Iterable
+                        ▲
+                        │
+                   Collection
+                  ▲          ▲
+                  │          │
+                List       Queue
+                  ▲          ▲
+                  │          │
+                  └────┐  Deque
+                       │     ▲
+                       └─────┘
+                           │
+                      LinkedList
 ```
+
+---
 
 ---
 
