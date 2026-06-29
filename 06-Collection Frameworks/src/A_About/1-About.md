@@ -4,6 +4,29 @@
 
 A **Collection** is a group of objects stored together and managed as a single unit.
 
+## What are Objects in a Collection?
+
+Objects refer to **instances of a class** in Java. A **Collection** stores these objects together and manages them as a single unit.
+
+### Example
+
+```java
+ArrayList<String> fruits = new ArrayList<>();
+
+fruits.add("Apple");
+fruits.add("Banana");
+fruits.add("Mango");
+```
+
+Here:
+- `"Apple"` → `String` object
+- `"Banana"` → `String` object
+- `"Mango"` → `String` object
+
+The `ArrayList` stores these `String` objects together as one collection.
+
+> **Key Point:** A Collection stores **objects (instances of classes)**, not primitive data types.
+
 The **Java Collection Framework (JCF)** is a set of classes and interfaces that provides ready-made data structures and methods for storing, retrieving, and manipulating groups of objects efficiently.
 
 ---
@@ -56,7 +79,7 @@ numbers.add(30);
 ```text
 Collection
 │
-├── C_List
+├── List
 ├── Set
 ├── Queue
 │
@@ -65,7 +88,7 @@ Map (Separate Interface)
 
 Major parts:
 
-1. C_List
+1. List
 2. Set
 3. Queue
 4. Map
@@ -86,7 +109,7 @@ A **C_List** is an ordered collection of elements.
 ### Example
 
 ```java
-C_List<String> names = new ArrayList<>();
+List<String> names = new ArrayList<>();
 
 names.add("John");
 names.add("Ali");
@@ -227,10 +250,11 @@ Collections are usually used with Generics.
 ### Without Generics
 
 ```java
-C_List list = new ArrayList();
+List list = new ArrayList();
 
 list.add("John");
 list.add(10);
+// For different datatype insertion recommended : List<Object> list = new ArrayList();
 ```
 
 Different data types can be added.
@@ -238,7 +262,7 @@ Different data types can be added.
 ### With Generics
 
 ```java
-C_List<String> users = new ArrayList<>();
+List<String> users = new ArrayList<>();
 ```
 
 Only String values are allowed.
@@ -246,70 +270,16 @@ Only String values are allowed.
 ### Syntax
 
 ```java
-C_List<Type> variableName;
+List<Type> variableName;
 ```
 
 Examples:
 
 ```java
-C_List<String> names;
-C_List<Integer> numbers;
-C_List<Double> marks;
+List<String> names;
+List<Integer> numbers;
+List<Double> marks;
 ```
-
----
-
-# Common Collection Methods
-
-## add()
-
-Adds an element.
-
-```java
-list.add("Java");
-```
-
-## remove()
-
-Removes an element.
-
-```java
-list.remove("Java");
-```
-
-## size()
-
-Returns total elements.
-
-```java
-list.size();
-```
-
-## contains()
-
-Checks existence.
-
-```java
-list.contains("Java");
-```
-
-## clear()
-
-Removes all elements.
-
-```java
-list.clear();
-```
-
-## isEmpty()
-
-Checks whether collection is empty.
-
-```java
-list.isEmpty();
-```
-
----
 
 # Advantages of Collection Framework
 
@@ -325,7 +295,7 @@ list.isEmpty();
 
 # Real-Life Examples
 
-### C_List
+### List
 
 Student attendance register.
 
@@ -381,11 +351,72 @@ Each key uniquely identifies a value.
 
 ---
 
+# Choosing the Right Collection in Java
+
+## Comparison Table
+
+| Collection | Stores Data As   | Ordered?   | Duplicates Allowed?   | Why Use It?                                               | Real-Life Example           |
+| ---------- | ---------------- | ---------- | --------------------- | --------------------------------------------------------- | --------------------------- |
+| **List**   | Single Values    | Yes        | Yes                   | When you want to keep items in order and allow duplicates | Shopping Cart, Playlist     |
+| **Set**    | Single Values    | No*        | No                    | When every item must be unique                            | Email IDs, Unique Usernames |
+| **Queue**  | Single Values    | Yes (FIFO) | Yes                   | When items wait and are processed one by one              | Ticket Counter, Print Queue |
+| **Map**    | Key → Value Pair | N/A        | Keys: No, Values: Yes | When you need to find data using a key                    | Roll No → Student Name      |
+
+> **Note:** `LinkedHashSet` maintains insertion order, but duplicates are still not allowed.
+
+---
+
+## Simple Decision Table
+
+| Requirement                         | Collection to Use |
+| ----------------------------------- | ----------------- |
+| Need order?                         | **List**          |
+| Need unique values only?            | **Set**           |
+| Need First-In-First-Out processing? | **Queue**         |
+| Need Key → Value mapping?           | **Map**           |
+
+---
+
+## Practical Examples
+
+| Problem                     | Best Collection | Reason                   |
+| --------------------------- | --------------- | ------------------------ |
+| Songs in a playlist         | List            | Order matters            |
+| Registered email IDs        | Set             | No duplicates allowed    |
+| Customers waiting in line   | Queue           | First come, first served |
+| Employee ID → Employee Name | Map             | Fast lookup by ID        |
+
+---
+
+## Memory Trick
+
+| Collection | Remember As             |
+| ---------- | ----------------------- |
+| **List**   | Ordered Collection      |
+| **Set**    | Unique Collection       |
+| **Queue**  | Waiting Line Collection |
+| **Map**    | Lookup Collection       |
+
+---
+
+## Quick Revision
+
+```text
+List  → Order + Duplicates
+
+Set   → Unique Values
+
+Queue → FIFO Processing
+
+Map   → Key-Value Lookup
+```
+
+
 # Summary
 
 - Collection = Group of Objects
 - Collection Framework = Toolbox for managing objects
-- C_List → Ordered, duplicates allowed
+- List → Ordered, duplicates allowed
 - Set → Unordered, duplicates not allowed
 - Queue → FIFO structure
 - Map → Key-Value pair
@@ -397,8 +428,8 @@ Each key uniquely identifies a value.
 ## Quick Revision
 
 | Interface | Ordered | Duplicates | Example |
-|------------|----------|------------|---------|
-| C_List | Yes | Yes | ArrayList |
+|----------|----------|------------|---------|
+| List | Yes | Yes | ArrayList |
 | Set | No | No | HashSet |
 | Queue | FIFO | Yes | LinkedList |
 | Map | Key-Value | Unique Keys | HashMap |
