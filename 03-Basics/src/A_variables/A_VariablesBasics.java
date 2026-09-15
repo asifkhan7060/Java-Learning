@@ -18,12 +18,10 @@ public class A_VariablesBasics {
         // Declaration + Initialisation
         int b = 20;
 
-        // OverRiding the Variable
+        // Overwrite the Variable
         a = 80;
 
         // Displaying Output
-
-        // Normal form
         System.out.println(a);
         System.out.println(name);
 
@@ -34,7 +32,7 @@ public class A_VariablesBasics {
         System.out.println("Hello! " + name + ". You are " + b + " years old");
 
 
-        // About Constants - If we need a variable that cant be overRide by anyone then we use const keyword with it (i.e final)
+        // About Constants - If we need a variable that cant be overwritten by anyone then we use const keyword with it (i.e final)
         final int CONST_VALUE = 50;
         System.out.println(CONST_VALUE);
         // x = 100;

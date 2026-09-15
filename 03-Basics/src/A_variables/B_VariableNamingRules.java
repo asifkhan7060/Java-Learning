@@ -90,8 +90,6 @@ package A_variables;
  */
 
 
-
-
 public class B_VariableNamingRules {
 
     public static void main(String[] args) {

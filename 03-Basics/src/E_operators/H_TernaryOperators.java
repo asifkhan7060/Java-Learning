@@ -133,8 +133,7 @@ public class H_TernaryOperators {
         // Example 1 : Adult or Minor
         int age = 20;
 
-        String ageResult =
-                (age >= 18) ? "Adult" : "Minor";
+        String ageResult = (age >= 18) ? "Adult" : "Minor";
 
         System.out.println("Age Check = " + ageResult);
 
@@ -142,16 +141,14 @@ public class H_TernaryOperators {
         int a = 10;
         int b = 20;
 
-        int max =
-                (a > b) ? a : b;
+        int max = (a > b) ? a : b;
 
         System.out.println("Maximum Number = " + max);
 
         // Example 3 : Even or Odd
         int number = 8;
 
-        String evenOdd =
-                (number % 2 == 0) ? "Even" : "Odd";
+        String evenOdd = (number % 2 == 0) ? "Even" : "Odd";
 
         System.out.println("Number Type = " + evenOdd);
     }

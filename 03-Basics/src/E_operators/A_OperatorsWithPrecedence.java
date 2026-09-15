@@ -139,7 +139,8 @@ public class A_OperatorsWithPrecedence {
 
  Example:
  condition ? value1 : value2
- */
+
+ **/
 
 
 /**
@@ -159,7 +160,7 @@ public class A_OperatorsWithPrecedence {
  | 12                    | **Logical OR**     | `\|\|`                                                          |
  | 13                    | **Ternary**        | `? :`                                                           |
  | 14                    | **Assignment**     | `=` `+=` `-=` `*=` `/=` `%=` `&=` `^=` `\|=` `<<=` `>>=` `>>>=` |
- */
 
+ **/
 
 }
