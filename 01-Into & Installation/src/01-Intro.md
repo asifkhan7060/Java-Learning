@@ -89,7 +89,7 @@ Examples include:
 Designed for:
 
 - Embedded devices
-- Resource-constrained devices
+- Resource-constrained devices (hardware platforms designed with strict physical limits on their processing power, memory, storage, and energy budgets)
 - Earlier generations of mobile devices
 
 It is less common in mainstream Java development today.

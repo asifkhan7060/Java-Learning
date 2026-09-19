@@ -49,7 +49,7 @@ public class A_HelloWorld {
  A class provides the structure in which we define methods, variables, constructors, etc.
 
  IMPORTANT:
- Because A_HelloWorld is a public class, the source file should be named: HelloWorld01.java
+ Because A_HelloWorld is a public class, the source file should be named: A_HelloWorld.java
 
 
  --------------------------------------------------
@@ -138,32 +138,6 @@ public class A_HelloWorld {
 
  WHY use println()?
  It is commonly used to display information, debugging messages, and program results on the console.
-
-
- --------------------------------------------------
- 💻 Command-Line Arguments
- --------------------------------------------------
-
- String[] args allows values to be passed to the program when starting it from the command line.
-
- Example:
- java A_HelloWorld Java Backend
-
- Inside the program:
- args[0] → "Java"
- args[1] → "Backend"
-
- Example:
- public class HelloWorld01 {
- public static void main(String[] args) {
- System.out.println(args[0]);
- System.out.println(args[1]);
- }
- }
-
- Output:
- Java
- Backend
 
  */
 
