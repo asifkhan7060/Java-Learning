@@ -1,133 +1,139 @@
 package E_operators;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOGICAL OPERATORS IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Logical Operators (&&, ||, !) in Java<br><br>
- *
- * 🔹 What Are Logical Operators?<br><br>
- *
- * Logical Operators are used to combine or manipulate
- * boolean expressions (true or false values).<br><br>
- *
- * The result of every logical operation is either:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false<br><br>
- *
- * Logical Operators are commonly used in:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- if statements<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- if-else statements<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- loops<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- decision making<br><br>
- *
- * Example:<br><br>
- *
- * boolean isAdult = true;<br>
- * boolean hasLicense = true;<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;isAdult and hasLicense → Operands<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&& → Logical Operator<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;1) Logical AND Operator (&&)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Returns true only when both conditions are true.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;condition1 && condition2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;(10 > 5) && (20 > 10)<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;true<br><br>
- *
- * Truth Table:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;true && true → true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;true && false → false<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false && true → false<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false && false → false<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;2) Logical OR Operator (||)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Returns true if at least one condition is true.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;condition1 || condition2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;(10 > 5) || (20 < 10)<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;true<br><br>
- *
- * Truth Table:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;true || true → true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;true || false → true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false || true → true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false || false → false<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3) Logical NOT Operator (!)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Reverses the boolean value.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;!condition<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;!(10 > 5)<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false<br><br>
- *
- * Truth Table:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;!true → false<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;!false → true<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Short-Circuit Evaluation<br>
- * ====================================================<br><br>
- *
- * Java uses Short-Circuit Evaluation.<br><br>
- *
- * For AND (&&):<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;If the first condition is false,
- * &nbsp;&nbsp;&nbsp;&nbsp;Java does not evaluate the second condition.<br><br>
- *
- * For OR (||):<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;If the first condition is true,
- * &nbsp;&nbsp;&nbsp;&nbsp;Java does not evaluate the second condition.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Applications of Logical Operators<br>
- * ====================================================<br><br>
- *
- * Used in:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Age Verification<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Login Systems<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Eligibility Checking<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Access Control<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Decision Making<br><br>
- *
+ ====================================================
+ LOGICAL OPERATORS IN JAVA
+ ====================================================
+
+ Study : Logical Operators (&&, ||, !) in Java
+
+ 🔹 What Are Logical Operators?
+
+ Logical Operators are used to combine or manipulate
+ boolean expressions (true or false values).
+
+ The result of every logical operation is either:
+
+ true
+ false
+
+ Logical Operators are commonly used in:
+
+ - if statements
+ - if-else statements
+ - loops
+ - decision making
+
+ Example:
+
+ boolean isAdult = true;
+ boolean hasLicense = true;
+
+ Here:
+
+ isAdult and hasLicense → Operands
+ && → Logical Operator
+
+
+ ====================================================
+ 1) Logical AND Operator (&&)
+ ====================================================
+
+ Purpose:
+ Returns true only when both conditions are true.
+
+ Syntax:
+ condition1 && condition2
+
+ Example:
+ (10 > 5) && (20 > 10)
+
+ Output:
+ true
+
+ Truth Table:
+
+ true && true → true
+ true && false → false
+ false && true → false
+ false && false → false
+
+
+ ====================================================
+ 2) Logical OR Operator (||)
+ ====================================================
+
+ Purpose:
+ Returns true if at least one condition is true.
+
+ Syntax:
+ condition1 || condition2
+
+ Example:
+ (10 > 5) || (20 < 10)
+
+ Output:
+ true
+
+ Truth Table:
+
+ true || true → true
+ true || false → true
+ false || true → true
+ false || false → false
+
+
+ ====================================================
+ 3) Logical NOT Operator (!)
+ ====================================================
+
+ Purpose:
+ Reverses the boolean value.
+
+ Syntax:
+ !condition
+
+ Example:
+ !(10 > 5)
+
+ Output:
+ false
+
+ Truth Table:
+
+ !true → false
+ !false → true
+
+
+ ====================================================
+ Short-Circuit Evaluation
+ ====================================================
+
+ Java uses Short-Circuit Evaluation.
+
+ For AND (&&):
+
+ If the first condition is false,
+ Java does not evaluate the second condition.
+
+ For OR (||):
+
+ If the first condition is true,
+ Java does not evaluate the second condition.
+
+
+ ====================================================
+ Applications of Logical Operators
+ ====================================================
+
+ Used in:
+
+ - Age Verification
+ - Login Systems
+ - Eligibility Checking
+ - Access Control
+ - Decision Making
+
  */
 
 public class D_LogicalOperators {

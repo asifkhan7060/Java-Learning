@@ -3,90 +3,104 @@
 package A_variables;
 
 /**
- * This program demonstrates Variable Naming Rules and Naming Conventions in Java.<br><br>
- *
- * Variable names are identifiers used to represent memory locations that store data.
- * Java follows specific rules and conventions for naming variables to improve
- * readability, maintainability, and code quality.<br><br>
- *
- * Explanation:<br><br>
- *
- * 1) Case Sensitivity<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Java is a case-sensitive programming language.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Variables with different letter cases are treated as different identifiers.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int number = 10;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int Number = 20;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Both variables are different because of letter casing.<br><br>
- *
- * 2) First Character Rules<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- A variable name must begin with a letter, underscore (_),
- * or dollar sign ($).<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Starting a variable name with a digit is not allowed.<br><br>
- *
- * 3) Allowed Characters<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- After the first character, a variable name may contain
- * letters, digits, underscores (_), and dollar signs ($).<br><br>
- *
- * 4) Invalid Characters<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Spaces are not allowed in variable names.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Special characters such as %, #, @, -, etc. are not allowed.<br><br>
- *
- * 5) Reserved Keywords<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Java keywords cannot be used as variable names.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Examples:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int class = 1; // Invalid<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int for = 5;   // Invalid<br><br>
- *
- * 6) Meaningful Variable Names<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Variable names should clearly describe their purpose.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Preferred:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;studentCount, totalMarks, gearRatio<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Avoid:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1, a2, temp123<br><br>
- *
- * 7) Naming Conventions<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Use lowerCamelCase for normal variables.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Examples:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;studentCount<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gearRatio<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalMarks<br><br>
- *
- * 8) Constant Naming Convention<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Constants are declared using the final keyword.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Use UPPER_CASE_WITH_UNDERSCORES for constants.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final int MAX_SPEED = 120;<br><br>
- *
- * 9) Valid Variable Name Examples<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- age<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- studentCount<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- _score<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- $total<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- gearRatio<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- MAX_SPEED<br><br>
- *
- * 10) ❌ INVALID Variable Names<br><br>
- *
- * int 1fast = 50; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Cannot start with a digit<br>
- * nt student-count = 40; // Hyphen not allowed<br>
- * int total marks = 100; &nbsp;// Spaces not allowed<br>
- * int for = 5; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Java keyword<br>
- * int @rate = 10; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Special character not allowed<br>
- * int class = 1; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Reserved keyword<br><br>
- *
- *
- * 11) Program Output<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- The program prints values stored in valid variables.<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- It demonstrates proper naming conventions and
- * case-sensitivity in Java.<br><br>
- *
- * Key Concepts Covered:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Variable Naming Rules<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Valid and Invalid Identifiers<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Naming Conventions<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Constants<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Case Sensitivity
+ Naming Rules and Naming Conventions in Java.
+
+ Variable names are identifiers used to represent variables that store data.
+ Java follows specific rules and conventions for naming variables to improve
+ readability, maintainability, and code quality.
+
+ Explanation:
+
+ 1) Case Sensitivity
+
+ - Java is a case-sensitive programming language.
+ - Variables with different letter cases are treated as different identifiers.
+ - Example:
+ int number = 10;
+ int Number = 20;
+ - Both variables are different because of letter casing.
+
+ 2) First Character Rules
+
+ - A variable name must begin with a letter, underscore (_) or dollar sign ($).
+ - Starting a variable name with a digit is not allowed.
+
+ 3) Allowed Characters
+
+ - After the first character, a variable name may contain letters, digits,
+ underscores (_) and dollar signs ($).
+
+ 4) Invalid Characters
+
+ - Spaces are not allowed in variable names.
+ - Special characters such as %, #, @, -, etc. are not allowed.
+
+ 5) Reserved Keywords
+
+ - Java keywords cannot be used as variable names.
+ - Examples:
+ int class = 1;   // Invalid
+ int for = 5;     // Invalid
+
+ 6) Meaningful Variable Names
+
+ - Variable names should clearly describe their purpose.
+
+ Preferred:
+ studentCount
+ totalMarks
+ gearRatio
+
+ Avoid:
+ x1
+ a2
+ temp123
+
+ 7) Naming Conventions
+
+ - Use lowerCamelCase for normal variables.
+ - Examples:
+ studentCount
+ gearRatio
+ totalMarks
+
+ 8) Constant Naming Convention
+
+ - Constants are declared using the final keyword.
+ - Use UPPER_CASE_WITH_UNDERSCORES for constants.
+ - Example:
+ final int MAX_SPEED = 120;
+
+ 9) Valid Variable Name Examples
+
+ - age
+ - studentCount
+ - _score
+ - $total
+ - gearRatio
+ - MAX_SPEED
+
+ 10) INVALID Variable Names
+
+ int 1fast = 50;           // Cannot start with a digit
+ int student-count = 40;   // Hyphen not allowed
+ int total marks = 100;    // Spaces not allowed
+ int for = 5;              // 'for' is a Java keyword
+ int @rate = 10;           // '@' is not allowed
+ int class = 1;            // 'class' is a Java keyword
+
+ 11) Program Output
+
+ - The program prints values stored in valid variables.
+ - It demonstrates proper naming conventions and case sensitivity in Java.
+
+ Key Concepts Covered:
+
+ - Variable Naming Rules
+ - Valid and Invalid Identifiers
+ - Naming Conventions
+ - Constants
+ - Case Sensitivity
  */
 
 
@@ -111,25 +125,22 @@ public class B_VariableNamingRules {
         System.out.println("Max Speed: " + MAX_SPEED);
 
         /*
-         * Invalid variable names
-         * Uncomment to see compiler errors
-         */
+        Invalid variable names
+        Uncomment one or more lines to see compiler errors.
 
-        /*
         int 1fast = 50;           // Cannot start with a digit
-        int student-count = 40;  // Hyphen not allowed
-        int total marks = 100;   // Spaces not allowed
-        int for = 5;             // 'for' is a keyword
-        int @rate = 10;          // '@' not allowed
-        int class = 1;           // Reserved keyword
+        int student-count = 40;   // Hyphen not allowed
+        int total marks = 100;    // Spaces not allowed
+        int for = 5;              // 'for' is a Java keyword
+        int @rate = 10;           // '@' is not allowed
+        int class = 1;            // 'class' is a Java keyword
         */
 
-        // Example showing case-sensitivity
+        // Example showing case sensitivity
         int number = 10;
         int Number = 20;
 
         System.out.println("number = " + number);
         System.out.println("Number = " + Number);
-
     }
 }

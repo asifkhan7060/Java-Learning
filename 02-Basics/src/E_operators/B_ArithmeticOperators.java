@@ -1,139 +1,141 @@
 package E_operators;
+
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ARITHMETIC OPERATORS IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Arithmetic Operators (+, -, *, /, %) in Java<br><br>
- *
- * 🔹 What Are Arithmetic Operators?<br><br>
- *
- * Arithmetic Operators are used to perform mathematical
- * calculations on numeric values.<br><br>
- *
- * Example:<br><br>
- *
- * int a = 10;<br>
- * int b = 5;<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;a and b → Operands<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;+ → Operator<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Addition Operator (+)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Used to add two values.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;operand1 + operand2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 + 5;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;15<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;2) Subtraction Operator (-)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Used to subtract one value from another.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;operand1 - operand2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 - 5;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;5<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3) Multiplication Operator (*)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Used to multiply two values.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;operand1 * operand2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 * 5;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;50<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4) Division Operator (/)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Used to divide one value by another.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;operand1 / operand2<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 / 5;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;2<br><br>
- *
- * Important Note:<br><br>
- *
- * When both operands are integers,
- * Java performs Integer Division.<br><br>
- *
- * Example:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 / 3;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3<br><br>
- *
- * The decimal part (0.333...) is discarded.<br><br>
- *
- * To obtain decimal output:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;double result = (double)10 / 3;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3.3333333333333335<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5) Modulus Operator (%)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Returns the remainder after division.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;operand1 % operand2<br><br>
- *
- * Example:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;int result = 10 % 3;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;1<br><br>
- *
- * Explanation:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;10 ÷ 3 = 3 remainder 1<br><br>
- *
- * Therefore:<br><br>
- *
- * &nbsp;&nbsp;&nbsp;&nbsp;10 % 3 = 1<br><br>
+ ====================================================
+ ARITHMETIC OPERATORS IN JAVA
+ ====================================================
+
+ Study : Arithmetic Operators (+, -, *, /, %) in Java
+
+ 🔹 What Are Arithmetic Operators?
+
+ Arithmetic Operators are used to perform mathematical
+ calculations on numeric values.
+
+ Example:
+
+ int a = 10;
+ int b = 5;
+
+ Here:
+
+ a and b → Operands
+ + → Operator
+
+
+ ====================================================
+ 1) Addition Operator (+)
+ ====================================================
+
+ Purpose:
+ Used to add two values.
+
+ Syntax:
+ operand1 + operand2
+
+ Example:
+ int result = 10 + 5;
+
+ Output:
+ 15
+
+
+ ====================================================
+ 2) Subtraction Operator (-)
+ ====================================================
+
+ Purpose:
+ Used to subtract one value from another.
+
+ Syntax:
+ operand1 - operand2
+
+ Example:
+ int result = 10 - 5;
+
+ Output:
+ 5
+
+
+ ====================================================
+ 3) Multiplication Operator (*)
+ ====================================================
+
+ Purpose:
+ Used to multiply two values.
+
+ Syntax:
+ operand1 * operand2
+
+ Example:
+ int result = 10 * 5;
+
+ Output:
+ 50
+
+
+ ====================================================
+ 4) Division Operator (/)
+ ====================================================
+
+ Purpose:
+ Used to divide one value by another.
+
+ Syntax:
+ operand1 / operand2
+
+ Example:
+ int result = 10 / 5;
+
+ Output:
+ 2
+
+ Important Note:
+
+ When both operands are integers,
+ Java performs Integer Division.
+
+ Example:
+
+ int result = 10 / 3;
+
+ Output:
+ 3
+
+ The decimal part (0.333...) is discarded.
+
+ To obtain decimal output:
+
+ double result = (double) 10 / 3;
+
+ Output:
+ 3.3333333333333335
+
+
+ ====================================================
+ 5) Modulus Operator (%)
+ ====================================================
+
+ Purpose:
+ Returns the remainder after division.
+
+ Syntax:
+ operand1 % operand2
+
+ Example:
+
+ int result = 10 % 3;
+
+ Output:
+ 1
+
+ Explanation:
+
+ 10 ÷ 3 = 3 remainder 1
+
+ Therefore:
+
+ 10 % 3 = 1
 
  */
 

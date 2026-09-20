@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/06-Collection Frameworks.iml" filepath="$PROJECT_DIR$/06-Collection Frameworks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04-Collection Frameworks.iml" filepath="$PROJECT_DIR$/04-Collection Frameworks.iml" />
     </modules>
   </component>
 </project>

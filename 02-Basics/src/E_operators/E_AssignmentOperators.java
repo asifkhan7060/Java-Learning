@@ -1,143 +1,144 @@
 package E_operators;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ASSIGNMENT OPERATORS IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Assignment Operators (=, +=, -=, *=, /=, %=) in Java<br><br>
- *
- * 🔹 What Are Assignment Operators?<br><br>
- *
- * Assignment Operators are used to assign values
- * to variables.<br><br>
- *
- * They can also perform an operation and assign
- * the result back to the same variable.<br><br>
- *
- * Example:<br><br>
- *
- * int a = 10;<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;a → Variable<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;= → Assignment Operator<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;10 → Value Assigned<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;1) Assignment Operator (=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Assigns a value to a variable.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 10;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x = 10<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;2) Add and Assign Operator (+=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Adds a value and assigns the result.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable += value<br><br>
- *
- * Equivalent To:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = variable + value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x += 5;<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3) Subtract and Assign Operator (-=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Subtracts a value and assigns the result.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable -= value<br><br>
- *
- * Equivalent To:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = variable - value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x -= 5;<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;4) Multiply and Assign Operator (*=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Multiplies a value and assigns the result.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable *= value<br><br>
- *
- * Equivalent To:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = variable * value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x *= 5;<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;5) Divide and Assign Operator (/=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Divides a value and assigns the result.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable /= value<br><br>
- *
- * Equivalent To:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = variable / value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x /= 5;<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;6) Modulus and Assign Operator (%=)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Finds remainder and assigns the result.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable %= value<br><br>
- *
- * Equivalent To:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable = variable % value<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x %= 3;<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Applications of Assignment Operators<br>
- * ====================================================<br><br>
- *
- * Used in:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Calculations<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Counters<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Loops<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Score Tracking<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Updating Variables<br><br>
- *
+ ====================================================
+ ASSIGNMENT OPERATORS IN JAVA
+ ====================================================
+
+ Study : Assignment Operators (=, +=, -=, *=, /=, %=) in Java
+
+ 🔹 What Are Assignment Operators?
+
+ Assignment Operators are used to assign values
+ to variables.
+
+ They can also perform an operation and assign
+ the result back to the same variable.
+
+ Example:
+
+ int a = 10;
+
+ Here:
+
+ a → Variable
+ = → Assignment Operator
+ 10 → Value Assigned
+
+
+ ====================================================
+ 1) Assignment Operator (=)
+ ====================================================
+
+ Purpose:
+ Assigns a value to a variable.
+
+ Syntax:
+ variable = value
+
+ Example:
+ int x = 10;
+
+ Output:
+ x = 10
+
+
+ ====================================================
+ 2) Add and Assign Operator (+=)
+ ====================================================
+
+ Purpose:
+ Adds a value and assigns the result.
+
+ Syntax:
+ variable += value
+
+ Equivalent To:
+ variable = variable + value
+
+ Example:
+ x += 5;
+
+
+ ====================================================
+ 3) Subtract and Assign Operator (-=)
+ ====================================================
+
+ Purpose:
+ Subtracts a value and assigns the result.
+
+ Syntax:
+ variable -= value
+
+ Equivalent To:
+ variable = variable - value
+
+ Example:
+ x -= 5;
+
+
+ ====================================================
+ 4) Multiply and Assign Operator (*=)
+ ====================================================
+
+ Purpose:
+ Multiplies a value and assigns the result.
+
+ Syntax:
+ variable *= value
+
+ Equivalent To:
+ variable = variable * value
+
+ Example:
+ x *= 5;
+
+
+ ====================================================
+ 5) Divide and Assign Operator (/=)
+ ====================================================
+
+ Purpose:
+ Divides a value and assigns the result.
+
+ Syntax:
+ variable /= value
+
+ Equivalent To:
+ variable = variable / value
+
+ Example:
+ x /= 5;
+
+
+ ====================================================
+ 6) Modulus and Assign Operator (%=)
+ ====================================================
+
+ Purpose:
+ Finds the remainder and assigns the result.
+
+ Syntax:
+ variable %= value
+
+ Equivalent To:
+ variable = variable % value
+
+ Example:
+ x %= 3;
+
+ ====================================================
+ Applications of Assignment Operators
+ ====================================================
+
+ Used in:
+
+ - Calculations
+ - Counters
+ - Loops
+ - Score Tracking
+ - Updating Variables
+
  */
 
 public class E_AssignmentOperators {

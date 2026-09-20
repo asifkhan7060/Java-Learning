@@ -1,129 +1,133 @@
 package E_operators;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TERNARY OPERATOR IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Ternary Operator (? :) in Java<br><br>
- *
- * 🔹 What Is the Ternary Operator?<br><br>
- *
- * The Ternary Operator is a shorthand form of
- * if-else statement.<br><br>
- *
- * It evaluates a condition and returns one of
- * two values depending on whether the condition
- * is true or false.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Syntax of Ternary Operator<br>
- * ====================================================<br><br>
- *
- * condition ? expression1 : expression2<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;condition → Boolean Expression<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;expression1 → Executes if condition is true<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;expression2 → Executes if condition is false<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;How Ternary Operator Works<br>
- * ====================================================<br><br>
- *
- * Step 1:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Condition is evaluated.<br><br>
- *
- * Step 2:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;If condition is true,
- * &nbsp;&nbsp;&nbsp;&nbsp;expression1 is executed.<br><br>
- *
- * Step 3:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;If condition is false,
- * &nbsp;&nbsp;&nbsp;&nbsp;expression2 is executed.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 1 : Adult or Minor<br>
- * ====================================================<br><br>
- *
- * int age = 20;<br><br>
- *
- * String result =
- * (age >= 18) ? "Adult" : "Minor";<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Adult<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 2 : Maximum of Two Numbers<br>
- * ====================================================<br><br>
- *
- * int a = 10;<br>
- * int b = 20;<br><br>
- *
- * int max = (a > b) ? a : b;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;20<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 3 : Even or Odd Number<br>
- * ====================================================<br><br>
- *
- * int number = 8;<br><br>
- *
- * String result =
- * (number % 2 == 0) ? "Even" : "Odd";<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Even<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Equivalent if-else Statement<br>
- * ====================================================<br><br>
- *
- * Ternary Operator:<br><br>
- *
- * String result =
- * (age >= 18) ? "Adult" : "Minor";<br><br>
- *
- * Equivalent if-else:<br><br>
- *
- * if(age >= 18) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;result = "Adult";<br>
- * }<br>
- * else {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;result = "Minor";<br>
- * }<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Advantages of Ternary Operator<br>
- * ====================================================<br><br>
- *
- * ✓ Reduces code length.<br>
- * ✓ Improves readability for simple conditions.<br>
- * ✓ Alternative to simple if-else statements.<br>
- * ✓ Frequently used in assignments and output statements.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Applications of Ternary Operator<br>
- * ====================================================<br><br>
- *
- * Used in:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Eligibility Checking<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Maximum/Minimum Finding<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Even/Odd Checking<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Conditional Assignments<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Quick Decision Making<br><br>
- *
+ ====================================================
+ TERNARY OPERATOR IN JAVA
+ ====================================================
+
+ Study : Ternary Operator (? :) in Java
+
+ 🔹 What Is the Ternary Operator?
+
+ The Ternary Operator is a shorthand form of
+ if-else statement.
+
+ It evaluates a condition and returns one of
+ two values depending on whether the condition
+ is true or false.
+
+
+ ====================================================
+ Syntax of Ternary Operator
+ ====================================================
+
+ condition ? expression1 : expression2
+
+ Here:
+
+ condition → Boolean Expression
+ expression1 → Executes if condition is true
+ expression2 → Executes if condition is false
+
+
+ ====================================================
+ How Ternary Operator Works
+ ====================================================
+
+ Step 1:
+ Condition is evaluated.
+
+ Step 2:
+ If condition is true,
+ expression1 is selected.
+
+ Step 3:
+ If condition is false,
+ expression2 is selected.
+
+
+ ====================================================
+ Example 1 : Adult or Minor
+ ====================================================
+
+ int age = 20;
+
+ String result =
+ (age >= 18) ? "Adult" : "Minor";
+
+ Output:
+ Adult
+
+
+ ====================================================
+ Example 2 : Maximum of Two Numbers
+ ====================================================
+
+ int a = 10;
+ int b = 20;
+
+ int max = (a > b) ? a : b;
+
+ Output:
+ 20
+
+
+ ====================================================
+ Example 3 : Even or Odd Number
+ ====================================================
+
+ int number = 8;
+
+ String result =
+ (number % 2 == 0) ? "Even" : "Odd";
+
+ Output:
+ Even
+
+
+ ====================================================
+ Equivalent if-else Statement
+ ====================================================
+
+ Ternary Operator:
+
+ String result =
+ (age >= 18) ? "Adult" : "Minor";
+
+ Equivalent if-else:
+
+ if(age >= 18)
+ {
+ result = "Adult";
+ }
+ else
+ {
+ result = "Minor";
+ }
+
+
+ ====================================================
+ Advantages of Ternary Operator
+ ====================================================
+
+ ✓ Reduces code length.
+ ✓ Improves readability for simple conditions.
+ ✓ Alternative to simple if-else statements.
+ ✓ Frequently used in assignments and output statements.
+
+
+ ====================================================
+ Applications of Ternary Operator
+ ====================================================
+
+ Used in:
+
+ - Eligibility Checking
+ - Maximum/Minimum Finding
+ - Even/Odd Checking
+ - Conditional Assignments
+ - Quick Decision Making
+
  */
 
 public class H_TernaryOperators {

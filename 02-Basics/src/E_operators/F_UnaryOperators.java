@@ -1,196 +1,203 @@
 package E_operators;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNARY OPERATORS IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Unary Operators (+, -, ++, --, !) in Java<br><br>
- *
- * 🔹 What Are Unary Operators?<br><br>
- *
- * Unary Operators are operators that work on only
- * one operand (single value or variable).<br><br>
- *
- * Example:<br><br>
- *
- * int a = 10;<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;++a → Unary Operation<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;a → Operand<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;1) Unary Plus Operator (+)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Indicates a positive value.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;+operand<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;+10<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;10<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;2) Unary Minus Operator (-)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Converts a positive value into a negative value.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;-operand<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;-10<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;-10<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;3) Increment Operator (++)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Increases the value by 1.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;++variable<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable++<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x++;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;6<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Pre-Increment (++x)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;First increments the value,
- * &nbsp;&nbsp;&nbsp;&nbsp;then uses it.<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(++x);<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;6<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Post-Increment (x++)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;First uses the value,
- * &nbsp;&nbsp;&nbsp;&nbsp;then increments it.<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x++);<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;5<br><br>
- *
- * Final Value of x:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;6<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;4) Decrement Operator (--)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Decreases the value by 1.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;--variable<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;variable--<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;x--;<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;4<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Pre-Decrement (--x)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;First decreases the value,
- * &nbsp;&nbsp;&nbsp;&nbsp;then uses it.<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(--x);<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;4<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Post-Decrement (x--)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;First uses the value,
- * &nbsp;&nbsp;&nbsp;&nbsp;then decreases it.<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int x = 5;<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(x--);<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;5<br><br>
- *
- * Final Value of x:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;4<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;5) Logical NOT Operator (!)<br>
- * ====================================================<br><br>
- *
- * Purpose:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Reverses a boolean value.<br><br>
- *
- * Syntax:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;!condition<br><br>
- *
- * Example:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;!true<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;false<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Applications of Unary Operators<br>
- * ====================================================<br><br>
- *
- * Used in:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Counters<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Loops<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Boolean Reversal<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Mathematical Operations<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;- Variable Updates<br><br>
- *
+ ====================================================
+ UNARY OPERATORS IN JAVA
+ ====================================================
+
+ Study : Unary Operators (+, -, ++, --, !) in Java
+
+ 🔹 What Are Unary Operators?
+
+ Unary Operators are operators that work on only
+ one operand (single value or variable).
+
+ Example:
+
+ int a = 10;
+
+ Here:
+
+ ++a → Unary Operation
+ a → Operand
+
+
+ ====================================================
+ 1) Unary Plus Operator (+)
+ ====================================================
+
+ Purpose:
+ Indicates a positive value.
+
+ Syntax:
+ +operand
+
+ Example:
+ +10
+
+ Output:
+ 10
+
+
+ ====================================================
+ 2) Unary Minus Operator (-)
+ ====================================================
+
+ Purpose:
+ Converts a positive value into a negative value.
+
+ Syntax:
+ -operand
+
+ Example:
+ -10
+
+ Output:
+ -10
+
+
+ ====================================================
+ 3) Increment Operator (++)
+ ====================================================
+
+ Purpose:
+ Increases the value by 1.
+
+ Syntax:
+ ++variable
+ variable++
+
+ Example:
+
+ int x = 5;
+ x++;
+
+ Output:
+ 6
+
+
+ ====================================================
+ Pre-Increment (++x)
+ ====================================================
+
+ Purpose:
+ First increments the value,
+ then uses it.
+
+ Example:
+
+ int x = 5;
+ System.out.println(++x);
+
+ Output:
+ 6
+
+
+ ====================================================
+ Post-Increment (x++)
+ ====================================================
+
+ Purpose:
+ First uses the value,
+ then increments it.
+
+ Example:
+
+ int x = 5;
+ System.out.println(x++);
+
+ Output:
+ 5
+
+ Final Value of x:
+ 6
+
+
+ ====================================================
+ 4) Decrement Operator (--)
+ ====================================================
+
+ Purpose:
+ Decreases the value by 1.
+
+ Syntax:
+ --variable
+ variable--
+
+ Example:
+
+ int x = 5;
+ x--;
+
+ Output:
+ 4
+
+
+ ====================================================
+ Pre-Decrement (--x)
+ ====================================================
+
+ Purpose:
+ First decreases the value,
+ then uses it.
+
+ Example:
+
+ int x = 5;
+ System.out.println(--x);
+
+ Output:
+ 4
+
+
+ ====================================================
+ Post-Decrement (x--)
+ ====================================================
+
+ Purpose:
+ First uses the value,
+ then decreases it.
+
+ Example:
+
+ int x = 5;
+ System.out.println(x--);
+
+ Output:
+ 5
+
+ Final Value of x:
+ 4
+
+
+ ====================================================
+ 5) Logical NOT Operator (!)
+ ====================================================
+
+ Purpose:
+ Reverses a boolean value.
+
+ Syntax:
+ !condition
+
+ Example:
+ !true
+
+ Output:
+ false
+
+ ====================================================
+ Applications of Unary Operators
+ ====================================================
+
+ Used in:
+
+ - Counters
+ - Loops
+ - Boolean Reversal
+ - Mathematical Operations
+ - Variable Updates
+
  */
 
 public class F_UnaryOperators {

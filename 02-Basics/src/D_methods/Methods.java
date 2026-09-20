@@ -1,244 +1,235 @@
 package D_methods;
 
 /**
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;METHODS IN JAVA<br>
- * ====================================================<br><br>
- *
- * Study : Methods (Functions) in Java<br><br>
- *
- * 🔹 What Is a Method?<br><br>
- *
- * A Method is a block of code that performs a
- * specific task.<br><br>
- *
- * Methods help us avoid writing the same code
- * repeatedly.<br><br>
- *
- * A method can be called whenever its functionality
- * is needed.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Why Methods Are Needed<br>
- * ====================================================<br><br>
- *
- * Without methods, the same code may be written
- * multiple times.<br><br>
- *
- * Example:<br><br>
- *
- * System.out.println("Hello");<br>
- * System.out.println("Welcome to Skywards");<br><br>
- *
- * If the same code appears 10 times, maintaining
- * it becomes difficult.<br><br>
- *
- * Methods solve this problem by keeping the code
- * in one place and reusing it whenever required.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method Creation Syntax<br>
- * ====================================================<br><br>
- *
- * accessModifier static returnType methodName() {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;// code<br>
- * }<br><br>
- *
- * Example:<br><br>
- *
- * private static void sayHello() {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello");<br>
- * }<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method Calling Syntax<br>
- * ====================================================<br><br>
- *
- * methodName();<br><br>
- *
- * Example:<br><br>
- *
- * sayHello();<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;How Methods Work<br>
- * ====================================================<br><br>
- *
- * Step 1:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method is defined.<br><br>
- *
- * Step 2:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method is called.<br><br>
- *
- * Step 3:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Control goes to method body.<br><br>
- *
- * Step 4:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method executes statements.<br><br>
- *
- * Step 5:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Control returns back to caller.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 1 : Simple Method<br>
- * ====================================================<br><br>
- *
- * Method:<br><br>
- *
- * private static void sayHello() {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello");<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Welcome to Skywards");<br>
- * }<br><br>
- *
- * Method Call:<br><br>
- *
- * sayHello();<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Hello<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Welcome to Skywards<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method Reusability<br>
- * ====================================================<br><br>
- *
- * A method can be called multiple times.<br><br>
- *
- * Example:<br><br>
- *
- * sayHello();<br>
- * sayHello();<br>
- * sayHello();<br><br>
- *
- * This executes the same code three times
- * without rewriting it.<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method Parameters<br>
- * ====================================================<br><br>
- *
- * Parameters are variables that receive values
- * when a method is called.<br><br>
- *
- * Syntax:<br><br>
- *
- * returnType methodName(dataType parameterName)<br><br>
- *
- * Example:<br><br>
- *
- * private static void sayHello(String name)<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;String → Data Type<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;name → Parameter<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Method Arguments<br>
- * ====================================================<br><br>
- *
- * Arguments are actual values passed to
- * parameters.<br><br>
- *
- * Example:<br><br>
- *
- * sayHello("John");<br><br>
- *
- * Here:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;"John" → Argument<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 2 : Method With Parameter<br>
- * ====================================================<br><br>
- *
- * Method:<br><br>
- *
- * private static void sayHello(String name) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, " + name);<br>
- * }<br><br>
- *
- * Calls:<br><br>
- *
- * sayHello("John");<br>
- * sayHello("Michael");<br>
- * sayHello("Mohan");<br>
- * sayHello("Sunil");<br><br>
- *
- * Output:<br><br>
- *
- * Hello, John<br>
- * Hello, Michael<br>
- * Hello, Mohan<br>
- * Hello, Sunil<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Return Type<br>
- * ====================================================<br><br>
- *
- * A method may return a value after execution.<br><br>
- *
- * Syntax:<br><br>
- *
- * returnType methodName() {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;return value;<br>
- * }<br><br>
- *
- * Example:<br><br>
- *
- * private static int add(int a, int b)<br><br>
- *
- * Return Type:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;int<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Example 3 : Method Returning Value<br>
- * ====================================================<br><br>
- *
- * int add(int a, int b) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;return a + b;<br>
- * }<br><br>
- *
- * Method Call:<br><br>
- *
- * add(10, 20);<br><br>
- *
- * Output:<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;30<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Advantages of Methods<br>
- * ====================================================<br><br>
- *
- * ✓ Code Reusability<br>
- * ✓ Less Code Duplication<br>
- * ✓ Easier Maintenance<br>
- * ✓ Better Readability<br>
- * ✓ Modular Programming<br>
- * ✓ Easier Debugging<br><br>
- *
- *
- * ====================================================<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;Important Terminology<br>
- * ====================================================<br><br>
- *
- * Method Definition → Creating a method<br>
- * Method Call → Executing a method<br>
- * Parameter → Variable in method declaration<br>
- * Argument → Actual value passed<br>
- * Return Type → Type of value returned<br>
- * void → Returns nothing<br><br>
- *
+ ====================================================
+ METHODS IN JAVA
+ ====================================================
+
+ 🔹 What Is a Method (Function)?
+
+ A Method is a block of code that performs a
+ specific task.
+
+ Methods help us avoid writing the same code
+ repeatedly.
+
+ A method can be called whenever its functionality
+ is needed.
+
+
+ ====================================================
+ Why Methods Are Needed
+ ====================================================
+
+ Without methods, the same code may be written
+ multiple times.
+
+ Example:
+
+ System.out.println("Hello");
+ System.out.println("Welcome to Skywards");
+
+ If the same code appears 10 times, maintaining
+ it becomes difficult.
+
+ Methods solve this problem by keeping the code
+ in one place and reusing it whenever required.
+
+
+ ====================================================
+ Method Creation Syntax
+ ====================================================
+
+ accessModifier static returnType methodName() {
+ // code
+ }
+
+ Example:
+
+ private static void sayHello() {
+ System.out.println("Hello");
+ }
+
+
+ ====================================================
+ Method Calling Syntax
+ ====================================================
+
+ methodName();
+
+ Example:
+
+ sayHello();
+
+
+ ====================================================
+ How Methods Work
+ ====================================================
+
+ Step 1:
+ Method is defined.
+
+ Step 2:
+ Method is called.
+
+ Step 3:
+ Control goes to method body.
+
+ Step 4:
+ Method executes statements.
+
+ Step 5:
+ Control returns back to caller.
+
+
+ ====================================================
+ Example 1 : Simple Method
+ ====================================================
+
+ Method:
+
+ private static void sayHello() {
+ System.out.println("Hello");
+ System.out.println("Welcome to Skywards");
+ }
+
+ Method Call:
+
+ sayHello();
+
+ Output:
+
+ Hello
+ Welcome to Skywards
+
+
+ ====================================================
+ Method Reusability
+ ====================================================
+
+ A method can be called multiple times.
+
+ Example:
+
+ sayHello();
+ sayHello();
+ sayHello();
+
+ This executes the same code three times
+ without rewriting it.
+
+
+ ====================================================
+ Method Parameters
+ ====================================================
+
+ Parameters are variables that receive values
+ when a method is called.
+
+ Syntax:
+
+ returnType methodName(dataType parameterName)
+
+ Example:
+
+ private static void sayHello(String name)
+
+ Here:
+
+ String → Data Type
+ name → Parameter
+
+
+ ====================================================
+ Method Arguments
+ ====================================================
+
+ Arguments are actual values passed to
+ parameters.
+
+ Example:
+
+ sayHello("John");
+
+ Here:
+
+ "John" → Argument
+
+
+ ====================================================
+ Example 2 : Method With Parameter
+ ====================================================
+
+ Method:
+
+ private static void sayHello(String name) {
+ System.out.println("Hello, " + name);
+ }
+
+ Calls:
+
+ sayHello("John");
+ sayHello("Michael");
+ sayHello("Mohan");
+ sayHello("Sunil");
+
+ Output:
+
+ Hello, John
+ Hello, Michael
+ Hello, Mohan
+ Hello, Sunil
+
+
+ ====================================================
+ Return Type
+ ====================================================
+
+ A method may return a value after execution.
+
+ Syntax:
+
+ returnType methodName() {
+ return value;
+ }
+
+ Example:
+
+ private static int add(int a, int b)
+
+ Return Type:
+
+ int
+
+
+ ====================================================
+ Example 3 : Method Returning Value
+ ====================================================
+
+ int add(int a, int b) {
+ return a + b;
+ }
+
+ Method Call:
+
+ add(10, 20);
+
+ Output:
+
+ 30
+
+
+ ====================================================
+ Advantages of Methods
+ ====================================================
+
+ ✓ Code Reusability
+ ✓ Less Code Duplication
+ ✓ Easier Maintenance
+ ✓ Better Readability
+ ✓ Modular Programming
+ ✓ Easier Debugging
+
  */
 
 public class Methods {

@@ -45,7 +45,7 @@ public class A_VariablesBasics {
 
         /* Multi Line Comment */
 
-        /** Documentation (JavaDoc) Comment */
+        /** Documentation (JavaDoc) Comment **/
 
     }
 }
