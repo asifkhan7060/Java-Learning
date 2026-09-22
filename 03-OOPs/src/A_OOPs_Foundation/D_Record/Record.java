@@ -1,4 +1,4 @@
-package A_OOPs_Foundation.D_RecordsConcept;
+package A_OOPs_Foundation.D_Record;
 
 /**
  * ====================================================
@@ -41,42 +41,32 @@ package A_OOPs_Foundation.D_RecordsConcept;
 
  * Example:
 
- record Bike(String Brand,
-              String Color,
-              int Price) {
+ record Bike(String brand,
+              String color,
+              int price) {
   }
 
  * Creating Object
 
-  Bike bike =
-       new Bike("Yamaha",
-                "Mat Black",
-                2400000);
+  Bike bike = new Bike("Yamaha","Mat Black",2400000);
 
  * Accessing Values
 
- * bike.Brand();
- * bike.Color();
- * bike.Price();
+ * bike.brand();
+ * bike.color();
+ * bike.price();
 
  * Note: Records do not use traditional getters.
 
- * Instead of: bike.getBrand(); We use: bike.Brand();
+ * Instead of: bike.getBrand(); We use: bike.brand();
 
- * Important Point
- Record objects are immutable.
-
- * Immutable means:
- Once values are assigned during object creation,they cannot be changed later.
+ * Important Point - Record objects are immutable (Once values are assigned during object creation,they cannot be changed later)
 
  * Example:
 
-  Bike bike =
-       new Bike("Yamaha",
-                "Black",
-                2400000);
+  Bike bike = new Bike("Yamaha","Black",2400000);
 
-  bike.Brand = "Honda"; // Not Allowed
+  bike.brand = "Honda"; // Not Allowed
 
  * When to Use Records?
 
@@ -84,31 +74,28 @@ package A_OOPs_Foundation.D_RecordsConcept;
   • You only need to store data.
   • Values should not change.
   • You want less code.
+
  */
 
-record Bike(String Brand, String Color, int Price) {}
+record Bike(String brand, String color, int price) {}
 
 public class Record {
 
     public static void main() {
 
         // Creating a Record Object
-        Bike bike = new Bike(
-                "Yamaha",
-                "Mat Black",
-                2400000
-        );
+        Bike bike = new Bike("Yamaha", "Mat Black", 2400000);
+
+        // Records are immutable (Values cannot be modified after object creation)
 
         // Accessing Record Components
         System.out.println("Bike Details:");
 
-        System.out.println("Brand : " + bike.Brand());
+        System.out.println("Brand : " + bike.brand());
 
-        System.out.println("Color : " + bike.Color());
+        System.out.println("Color : " + bike.color());
 
-        System.out.println("Price : " + bike.Price());
+        System.out.println("Price : " + bike.price());
 
-        // Records are immutable
-        // Values cannot be modified after object creation
     }
 }
