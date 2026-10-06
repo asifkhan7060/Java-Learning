@@ -1,0 +1,19 @@
+/*
+         * ==========================================================
+         *               Methods Inherited from Object
+         *
+         *               ├── 🆕 toString()
+         *               ├── 🆕 getClass()
+         *               ├── 🆕 wait()
+         *               ├── 🆕 wait(long timeout)
+         *               ├── 🆕 wait(long timeout, int nanos)
+         *               ├── 🆕 notify()
+         *               ├── 🆕 notifyAll()
+         *               ├── 🆕 clone() (protected)
+         *               ├── 🆕 equals(Object)
+         *               ├── 🆕 hashCode()
+         *               ├── 🆕 finalize() (Deprecated)
+         *               └── 🆕 registerNatives() (Native, Internal - Ignore)
+         *
+         * ==========================================================
+         */
