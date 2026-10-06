@@ -176,6 +176,32 @@ Excessive collisions can affect performance.
 
 Explained well in Hash-Table.md
 
+### NOTE 
+
+Prefer immutable objects as HashSet elements. Do not modify fields used by equals() or hashCode() after insertion, because changing them can make the object difficult to find in the HashSet.
+
+### Example
+
+Suppose an object is added with:
+
+```text
+id = 10
+↓
+hashCode() → Bucket 10
+```
+
+Later, its `id` is changed:
+
+```text
+id = 20
+↓
+hashCode() → Bucket 20
+```
+
+But the object is still stored in **Bucket 10**, so `HashSet` may not be able to find it.
+
+> **Don't change fields used by `equals()` or `hashCode()` after adding an object to a `HashSet`.**
+
 ## LinkedHashSet
 
 ### Overview
@@ -268,14 +294,14 @@ Java, Python
 
 ### Methods of SortedSet
 
-| Method | Purpose | Typical Complexity |
-|--------|---------|--------------------|
-| `first()` | Smallest element | O(log n) |
-| `last()` | Largest element | O(log n) |
-| `headSet(to)` | View of elements `< to` | O(1) view |
-| `tailSet(from)` | View of elements `>= from` | O(1) view |
-| `subSet(from, to)` | View of range `[from, to)` | O(1) view |
-| `comparator()` | Returns comparator | O(1) |
+| Method | Purpose | Typical Complexity             |
+|--------|---------|--------------------------------|
+| `first()` | Smallest element | O(log n) (leftmost leaf node)  |
+| `last()` | Largest element | O(log n) (rightmost leaf node) |
+| `headSet(to)` | View of elements `< to` | O(1) view                      |
+| `tailSet(from)` | View of elements `>= from` | O(1) view                      |
+| `subSet(from, to)` | View of range `[from, to)` | O(1) view                      |
+| `comparator()` | Returns comparator | O(1)                           |
 
 ## NavigableSet
 
@@ -283,19 +309,19 @@ Java, Python
 
 ### Methods of NavigableSet
 
-| Method | Purpose | Typical Complexity |
-|--------|---------|--------------------|
+| Method | Purpose | Typical Complexity        |
+|--------|---------|---------------------------|
 | `lower(e)` | Greatest element `< e` | O(log n) |
 | `floor(e)` | Greatest element `<= e` | O(log n) |
-| `ceiling(e)` | Smallest element `>= e` | O(log n) |
-| `higher(e)` | Smallest element `> e` | O(log n) |
-| `pollFirst()` | Remove and return first | O(log n) |
-| `pollLast()` | Remove and return last | O(log n) |
-| `descendingSet()` | Reverse-order view | O(1) view |
-| `descendingIterator()` | Reverse traversal | O(1) |
-| `subSet(...)` | Range with boundary control | O(1) view |
-| `headSet(...)` | Head range with boundary control | O(1) view |
-| `tailSet(...)` | Tail range with boundary control | O(1) view |
+| `ceiling(e)` | Smallest element `>= e` | O(log n)                  |
+| `higher(e)` | Smallest element `> e` | O(log n)                  |
+| `pollFirst()` | Remove and return first | O(log n)                  |
+| `pollLast()` | Remove and return last | O(log n)                  |
+| `descendingSet()` | Reverse-order view | O(1) view                 |
+| `descendingIterator()` | Reverse traversal | O(1)                      |
+| `subSet(...)` | Range with boundary control | O(1) view                 |
+| `headSet(...)` | Head range with boundary control | O(1) view                 |
+| `tailSet(...)` | Tail range with boundary control | O(1) view                 |
 
 ### NavigableSet Visual Memory
 
@@ -389,23 +415,7 @@ Comparator  → comparison rule outside the class
 
 ### TreeSet Internal Working
 
-```text
-       20
-      /  \
-    10    30
-         /  \
-        25  40
-```
-
-TreeSet uses a self-balancing Red-Black Tree.
-
-Key properties:
-
-- The tree automatically rebalances after insertions and deletions.
-- In-order traversal produces sorted elements.
-- There is no hash table.
-- Height remains O(log n), providing consistent operation complexity.
-- Elements are ordered using natural ordering or a supplied `Comparator`.
+See Red-Black-Tree.md for Internal working info
 
 ### Why TreeSet Does Not Allow null
 
@@ -433,7 +443,7 @@ set.add(null);    // ❌ NullPointerException
 
 | Misconception / Mistake | Reality / Solution |
 |-------------------------|--------------------|
-| HashSet stores elements randomly | HashSet uses hashing; iteration order is simply not guaranteed. |
+| HashSet stores elements randomly | HashSet uses hashing |
 | HashSet preserves insertion order | Use `LinkedHashSet` when insertion order matters. |
 | LinkedHashSet is completely different from HashSet | It extends `HashSet` and adds insertion-order maintenance through its internal linked structure. |
 | LinkedHashSet provides sorted order | It preserves insertion order, not sorted order. Use `TreeSet` for sorting. |
@@ -441,10 +451,6 @@ set.add(null);    // ❌ NullPointerException
 | TreeSet is always the best way to remove duplicates | If only uniqueness is needed, HashSet avoids unnecessary ordering overhead. |
 | All Sets allow `null` | HashSet and LinkedHashSet allow one `null`; TreeSet does not allow `null` in normal ordering. |
 | Duplicate elements are stored | Duplicate insertion is rejected; `add()` returns `false`. |
-| Mutable objects are always safe Set elements | Changing equality/hash-related state after insertion can break hash-based lookup. |
-| TreeSet accepts every custom object automatically | Elements need compatible ordering through `Comparable` or `Comparator`. |
-| `Set<Integer>` exposes every method of the actual implementation | Accessible methods depend on the reference type. |
-| `headSet()`, `tailSet()`, and `subSet()` create independent collections | They return views backed by the original TreeSet. |
 
 ## Best Practices
 
@@ -456,28 +462,3 @@ set.add(null);    // ❌ NullPointerException
 - Do not modify fields involved in `equals()` / `hashCode()` after insertion into a hash-based Set.
 - Choose `Comparable` for natural ordering and `Comparator` for custom ordering.
 - Use an appropriate synchronized or concurrent Set implementation when thread safety is required.
-
-## Quick Reference
-
-| Requirement | HashSet | LinkedHashSet | TreeSet |
-|-------------|:-------:|:-------------:|:-------:|
-| Unique elements | ✅ | ✅ | ✅ |
-| Fast average lookup | ✅ | ✅ | — |
-| Insertion order | ❌ | ✅ | ❌ |
-| Sorted order | ❌ | ❌ | ✅ |
-| Navigation | ❌ | ❌ | ✅ |
-| Range queries | ❌ | ❌ | ✅ |
-| One `null` allowed | ✅ | ✅ | ❌ |
-| Typical `add()` | O(1)* | O(1)* | O(log n) |
-| Typical `remove()` | O(1)* | O(1)* | O(log n) |
-| Typical `contains()` | O(1)* | O(1)* | O(log n) |
-
-> *Average case for hash-based Sets.*
-
-## One-Line Summary
-
-> **HashSet** → Unique elements + fast average lookup, no ordering guarantee  
-> **LinkedHashSet** → Unique elements + fast average lookup + insertion order  
-> **TreeSet** → Unique elements + sorted order + navigation/range operations
-
-> **Key Principle:** Choose based on whether you need **speed** (`HashSet`), **order** (`LinkedHashSet`), or **sorting/navigation** (`TreeSet`).

@@ -60,126 +60,32 @@ public class Implementation {
          * ==========================================================
          */
 
-        // ---------------------------------------------------------
-        // Raw Type (Without Type Safety)
-        // ---------------------------------------------------------
-
-        HashSet rawUsers = new HashSet();
-
-        rawUsers.add("Alice");
-        rawUsers.add(101);
-        rawUsers.add(true);
-
-        System.out.println("Raw HashSet");
-        System.out.println(rawUsers);
-
-        /*
-         * Raw Types:
-         * -----------
-         * Stores everything as Object.
-         * Type Safety is NOT available.
-         * Avoid using Raw Types in modern Java.
-         */
-
-        System.out.println();
-
-
-        // ---------------------------------------------------------
-        // Generics
-        // ---------------------------------------------------------
-
         HashSet<String> users = new HashSet<>();
 
         users.add("Rudra");
         users.add("Haya");
         users.add("Arman");
-        users.add("Arman");   // Duplicate
-//      users.add(100);       // Compile Time Error
+        users.add("Arman");   // Duplicate (ignored)
+        //users.add(100);     // Compile Time Error
+        users.add(null);      // Only one null allowed
+        users.add("Arya");
+        users.add(null);      // Ignored
+        users.add("Ahmed");
 
-        System.out.println("HashSet with Generics");
-        System.out.println(users);
-
-        /*
-         * Note:
-         * Duplicate values are ignored automatically.
-         * Output order is NOT guaranteed.
-         */
-
-
-        // ---------------------------------------------------------
-        // Duplicate Demonstration
-        // ---------------------------------------------------------
-
-        HashSet<Integer> duplicateDemo = new HashSet<>();
-
-        duplicateDemo.add(10);
-        duplicateDemo.add(20);
-        duplicateDemo.add(30);
-        duplicateDemo.add(20);
-        duplicateDemo.add(10);
-        duplicateDemo.add(40);
-
-        System.out.println("\nDuplicate Demonstration");
-        System.out.println(duplicateDemo);
-
-        /*
-         * Output : [10,20,30,40]
-         * Duplicate values are ignored.
-         */
-
-
-        // ---------------------------------------------------------
-        // Null Demonstration
-        // ---------------------------------------------------------
-
-        HashSet<String> nullDemo = new HashSet<>();
-
-        nullDemo.add(null);
-        nullDemo.add("Java");
-        nullDemo.add(null);
-        nullDemo.add("Python");
-
-        System.out.println("\nNull Demonstration");
-        System.out.println(nullDemo);
-
-        /*
-         * HashSet allows only ONE null element.
-         */
-
-
-        // ---------------------------------------------------------
-        // For Each Loop
-        // ---------------------------------------------------------
-
-        System.out.println("\nUsing For Each");
-
-        for (String user : users) {
-            System.out.println(user);
-        }
-
-
-        // ---------------------------------------------------------
-        // Iterator
-        // ---------------------------------------------------------
-
-        System.out.println("\nUsing Iterator");
-
-        Iterator<String> iterator = users.iterator();
-
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+        System.out.println(users); // Output order is NOT guaranteed
 
 
         // ---------------------------------------------------------
         // Working with Custom Class
         // ---------------------------------------------------------
 
+        // Since equals() and hashCode() are NOT overridden in class, HashSet treats every Car object as different.
+
         HashSet<Car> cars = new HashSet<>();
 
         cars.add(new Car("BMW", 900));
         cars.add(new Car("Toyota", 500));
-        cars.add(new Car("BMW", 900));      // Different Object
+        cars.add(new Car("BMW", 900));    // Looks same values like above but It is Different Object so both gets printed
 
         System.out.println("\nCustom Class");
 
@@ -193,11 +99,7 @@ public class Implementation {
          * ==========================================================
          */
 
-        // ---------------------------------------------------------
-        // HashSet()
-        // ---------------------------------------------------------
-
-        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set1 = new HashSet<>(); // normal (Default Constructor)
 
         set1.add(10);
         set1.add(20);
@@ -208,7 +110,6 @@ public class Implementation {
 
         /*
          * Creates an empty HashSet.
-         * Default Constructor.
          * Default Capacity  : 16
          * Default LoadFactor: 0.75
          */
@@ -237,8 +138,7 @@ public class Implementation {
         // HashSet(int initialCapacity,float loadFactor)
         // ---------------------------------------------------------
 
-        HashSet<Integer> set3 =
-                new HashSet<>(100, 0.75f);
+        HashSet<Integer> set3 = new HashSet<>(100, 0.75f);
 
         set3.add(1);
         set3.add(2);
@@ -249,7 +149,6 @@ public class Implementation {
 
         /*
          * Allows custom Load Factor.
-         *
          * Generally default value (0.75) is recommended.
          */
 
@@ -273,14 +172,13 @@ public class Implementation {
         System.out.println("HashSet       : " + set4);
 
         /*
-         * Frequently used for:
-         * Removing Duplicate Elements from another Collection.
+         * Frequently used for Removing Duplicate Elements from another Collection.
          */
 
 
         /*
          * ==========================================================
-         *                     clone()
+         *         HashSet Specific Method - clone()
          * ==========================================================
          */
 
@@ -308,64 +206,12 @@ public class Implementation {
         System.out.println("Cloned HashSet   : " + cloned);
 
         /*
-         * Note:
-         * clone() creates a SHALLOW COPY.
-         * Only HashSet object is copied.
-         * Stored objects are shared.
-         */
-
-
-        /*
-         * ==========================================================
-         *              Shallow Copy Demonstration
-         * ==========================================================
-         */
-
-        HashSet<Car> originalCars = new HashSet<>();
-
-        originalCars.add(new Car("BMW",900));
-        originalCars.add(new Car("Toyota",500));
-
-        @SuppressWarnings("unchecked")
-        HashSet<Car> copiedCars =
-                (HashSet<Car>) originalCars.clone();
-
-        System.out.println("\nShallow Copy");
-
-        System.out.println("Original : " + originalCars);
-        System.out.println("Copied   : " + copiedCars);
-
-        // Modify object inside copied HashSet
-
-        for(Car car : copiedCars){
-
-            if(car.brand.equals("BMW")){
-                car.brand = "Audi";
-            }
-
-        }
-
-        System.out.println("\nAfter Modifying Object");
-
-        System.out.println("Original : " + originalCars);
-        System.out.println("Copied   : " + copiedCars);
-
-        /*
-         * Note:
-         * HashSet is copied.
-         * Car objects are NOT copied.
-         * Both HashSets refer to the same Car objects.
-         */
-
-
-        /*
          * ==========================================================
          *                      Rehashing
          * ==========================================================
          */
 
-        HashSet<Integer> rehashDemo =
-                new HashSet<>(4, 0.75f);
+        HashSet<Integer> rehashDemo = new HashSet<>(4, 0.75f);
 
         /*
          * Initial:
@@ -400,131 +246,25 @@ public class Implementation {
 
         /*
          * Rehashing:
-         * • Capacity increases.
-         * • Existing elements are redistributed into the new bucket array.
+         * Capacity increases & Existing elements are redistributed into the new bucket array.
          */
 
         /*
-         * ==========================================================
-         *          Reference Type Demonstration
-         * ==========================================================
-         *
-         * Set Reference
-         * ✓ Access Set + Collection methods only.
-         * ✗ Cannot access HashSet-specific methods (e.g. clone()).
-         *
-         * HashSet Reference
-         * ✓ Access all HashSet methods, including clone().
-         *
-         * Recommendation
-         * ✓ Use Set reference for loose coupling.
-         * ✓ Use HashSet reference only when HashSet-specific methods are needed.
-         */
+        ==========================================================
+                    Methods Not Covered Yet - Java 19+
+        ==========================================================
 
+        HashSet.newHashSet(int expectedSize)
 
-        /*
-         * ==========================================================
-         *               Already Covered in ArrayList
-         * ==========================================================
-         *
-         * The following methods behave the same for HashSet.
-         * Refer to ArrayList Implementation.java.
-         *
-         * ✓ forEach()
-         * ✓ Method Reference (System.out::println)
-         * ✓ spliterator()
-         *
-         * Note:
-         * Although these methods are available in HashSet,
-         * the iteration order is NOT guaranteed because
-         * HashSet is unordered.
-         */
+        Ex:
+        HashSet<Integer> set = HashSet.newHashSet(100);
 
+        HashSet       → class name
+        .             → access a static method
+        newHashSet    → method name
+        (100)         → expected number of elements
+        */
 
-        /*
-         * ==========================================================
-         *                    iterator()
-         * ==========================================================
-         */
-
-        HashSet<String> fruits = new HashSet<>();
-
-        fruits.add("Apple");
-        fruits.add("Banana");
-        fruits.add("Mango");
-
-        System.out.println("\nIterator");
-
-        Iterator<String> itr = fruits.iterator();
-
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
-        }
-
-        /*
-         * HashSet supports Iterator only.
-         *
-         * ListIterator is NOT available
-         * because HashSet does not implement List.
-         */
-
-
-        /*
-         * ==========================================================
-         *               HashSet Characteristics
-         * ==========================================================
-         */
-
-        HashSet<Integer> characteristics = new HashSet<>();
-
-        characteristics.add(30);
-        characteristics.add(10);
-        characteristics.add(40);
-        characteristics.add(20);
-        characteristics.add(20);   // Duplicate
-        characteristics.add(null); // One null allowed
-        characteristics.add(null); // Ignored
-
-        System.out.println("\nHashSet Characteristics");
-
-        System.out.println(characteristics);
-
-        /*
-         * Characteristics
-         *
-         * ✓ Duplicate NOT Allowed
-         * ✓ One Null Allowed
-         * ✓ Unordered
-         * ✓ No Index
-         * ✓ Fast Searching (Average O(1))
-         */
-
-
-        /*
-         * ==========================================================
-         *              Methods Not Covered Yet
-         * ==========================================================
-         */
-        /*
-         * Java 21
-         *
-         * HashSet.newHashSet(int expectedSize)
-         */
-
-
-        /*
-         * ==========================================================
-         *              Methods Inherited from Object
-         * ==========================================================
-         */
-
-        // future !!
-
-        /*
-         * ==========================================================
-         *                       End
-         * ==========================================================
-         */
 
         System.out.println("\nHashSet Implementation Completed.");
 
@@ -562,19 +302,3 @@ class Car {
     }
 
 }
-
-/*
- * ==========================================================
- * IMPORTANT
- * ==========================================================
- *
- * Since equals() and hashCode() are NOT overridden,
- * HashSet treats every Car object as different.
- *
- * Override both methods when logical equality
- * is required.
- *
- * This will be covered in Object Class / HashMap topic.
- *
- * ==========================================================
- */
