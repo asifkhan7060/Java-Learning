@@ -450,8 +450,20 @@ public class PriorityQueue<E>
 ```
 
 ```java
+public class ConcurrentLinkedQueue<E>
+        implements Queue<E>, Serializable {
+}
+```
+
+```java
 public class ArrayDeque<E>
         implements Deque<E>, Cloneable, Serializable {
+}
+```
+
+```java
+public class ConcurrentLinkedDeque<E>
+        implements Deque<E>, Serializable {
 }
 ```
 

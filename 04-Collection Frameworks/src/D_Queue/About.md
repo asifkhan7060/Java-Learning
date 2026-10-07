@@ -1,7 +1,6 @@
 # Java Queue Interface + PriorityQueue — Complete Guide
 
 > **Scope:** This document combines the overall `Queue` concepts with an in-depth study of `PriorityQueue`.  
-> Generic traversal concepts such as `Iterable`, `Iterator`, `Spliterator`, and Stream traversal are covered in the Collection/Iterable documentation; they are not repeated here unless a Queue-specific behavior is important.
 
 # What is Queue?
 
@@ -25,21 +24,26 @@ public interface Queue<E> extends Collection<E>
 ## Queue Hierarchy
 
 ```text
-Iterable → Collection → Queue
-                           ├── PriorityQueue
-                           ├── Deque
-                           │   ├── ArrayDeque
-                           │   └── LinkedList
-                           ├── BlockingQueue
-                           │   ├── ArrayBlockingQueue
-                           │   ├── LinkedBlockingQueue
-                           │   ├── PriorityBlockingQueue
-                           │   ├── DelayQueue
-                           │   ├── SynchronousQueue
-                           │   └── TransferQueue
-                           │       └── LinkedTransferQueue
-                           └── BlockingDeque
-                               └── LinkedBlockingDeque
+Queue
+├── PriorityQueue
+├── Deque
+│   ├── ArrayDeque
+│   ├── LinkedList
+│   └── ConcurrentLinkedDeque
+├── BlockingQueue
+│   ├── ArrayBlockingQueue
+│   ├── LinkedBlockingQueue
+│   ├── PriorityBlockingQueue
+│   ├── DelayQueue
+│   ├── SynchronousQueue
+│   └── TransferQueue
+│       └── LinkedTransferQueue
+└── ConcurrentLinkedQueue
+
+Deque → SequencedCollection
+BlockingDeque → BlockingQueue + Deque
+                   ↓
+            LinkedBlockingDeque
 ```
 
 # Why Do We Need Queue?
