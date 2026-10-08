@@ -1,6 +1,6 @@
-# Java Queue Interface + PriorityQueue — Complete Guide
+# Java Queue, Deque + PriorityQueue — Complete Guide
 
-> **Scope:** This document combines the overall `Queue` concepts with an in-depth study of `PriorityQueue`.  
+> **Scope:** This document combines the overall `Queue` concepts with an in-depth study of `PriorityQueue`. It also covers `Deque` concepts, including `ArrayDeque` and `BlockingDeque` with `LinkedBlockingDeque`. 
 
 # What is Queue?
 

@@ -1,4 +1,4 @@
-package D_Queue.BlockingQueue.Z_Last_Priority.DelayQueue;
+package D_Queue.Z_Last_Priority.BlockingQueueParts.DelayQueue;
 
 import java.util.*;
 import java.util.concurrent.*;

@@ -1,4 +1,4 @@
-package D_Queue.Deque;
+package D_Queue.Z_Last_Priority.ConcurrentLinkedDeque;
 
 import java.util.*;
 

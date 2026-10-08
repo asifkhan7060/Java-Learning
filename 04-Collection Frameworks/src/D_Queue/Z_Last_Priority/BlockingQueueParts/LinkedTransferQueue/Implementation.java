@@ -1,4 +1,4 @@
-package D_Queue.BlockingQueue.Z_Last_Priority.TransferQueue.LinkedTransferQueue;
+package D_Queue.Z_Last_Priority.BlockingQueueParts.LinkedTransferQueue;
 
 import java.util.*;
 import java.util.concurrent.*;

@@ -1,4 +1,4 @@
-package D_Queue.BlockingQueue.Z_Last_Priority.TransferQueue;
+package D_Queue.Z_Last_Priority.BlockingQueueParts;
 
 import java.util.Iterator;
 import java.util.Spliterator;

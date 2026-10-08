@@ -1,4 +1,4 @@
-package D_Queue.Z_Last_Priority;
+package D_Queue.Z_Last_Priority.ConcurrentLinkedQueue;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
